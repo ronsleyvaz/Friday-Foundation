@@ -5,10 +5,12 @@ set -euo pipefail
 # No account, no paid install, nothing phones home.
 #
 # Usage:
-#   curl -fsSL .../install.sh | bash              -- installs the full command pack
-#   curl -fsSL .../install.sh | bash -s -- decide -- installs just /decide
-#   curl -fsSL .../install.sh | bash -s -- brief  -- installs just /brief
+#   curl -fsSL .../install.sh | bash                       -- installs the full command pack
+#   curl -fsSL .../install.sh | bash -s -- decide          -- installs just /decide
+#   curl -fsSL .../install.sh | bash -s -- brief           -- installs just /brief
 #   curl -fsSL .../install.sh | bash -s -- voice-installer -- installs just /voice-installer
+#   curl -fsSL .../install.sh | bash -s -- meetingprep     -- installs just /meetingprep
+#   curl -fsSL .../install.sh | bash -s -- weeklyreview    -- installs just /weeklyreview
 #
 # The no-argument path installs the full command pack (all capabilities).
 # Pass a capability name to install a single capability.
@@ -24,6 +26,8 @@ PACK_COMMANDS=(
   "voice-installer voice-installer.md /voice-installer"
   "decide          decide.md          /decide"
   "brief           brief.md           /brief"
+  "meetingprep     meetingprep.md     /meetingprep"
+  "weeklyreview    weeklyreview.md    /weeklyreview"
 )
 
 # ---------------------------------------------------------------------------
@@ -75,6 +79,8 @@ if [ -z "${CAPABILITY}" ]; then
   echo "  /voice-installer   -- set up your voice profile first"
   echo "  /brief             -- your morning brief"
   echo "  /decide            -- run the 1-3-1 decision protocol"
+  echo "  /meetingprep       -- prepare for any meeting in five minutes"
+  echo "  /weeklyreview      -- structured weekly review and one clear priority"
 
 else
   # ---- Single capability install ----
@@ -96,7 +102,7 @@ else
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${CAPABILITY}"
-    echo "Available: voice-installer (default pack), decide, brief"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview"
     exit 1
   fi
 fi
