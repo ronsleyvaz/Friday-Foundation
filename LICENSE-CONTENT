@@ -1,0 +1,38 @@
+Friday Foundation Content Licence
+Version 1.0, 2026
+
+Copyright (c) 2026 Amplify AI (amplifyais.com)
+
+This licence applies to the content files explicitly marked with a
+"Content licensed under LICENSE-CONTENT" header. These files are:
+
+  commands/amplify.md
+  harness/05-the-amplify-logic.md
+  docs/why-guides/amplify-why-guide.md
+
+Rights granted:
+
+  You may use, read, run, and share these files for personal and
+  commercial purposes, provided attribution to Amplify AI is kept
+  intact. Attribution means: you do not remove the "Built by Amplify AI"
+  footer and you do not claim authorship of the underlying Amplify
+  methodology.
+
+Rights reserved:
+
+  1. You may not resell these files as a standalone product or as part
+     of a competing product.
+  2. You may not rebrand or relabel these files to present the Amplify
+     method as your own proprietary framework.
+  3. You may not distribute modified versions that misrepresent the
+     source of the methodology.
+
+The Amplify AI method is described in full in:
+  "Amplify: Integrating Intelligence with Humanity for Acceleration"
+  https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
+
+For permissions beyond the scope of this licence, contact:
+  amplifyais.com
+
+All other files in this repository are MIT licensed.
+See LICENSE for terms.

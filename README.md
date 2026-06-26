@@ -1,62 +1,111 @@
-# Friday for Claude Code
+# Friday Foundation
 
-Make every AI tool you use write in your voice. Five minutes, one command, no code.
+Build your own AI Chief of Staff inside Claude Code. Seven commands, a growth diagnostic, and a harness to extend it to your workflow.
 
-This is the free, runnable version of Friday, the AI Chief of Staff. You build it one capability at a time. Each one installs into Claude Code with a single line, writes a real file to your machine, and shows you the before and the after. You feel the improvement the moment it lands.
+Free and open-source. No account. No server. Everything runs on your machine.
 
-First up: the Voice Installer.
+---
 
-## Install
-
-You need Claude Code installed and open. Then run this in your terminal:
+## Install in one line
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-for-Claude-Code/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash
 ```
 
-It checks for Claude Code, drops the command into `~/.claude/commands/`, and tells you the next step. Nothing phones home. No account. No paid install.
+You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-Then open Claude Code and run:
+The installer drops the commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` and the harness guide to your current directory, and tells you what to do next.
+
+---
+
+## Start here
+
+Open Claude Code in your project directory and run:
 
 ```
 /voice-installer
 ```
 
-## What the Voice Installer does
+This is the foundation. It reads your writing samples, builds a voice profile, and writes it to `friday/voice.md`. Every command that runs after reads that profile and writes in your voice instead of generic AI voice.
 
-The Voice Installer interviews you, reads two or three things you have written, and writes a real voice config to your machine:
+---
 
-- `friday/voice.md`, your voice profile, readable by any AI tool
-- a voice block in your `CLAUDE.md`, so Claude Code reads it every session
+## What each command does
 
-Then it proves the win. It takes a sample paragraph of default AI copy, rewrites it in your voice using the profile it just wrote, and shows you both side by side. That difference is the point.
+| Command | What it does | Output |
+|---|---|---|
+| `/voice-installer` | Builds your voice profile from writing samples | `friday/voice.md` |
+| `/brief` | Filters today's priorities through your nine decisions | `friday/morning.md` |
+| `/decide` | Runs the 1-3-1 protocol: one problem, three options, one pick | `friday/decisions.md` |
+| `/meetingprep` | Prepares you for any meeting in five minutes | `friday/meeting-<name>.md` |
+| `/weeklyreview` | Structured weekly review and one clear priority | `friday/weekly-<date>.md` |
+| `/amplify` | Runs the Amplify growth diagnostic on your numbers | `friday/growth.md` |
+| `/new-capability` | Scaffolds a new command from a template | `commands/<name>.md` |
 
-Full background: [why the Voice Installer matters](docs/voice-installer-why-guide.md).
+Each command writes to a `friday/` folder in your project directory. That folder is your config, growing over time.
 
-## The ladder
+---
 
-This is the first capability. More land in this repo over time, and each appends to the same `friday/` folder:
+## The Amplify growth diagnostic
 
-- Next, the Decision Runner. Paste a real decision, get one problem, three options, one pick, written in your voice.
-- More to come.
+`/amplify` is the flagship capability.
 
-You watch your `friday/` config grow as each one lands.
+It walks you through eight business vital signs, detects your growth stage, maps to your priority quadrant (Revenue, Brand, Audience, or Operations), runs an ethics check on the recommendation, and writes a 90-day plan to `friday/growth.md`.
 
-## What this is not
+It takes about five minutes. It tells you where to push next and which AI tools to use first, matched to your experience level.
 
-A capability runs only when you run it. It does not read your inbox, your calendar, or your transcripts. It does not work while you sleep.
+Based on the Amplify AI method. Full breakdown in the book: https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
-That part is Friday, the full AI Chief of Staff: nine specialists wired together, trained on your voice and your stories, connected to your stack, in one install. That is the paid product at [friday.amplifyais.com](https://friday.amplifyais.com).
+---
 
-This repo is what one piece of Friday feels like, by hand, for free.
+## Install a single command
 
-## Prerequisite
+```
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- amplify
+```
 
-Claude Code, installed and logged in. Setup guide: https://docs.anthropic.com/claude-code
+Replace `amplify` with any command name to install just that one.
+
+---
+
+## Build your own command
+
+Run `/new-capability <name>` in Claude Code. It scaffolds a command file with the right frontmatter and step structure.
+
+For a full walkthrough, read the harness guide (fetched to `./harness/` when you install):
+
+- `harness/00-how-friday-works.md` -- the mental model
+- `harness/01-add-a-command.md` -- write your first custom command
+- `harness/02-add-an-agent.md` -- build a specialist agent
+- `harness/03-connect-your-own-tools.md` -- wire your own APIs and CLIs
+- `harness/04-the-friday-folder.md` -- how the config grows
+- `harness/05-the-amplify-logic.md` -- the Amplify method explained
+
+---
+
+## The soft ladder
+
+**Friday Foundation (here):** free, open-source, seven commands, bring your own Claude Code.
+
+**The Amplify book:** the full framework behind the growth diagnostic. Read it for the complete methodology. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
+
+**Friday (paid):** nine specialists wired together, connected to your inbox, calendar, tasks, and transcript archive, running before you wake up. friday.amplifyais.com
+
+Foundation gives you the shape of Friday. The paid product is Friday running while you sleep.
+
+---
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+Code (everything except the three content-licensed files) is **MIT**. See `LICENSE`.
+
+The Amplify method content -- `commands/amplify.md`, `harness/05-the-amplify-logic.md`, and `docs/why-guides/amplify-why-guide.md` -- is licensed separately under `LICENSE-CONTENT`: free to use and share with attribution, not to resell or rebrand. Those files carry a header pointing to `LICENSE-CONTENT`.
+
+---
+
+## Contributing
+
+Pull requests are open. See `CONTRIBUTING.md` for what belongs here and the quality bar for commands.
 
 ---
 
