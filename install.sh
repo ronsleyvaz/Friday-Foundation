@@ -17,6 +17,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- scope-decision    -- installs just /scope-decision
 #   curl -fsSL .../install.sh | bash -s -- learnings         -- installs just /learnings
 #   curl -fsSL .../install.sh | bash -s -- shipping-retro    -- installs just /shipping-retro
+#   curl -fsSL .../install.sh | bash -s -- teach-team        -- installs just /teach-team
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -44,6 +45,7 @@ PACK_COMMANDS=(
   "scope-decision   scope-decision.md   /scope-decision"
   "learnings        learnings.md        /learnings"
   "shipping-retro   shipping-retro.md   /shipping-retro"
+  "teach-team       teach-team.md       /teach-team"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -140,6 +142,7 @@ if [ -z "${CAPABILITY}" ]; then
   echo "  /scope-decision    -- force an expansion, hold, or reduction call"
   echo "  /learnings         -- review, search, and prune what Friday's learned"
   echo "  /shipping-retro    -- weekly reflection from your real commit history"
+  echo "  /teach-team        -- scaffold an onboarding plan for a team member"
   echo
   echo "Read harness/00-how-friday-works.md to understand what you just installed."
 
@@ -163,7 +166,7 @@ else
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${CAPABILITY}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team"
     exit 1
   fi
 fi
