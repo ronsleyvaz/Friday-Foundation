@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, release]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run test suite
+        run: python3 -m pytest tests/ -v
+
+      - name: Raw grep sweep for proprietary terms (belt and suspenders)
+        run: |
+          set -uo pipefail
+          PATTERN=$(python3 -c "from tests.test_cleanroom import FORBIDDEN_PATTERNS; print('|'.join(FORBIDDEN_PATTERNS))")
+          MATCHES=$(grep -rEn "$PATTERN" \
+            --include='*.md' --include='*.sh' --include='*.txt' --include='*.yml' --include='*.yaml' \
+            commands docs harness .github README.md CONTRIBUTING.md SECURITY.md CLAUDE.md.template install.sh LICENSE-CONTENT \
+            2>/dev/null | grep -v 'amplifyais.com' || true)
+          if [ -n "$MATCHES" ]; then
+            echo "Proprietary term found by raw grep sweep:"
+            echo "$MATCHES"
+            exit 1
+          fi
+          echo "Raw grep sweep clean"
