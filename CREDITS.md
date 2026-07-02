@@ -50,6 +50,13 @@ Source: https://github.com/ognjengt/founder-skills (MIT)
 Ported:
 - `/product-hunt-launch`
 
+## Contributors
+
+Commands and improvements contributed by the community. When your pull request is
+merged, add a line for yourself here.
+
+<!-- Add a line in the form: - github-handle, /your-command -->
+
 ## Why this file exists
 
 Friday Foundation exists to close the gap between founders stuck on chat and

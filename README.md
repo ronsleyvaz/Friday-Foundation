@@ -1,5 +1,8 @@
 # Friday Foundation
 
+[![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Build your own AI Chief of Staff inside Claude Code. Nineteen commands, a growth diagnostic, and a harness to extend it to your workflow.
 
 Free and open-source. No account. No server. Everything runs on your machine.
@@ -119,7 +122,13 @@ The Amplify method content -- `commands/amplify.md`, `harness/05-the-amplify-log
 
 ## Contributing
 
-Pull requests are open. See `CONTRIBUTING.md` for what belongs here and the quality bar for commands.
+Pull requests are open, and the test gate runs on every one, so you get fast feedback before a maintainer ever looks.
+
+New here? The best place to start is a [good first issue](https://github.com/ronsleyvaz/Friday-Foundation/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). Each one is a self-contained command to build, with the founder problem and the definition of done written out.
+
+You can ship your first command in about ten minutes. `CONTRIBUTING.md` has the step by step, the quality bar, and how to get credit for what you add.
+
+If Foundation is useful to you, star the repo. It is the cheapest way to help more founders find it.
 
 ---
 

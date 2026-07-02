@@ -4,6 +4,19 @@ Thank you for building here.
 
 Friday Foundation is an open-source founder harness built on top of Claude Code. Contributions are welcome. Here is what you need to know before you open a pull request.
 
+## Ship your first command in ten minutes
+
+The fastest way in is to pick a [good first issue](https://github.com/ronsleyvaz/Friday-Foundation/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and build the command it describes.
+
+1. Fork the repo and clone your fork.
+2. Copy an existing command that is close to what you want as your model. `commands/weeklyreview.md` and `commands/meetingprep.md` are short, readable examples.
+3. Save it as `commands/<your-command>.md`. Fill in the frontmatter name and description, then write the steps: one thing at a time, file tools only, no imports. It should read `friday/voice.md` if it exists and write its output into the `friday/` folder.
+4. Add a test in `tests/` that checks your command's frontmatter and structure. Copy the shape of an existing test in `test_commands.py`.
+5. Run `python -m pytest tests/` and confirm green.
+6. Open a pull request against `main`. CI runs the full suite on your PR automatically, so you see green or red before a maintainer reviews.
+
+That is the whole loop. The sections below have the detail.
+
 ## What belongs here
 
 - New slash commands that help founders get leverage from Claude Code.
@@ -49,6 +62,10 @@ A command is ready when:
 `main` is the integration branch; the installer distributes from `release`.
 See `RELEASING.md` for how a maintainer promotes a batch of merged pull
 requests to `release`.
+
+## Getting credit
+
+When your command is merged, add a line for yourself under Contributors in `CREDITS.md`. Foundation credits the people who build it. That is the honest version of open source.
 
 ## Licence
 
