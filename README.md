@@ -123,4 +123,12 @@ Pull requests are open. See `CONTRIBUTING.md` for what belongs here and the qual
 
 ---
 
+## Credits
+
+Twelve commands started as methodology from five open-source projects: gstack,
+Matt Pocock's skills repo, and three founder-focused skill packs. Full list and
+sources in `CREDITS.md`.
+
+---
+
 Built by Amplify AI at amplifyais.com
