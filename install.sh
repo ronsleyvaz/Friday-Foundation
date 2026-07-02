@@ -24,6 +24,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- offer-creation    -- installs just /offer-creation
 #   curl -fsSL .../install.sh | bash -s -- competitive-analysis -- installs just /competitive-analysis
 #   curl -fsSL .../install.sh | bash -s -- sop-builder       -- installs just /sop-builder
+#   curl -fsSL .../install.sh | bash -s -- product-hunt-launch -- installs just /product-hunt-launch
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -58,6 +59,7 @@ PACK_COMMANDS=(
   "offer-creation   offer-creation.md   /offer-creation"
   "competitive-analysis competitive-analysis.md /competitive-analysis"
   "sop-builder      sop-builder.md      /sop-builder"
+  "product-hunt-launch product-hunt-launch.md /product-hunt-launch"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -161,6 +163,7 @@ if [ -z "${CAPABILITY}" ]; then
   echo "  /offer-creation    -- value-equation review, find the weakest lever"
   echo "  /competitive-analysis -- competitor teardown, matrix plus SWOT"
   echo "  /sop-builder       -- turn a repeatable process into a followable SOP"
+  echo "  /product-hunt-launch -- Product Hunt specific launch runbook"
   echo
   echo "Read harness/00-how-friday-works.md to understand what you just installed."
 
@@ -184,7 +187,7 @@ else
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${CAPABILITY}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch"
     exit 1
   fi
 fi

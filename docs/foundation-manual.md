@@ -3,7 +3,7 @@
 
 **Free. Open-source. Runs on your machine, with your keys.**
 
-Foundation is the skeleton. Install it, run the seven commands, and your AI starts writing in your voice, filtering your priorities through your nine business decisions, and diagnosing where to push next.
+Foundation is the skeleton. Install it, run the commands, and your AI starts writing in your voice, filtering your priorities through your nine business decisions, and diagnosing where to push next.
 
 There are no specialists running in the background. No overnight queue. No connected inbox. Those live in the paid stack. Foundation is what you build yourself, step by step, with full visibility into every command you run.
 
@@ -24,7 +24,7 @@ Find your state below. There is a move for each.
 | **Brand new** | Just installed, not sure what to run first | `/voice-installer`, five minutes, once |
 | **Voice set up, nothing else running** | Output sounds generic, not like you | `/brief` to set your nine decisions and write today's brief |
 | **Briefed, want growth clarity** | Busy but no clear priority | `/amplify`, eight vital signs, one 90-day plan |
-| **Running well, want to extend** | The seven commands do not cover your workflow | `/new-capability` to scaffold your own |
+| **Running well, want to extend** | The built-in commands do not cover your workflow | `/new-capability` to scaffold your own |
 | **Something is off** | A command is not writing where you expect | Check the Troubleshooting section below |
 
 ### Brand new
@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/i
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all seven commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` to your current directory, and downloads the six-part harness guide to `./harness/`.
+The installer puts all nineteen commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` to your current directory, and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -112,6 +112,18 @@ Every command writes to a `friday/` folder in your project directory. That folde
 | `friday/meetings.md` | `/meetingprep` | Your meeting briefs |
 | `friday/review.md` | `/weeklyreview` | Your weekly reviews |
 | `friday/growth.md` | `/amplify` | Your growth diagnostic and 90-day plan |
+| `friday/idea-exploration.md` | `/explore-idea` | The six forcing questions run against a new idea |
+| `friday/scope-decision.md` | `/scope-decision` | Your expansion, hold, or reduction call on a plan |
+| `friday/learnings.md` | `/learnings` | A running log of patterns, preferences, and pitfalls |
+| `friday/shipping-retro.md` | `/shipping-retro` | Weekly reflection built from your git commit history |
+| `friday/teaching/<topic>.md` | `/teach-team` | Onboarding plans for team members or contractors |
+| `friday/validation.md` | `/validate-idea` | A 7-dimension idea validation and verdict |
+| `friday/gtm-plan.md` | `/go-to-market` | Your phased launch plan |
+| `friday/pricing.md` | `/pricing-strategy` | Your pricing model and tier structure |
+| `friday/offer.md` | `/offer-creation` | Your value-equation offer review |
+| `friday/competitive-analysis.md` | `/competitive-analysis` | Your competitor teardown and SWOT |
+| `friday/sops/<process>.md` | `/sop-builder` | Documented SOPs for repeatable processes |
+| `friday/product-hunt-launch.md` | `/product-hunt-launch` | Your Product Hunt specific launch runbook |
 
 Custom commands you build will add their own files here.
 
@@ -130,7 +142,7 @@ Never use the words on the banned list.
 
 ---
 
-## The seven commands
+## The nineteen commands
 
 ### Set up first
 
@@ -148,12 +160,34 @@ Run this before anything else. Every other command reads from the profile it cre
 | `/decide` | Runs the 1-3-1 protocol: one problem, three options, one pick | `friday/decisions.md` |
 | `/meetingprep` | Produces a brief with context, your desired outcome, and three sharp questions | `friday/meetings.md` |
 | `/weeklyreview` | Walks through wins, misses, and carry-forwards, then names one priority | `friday/review.md` |
+| `/shipping-retro` | Weekly reflection built from your real git commit history | `friday/shipping-retro.md` |
+| `/learnings` | Reviews, searches, and prunes what Friday has learned about your business | `friday/learnings.md` |
 
 ### Growth
 
 | Command | What it does | Output |
 |---|---|---|
 | `/amplify` | Runs the Amplify growth diagnostic on your eight vital signs | `friday/growth.md` |
+| `/go-to-market` | Phased launch plan: pre-launch, launch week, 30/60/90 days | `friday/gtm-plan.md` |
+| `/pricing-strategy` | Value-based pricing model and tier design with real numbers | `friday/pricing.md` |
+| `/offer-creation` | Value-equation review, finds your offer's weakest lever | `friday/offer.md` |
+| `/competitive-analysis` | Competitor teardown: comparison matrix plus SWOT | `friday/competitive-analysis.md` |
+| `/product-hunt-launch` | Product Hunt specific launch runbook | `friday/product-hunt-launch.md` |
+
+### Idea and scope
+
+| Command | What it does | Output |
+|---|---|---|
+| `/explore-idea` | Six forcing questions on a new idea before you build anything | `friday/idea-exploration.md` |
+| `/scope-decision` | Forces an expansion, hold, or reduction call on a plan's scope | `friday/scope-decision.md` |
+| `/validate-idea` | 7-dimensional validation pass, build, pivot, or kill verdict | `friday/validation.md` |
+
+### Team and operations
+
+| Command | What it does | Output |
+|---|---|---|
+| `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
+| `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process>.md` |
 
 ### Extend
 
@@ -179,7 +213,7 @@ The full Amplify method is in the book: https://www.amazon.com/Amplify-Integrati
 
 ## Build your own
 
-The seven commands cover the daily fundamentals. Your workflow will have recurring needs they do not touch.
+The built-in commands cover the daily fundamentals. Your workflow will have recurring needs they do not touch.
 
 ### Scaffold a new command
 
@@ -216,7 +250,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, seven commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, nineteen commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
