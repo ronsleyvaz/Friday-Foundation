@@ -116,5 +116,5 @@ The full stack, nine specialists wired to your inbox, calendar, and transcript a
 
 Built by Amplify AI at amplifyais.com
 
-<!-- golden-test-throwaway: deliberate em dash below -- do not merge -->
-This line has an em dash — right here, on purpose.
+<!-- golden-test-throwaway: em dash fixed, ready for CI to go green -->
+This line no longer has an em dash, on purpose.
