@@ -13,6 +13,10 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- weeklyreview      -- installs just /weeklyreview
 #   curl -fsSL .../install.sh | bash -s -- amplify           -- installs just /amplify
 #   curl -fsSL .../install.sh | bash -s -- new-capability    -- installs just /new-capability
+#   curl -fsSL .../install.sh | bash -s -- explore-idea      -- installs just /explore-idea
+#   curl -fsSL .../install.sh | bash -s -- scope-decision    -- installs just /scope-decision
+#   curl -fsSL .../install.sh | bash -s -- learnings         -- installs just /learnings
+#   curl -fsSL .../install.sh | bash -s -- shipping-retro    -- installs just /shipping-retro
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -36,6 +40,10 @@ PACK_COMMANDS=(
   "weeklyreview     weeklyreview.md     /weeklyreview"
   "amplify          amplify.md          /amplify"
   "new-capability   new-capability.md   /new-capability"
+  "explore-idea     explore-idea.md     /explore-idea"
+  "scope-decision   scope-decision.md   /scope-decision"
+  "learnings        learnings.md        /learnings"
+  "shipping-retro   shipping-retro.md   /shipping-retro"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -128,6 +136,10 @@ if [ -z "${CAPABILITY}" ]; then
   echo "  /meetingprep       -- prepare for any meeting in five minutes"
   echo "  /weeklyreview      -- structured weekly review and one clear priority"
   echo "  /new-capability    -- scaffold your own command"
+  echo "  /explore-idea      -- six forcing questions on a new idea"
+  echo "  /scope-decision    -- force an expansion, hold, or reduction call"
+  echo "  /learnings         -- review, search, and prune what Friday's learned"
+  echo "  /shipping-retro    -- weekly reflection from your real commit history"
   echo
   echo "Read harness/00-how-friday-works.md to understand what you just installed."
 
@@ -151,7 +163,7 @@ else
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${CAPABILITY}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro"
     exit 1
   fi
 fi
