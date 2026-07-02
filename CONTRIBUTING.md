@@ -44,6 +44,12 @@ A command is ready when:
 - Python tests: pytest, no external dependencies beyond the stdlib.
 - No environment assumptions except that `bash` and `python3` are on the PATH.
 
+## Releasing
+
+`main` is the integration branch; the installer distributes from `release`.
+See `RELEASING.md` for how a maintainer promotes a batch of merged pull
+requests to `release`.
+
 ## Licence
 
 By contributing, you agree that your contribution is licensed under MIT (for code) or the content licence in `LICENSE-CONTENT` (for framework-derived content). See those files for terms.

@@ -9,7 +9,7 @@ Free and open-source. No account. No server. Everything runs on your machine.
 ## Install in one line
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
@@ -75,7 +75,7 @@ Based on the Amplify AI method. Full breakdown in the book: https://www.amazon.c
 ## Install a single command
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- amplify
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- amplify
 ```
 
 Replace `amplify` with any command name to install just that one.

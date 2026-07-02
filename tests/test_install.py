@@ -7,6 +7,7 @@ install.sh integration tests:
 """
 import http.server
 import os
+import re
 import subprocess
 import tempfile
 import threading
@@ -191,6 +192,40 @@ def test_install_idempotency():
             )
     finally:
         httpd.shutdown()
+
+
+def test_repo_raw_defaults_to_release():
+    """install.sh's REPO_RAW default must point at the release branch, not main.
+
+    Guards AC2.3: the installer distributes from `release`, so a merge to
+    `main` does not ship until a maintainer deliberately promotes it.
+    """
+    content = INSTALL_SH.read_text()
+    match = re.search(
+        r'REPO_RAW="\$\{FRIDAY_REPO_RAW:-(https://raw\.githubusercontent\.com/[^}]+)\}"',
+        content,
+    )
+    assert match, "Could not find the REPO_RAW default assignment in install.sh"
+    default_url = match.group(1)
+    assert default_url.endswith("/release"), (
+        f"install.sh REPO_RAW default must end in /release, got: {default_url}"
+    )
+
+
+def test_readme_primary_install_oneliner_uses_release():
+    """README's install one-liners must point at /release/install.sh, and no
+    pasteable /main/install.sh one-liner may remain.
+
+    Guards against a future edit silently repointing distribution back at
+    the integration branch (AC2.3).
+    """
+    readme_text = (REPO_ROOT / "README.md").read_text()
+    assert "/release/install.sh" in readme_text, (
+        "README must reference /release/install.sh"
+    )
+    assert "/main/install.sh" not in readme_text, (
+        "README must not leave a pasteable /main/install.sh one-liner"
+    )
 
 
 def test_install_single_capability():

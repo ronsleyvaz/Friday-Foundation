@@ -21,6 +21,7 @@ SCAN_DIRS = [
 SCAN_FILES = [
     "README.md",
     "CONTRIBUTING.md",
+    "RELEASING.md",
     "SECURITY.md",
     "CLAUDE.md.template",
     "install.sh",
@@ -80,6 +81,15 @@ def check_file(file_path: Path):
                 if re.search(pattern, clean):
                     violations.append((lineno, line.strip(), pattern))
     return violations
+
+
+def test_scan_files_includes_releasing_doc():
+    """Guard against RELEASING.md being silently dropped from the clean-room scan.
+
+    RELEASING.md is a shipped root-level doc (added for the release-branch
+    promote flow) and must stay covered the same way CONTRIBUTING.md is.
+    """
+    assert "RELEASING.md" in SCAN_FILES
 
 
 def test_cleanroom_guard():

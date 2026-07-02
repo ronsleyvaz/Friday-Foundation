@@ -35,7 +35,7 @@ set -euo pipefail
 # Override the source URL for testing (set FRIDAY_REPO_RAW before running):
 #   FRIDAY_REPO_RAW=http://localhost:8000 bash install.sh
 
-REPO_RAW="${FRIDAY_REPO_RAW:-https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main}"
+REPO_RAW="${FRIDAY_REPO_RAW:-https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release}"
 DEST="${HOME}/.claude/commands"
 
 # Full pack -- every command file installed by the no-arg path.
