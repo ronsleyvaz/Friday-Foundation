@@ -63,7 +63,7 @@ Open your `friday/` folder after this runs. You built that by hand. Each file re
 You need Claude Code installed and open. If you do not have it yet: https://docs.anthropic.com/claude-code
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- brief
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- brief
 ```
 
 Then in Claude Code:
