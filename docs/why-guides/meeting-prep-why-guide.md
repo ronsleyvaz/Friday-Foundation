@@ -59,7 +59,7 @@ You now have your voice profile, your decision log, your nine recurring decision
 You need Claude Code installed and open. If you do not have it yet: https://docs.anthropic.com/claude-code
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- meetingprep
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- meetingprep
 ```
 
 Then in Claude Code:

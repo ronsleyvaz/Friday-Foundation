@@ -77,7 +77,7 @@ The folder is the proof that your config is growing. Not a product promise. A re
 You need Claude Code installed and open. If you do not have it yet: https://docs.anthropic.com/claude-code
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- decide
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- decide
 ```
 
 Then in Claude Code:

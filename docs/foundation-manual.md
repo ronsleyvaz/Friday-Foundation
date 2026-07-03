@@ -46,7 +46,7 @@ Run `/new-capability`. It asks for a name, a purpose, and an output file. It sca
 ### Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
@@ -56,7 +56,7 @@ The installer puts all nineteen commands into `~/.claude/commands/`, fetches `CL
 ### Install a single command
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- amplify
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- amplify
 ```
 
 Replace `amplify` with any command name.

@@ -57,7 +57,7 @@ Your voice profile. Your decision log. Your nine recurring decisions. Your morni
 You need Claude Code installed and open. If you do not have it yet: https://docs.anthropic.com/claude-code
 
 ```
-curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/main/install.sh | bash -s -- weeklyreview
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash -s -- weeklyreview
 ```
 
 Then in Claude Code:
