@@ -88,3 +88,35 @@ def test_expected_commands_exist():
     ]
     missing = [f for f in expected if not (COMMANDS_DIR / f).exists()]
     assert not missing, f"Missing command files: {missing}"
+
+
+def test_positioning_command_matches_issue_contract():
+    """The positioning command has the output, voice, and structure requested in #10."""
+    text = (COMMANDS_DIR / "positioning.md").read_text(encoding="utf-8")
+    fm, body = parse_frontmatter(text)
+
+    assert fm["name"] == "positioning"
+    assert "friday/voice.md" in fm["description"]
+    assert "friday/positioning.md" in fm["description"]
+
+    required_sections = [
+        "# /positioning",
+        "## Step 1: Read the founder's voice profile (if it exists)",
+        "## Step 2: Get the raw positioning inputs",
+        "## Step 3: Tighten vague answers",
+        "## Step 4: Write the positioning draft",
+    ]
+    for section in required_sections:
+        assert section in body
+
+    required_terms = [
+        "category",
+        "target customer",
+        "key benefit",
+        "difference from alternatives",
+        "friday/positioning.md",
+        "Positioning saved to `friday/positioning.md`",
+        "Next move",
+    ]
+    for term in required_terms:
+        assert term in body
