@@ -7,6 +7,8 @@ Build your own AI Chief of Staff inside Claude Code. Nineteen commands, a growth
 
 Free and open-source. No account. No server. Everything runs on your machine.
 
+![Installing Friday Foundation: one curl command, then running your first command inside Claude Code](docs/assets/install-demo.gif)
+
 ---
 
 ## Install in one line
