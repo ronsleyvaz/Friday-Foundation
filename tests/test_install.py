@@ -96,6 +96,7 @@ def test_install_full_pack_lands_commands():
                 "weeklyreview.md",
                 "new-capability.md",
                 "amplify.md",
+                "changelog.md",
             ]
             missing = [f for f in expected if not (commands_dir / f).exists()]
             assert not missing, f"Commands missing after install: {missing}"
