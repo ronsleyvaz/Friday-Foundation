@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all nineteen commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` to your current directory, and downloads the six-part harness guide to `./harness/`.
+The installer puts all 22 commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` to your current directory, and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -116,13 +116,16 @@ Every command writes to a `friday/` folder in your project directory. That folde
 | `friday/scope-decision.md` | `/scope-decision` | Your expansion, hold, or reduction call on a plan |
 | `friday/learnings.md` | `/learnings` | A running log of patterns, preferences, and pitfalls |
 | `friday/shipping-retro.md` | `/shipping-retro` | Weekly reflection built from your git commit history |
+| `friday/changelog.md` | `/changelog` | Customer-facing release notes built from git history |
 | `friday/teaching/<topic>.md` | `/teach-team` | Onboarding plans for team members or contractors |
 | `friday/validation.md` | `/validate-idea` | A 7-dimension idea validation and verdict |
+| `friday/roadmap.md` | `/roadmap` | A sequenced 90-day roadmap and first-week action |
 | `friday/gtm-plan.md` | `/go-to-market` | Your phased launch plan |
 | `friday/pricing.md` | `/pricing-strategy` | Your pricing model and tier structure |
 | `friday/offer.md` | `/offer-creation` | Your value-equation offer review |
+| `friday/positioning.md` | `/positioning` | Your positioning statement and next move |
 | `friday/competitive-analysis.md` | `/competitive-analysis` | Your competitor teardown and SWOT |
-| `friday/sops/<process>.md` | `/sop-builder` | Documented SOPs for repeatable processes |
+| `friday/sops/<process-name>.md` | `/sop-builder` | Documented SOPs for repeatable processes |
 | `friday/product-hunt-launch.md` | `/product-hunt-launch` | Your Product Hunt specific launch runbook |
 
 Custom commands you build will add their own files here.
@@ -142,7 +145,7 @@ Never use the words on the banned list.
 
 ---
 
-## The nineteen commands
+## The 22 commands
 
 ### Set up first
 
@@ -162,6 +165,7 @@ Run this before anything else. Every other command reads from the profile it cre
 | `/weeklyreview` | Walks through wins, misses, and carry-forwards, then names one priority | `friday/review.md` |
 | `/shipping-retro` | Weekly reflection built from your real git commit history | `friday/shipping-retro.md` |
 | `/learnings` | Reviews, searches, and prunes what Friday has learned about your business | `friday/learnings.md` |
+| `/changelog` | Turns git history into customer-facing release notes | `friday/changelog.md` |
 
 ### Growth
 
@@ -171,6 +175,7 @@ Run this before anything else. Every other command reads from the profile it cre
 | `/go-to-market` | Phased launch plan: pre-launch, launch week, 30/60/90 days | `friday/gtm-plan.md` |
 | `/pricing-strategy` | Value-based pricing model and tier design with real numbers | `friday/pricing.md` |
 | `/offer-creation` | Value-equation review, finds your offer's weakest lever | `friday/offer.md` |
+| `/positioning` | Builds a clear positioning statement and next move | `friday/positioning.md` |
 | `/competitive-analysis` | Competitor teardown: comparison matrix plus SWOT | `friday/competitive-analysis.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook | `friday/product-hunt-launch.md` |
 
@@ -181,13 +186,14 @@ Run this before anything else. Every other command reads from the profile it cre
 | `/explore-idea` | Six forcing questions on a new idea before you build anything | `friday/idea-exploration.md` |
 | `/scope-decision` | Forces an expansion, hold, or reduction call on a plan's scope | `friday/scope-decision.md` |
 | `/validate-idea` | 7-dimensional validation pass, build, pivot, or kill verdict | `friday/validation.md` |
+| `/roadmap` | Turns a goal into a sequenced 90-day roadmap | `friday/roadmap.md` |
 
 ### Team and operations
 
 | Command | What it does | Output |
 |---|---|---|
 | `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
-| `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process>.md` |
+| `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
 
 ### Extend
 
@@ -250,7 +256,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, nineteen commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, 22 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
