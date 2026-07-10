@@ -95,18 +95,20 @@ def test_installer_usage_block_matches_manifest():
 
 
 def test_installer_user_facing_lists_match_manifest():
-    """Completion and error output list every installable command."""
+    """The single-command error lists every installable command.
+
+    The full-pack completion message is a three-step first-run path, not a
+    per-command list, so only the Available list is checked here. The closing
+    message itself is covered by tests in test_install.py.
+    """
     expected = command_slugs()
     text = INSTALL_SH.read_text(encoding="utf-8")
 
-    completion_commands = re.findall(r'^\s*echo "  /([a-z0-9-]+)\s+', text, re.MULTILINE)
     available_match = re.search(r'^\s*echo "Available: ([^"]+)"', text, re.MULTILINE)
     assert available_match, "install.sh: Available list not found"
     available_commands = [item.strip() for item in available_match.group(1).split(",")]
 
-    assert set(completion_commands) == expected
     assert set(available_commands) == expected
-    assert len(completion_commands) == len(expected)
     assert len(available_commands) == len(expected)
 
 

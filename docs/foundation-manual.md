@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 22 commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` to your current directory, and downloads the six-part harness guide to `./harness/`.
+The installer puts all 22 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -65,29 +65,29 @@ Replace `amplify` with any command name.
 
 Open Claude Code in your project directory.
 
-**One. Build your voice profile (run once).**
-
-```
-/voice-installer
-```
-
-It asks you five questions, reads two or three files you have written, and writes `friday/voice.md`. Every command that runs after reads from that file. Your output starts matching your actual writing, not a generic AI imitation.
-
-**Two. Get your morning brief.**
-
-```
-/brief
-```
-
-First run walks you through naming your nine decisions. Every run after that filters your priorities through them and writes `friday/morning.md`. The brief names one thing to start with.
-
-**Three. Run the growth diagnostic.**
+**One. Run the growth diagnostic (your fastest win, no setup).**
 
 ```
 /amplify
 ```
 
-Eight vital signs. Five minutes. One prioritised 90-day plan written to `friday/growth.md`.
+Eight vital signs. Five minutes. One prioritised 90-day plan written to `friday/growth.md`. Nothing to configure first.
+
+**Two. Build your voice profile (optional but recommended, run once).**
+
+```
+/voice-installer
+```
+
+It asks you five questions, reads two or three files you have written, and writes `friday/voice.md`. Every command that runs after reads from that file, so your output matches your actual writing instead of a generic AI imitation. Skipping it is safe: commands fall back to a neutral, direct style until you run it.
+
+**Three. Get your morning brief.**
+
+```
+/brief
+```
+
+First run walks you through naming your recurring decisions (three is enough to start). Every run after that filters your priorities through them and writes `friday/morning.md`. The brief names one thing to start with.
 
 You are running.
 
@@ -132,7 +132,7 @@ Custom commands you build will add their own files here.
 
 ### The brain file
 
-`CLAUDE.md.template` lands in your project directory during install. Open it. Replace every `[bracket]` with your own content. Claude Code reads this file at the start of every session. It holds your identity, your voice pointer, and your decision rules.
+`CLAUDE.md.template` lands in your project directory during install, and the installer copies it to `CLAUDE.md` for you (unless you already have one). Open `CLAUDE.md`. Replace every `[bracket]` with your own content. Claude Code reads `CLAUDE.md` (not the template) at the start of every session. It holds your identity, your voice pointer, and your decision rules.
 
 Once `/voice-installer` has run, wire your voice profile into `CLAUDE.md`:
 
@@ -153,7 +153,7 @@ Never use the words on the banned list.
 |---|---|---|
 | `/voice-installer` | Interviews you, reads your writing samples, writes your voice profile | `friday/voice.md` |
 
-Run this before anything else. Every other command reads from the profile it creates.
+Recommended early, though optional. Every other command reads this profile if it exists, and falls back to a neutral, direct style if you skip it.
 
 ### Daily tools
 

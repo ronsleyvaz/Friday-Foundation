@@ -13,25 +13,37 @@ Free and open-source. No account. No server. Everything runs on your machine.
 
 ## Install in one line
 
+First, `cd` into your project directory. The commands install globally, but your `CLAUDE.md` brain file and the harness guide land wherever you run this:
+
 ```
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer drops the commands into `~/.claude/commands/`, fetches `CLAUDE.md.template` and the harness guide to your current directory, and tells you what to do next.
+The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, and tells you what to do next.
 
 ---
 
 ## Start here
 
-Open Claude Code in your project directory and run:
+Open Claude Code in your project directory. You have two good first moves.
+
+Your fastest win, no setup required:
+
+```
+/amplify
+```
+
+Five minutes. It runs the growth diagnostic on your numbers and writes a 90-day plan to `friday/growth.md`.
+
+Optional, but it sharpens every other command:
 
 ```
 /voice-installer
 ```
 
-This is the foundation. It reads your writing samples, builds a voice profile, and writes it to `friday/voice.md`. Every command that runs after reads that profile and writes in your voice instead of generic AI voice.
+It reads your writing samples, builds a voice profile, and writes it to `friday/voice.md`. Every command that runs after reads that profile and writes in your voice instead of a generic AI voice. Skipping it is safe: commands fall back to a neutral, direct style until you run it.
 
 Want the full walkthrough first? The manual covers every command, the `friday/` folder, and how to extend Foundation: [`docs/foundation-manual.md`](docs/foundation-manual.md).
 

@@ -1,6 +1,6 @@
 # [Your Project Name] - AI Chief of Staff
 
-This is the brain file for your Friday configuration. Claude Code reads it every session. Start here and build it out as you add capabilities.
+This is the starting point for your `CLAUDE.md` brain file. The installer copies it to `CLAUDE.md` for you (unless you already have one), and Claude Code reads `CLAUDE.md` every session. Start here and build it out as you add capabilities.
 
 Replace every `[bracket]` below with your own content.
 
