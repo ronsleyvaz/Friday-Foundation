@@ -11,9 +11,10 @@ The fastest way in is to pick a [good first issue](https://github.com/ronsleyvaz
 1. Fork the repo and clone your fork.
 2. Copy an existing command that is close to what you want as your model. `commands/weeklyreview.md` and `commands/meetingprep.md` are short, readable examples.
 3. Save it as `commands/<your-command>.md`. Fill in the frontmatter name and description, then write the steps: one thing at a time, file tools only, no imports. It should read `friday/voice.md` if it exists and write its output into the `friday/` folder.
-4. Add a test in `tests/` that checks your command's frontmatter and structure. Copy the shape of an existing test in `test_commands.py`.
-5. Run `python -m pytest tests/` and confirm green.
-6. Open a pull request against `main`. CI runs the full suite on your PR automatically, so you see green or red before a maintainer reviews.
+4. Register it in the installer: add a line to the `PACK_COMMANDS` array in `install.sh`. The catalog parity tests then check that the command also appears everywhere else it is listed: the installer's usage and completion output, the README and manual tables, the command-count lines, and `new-capability.md`'s reserved-name list. They go red and name each place that is still out of sync, so you know exactly what to update.
+5. Add a test in `tests/` that checks your command's frontmatter and structure. Copy the shape of an existing test in `test_commands.py`.
+6. Run `python -m pytest tests/` and confirm green.
+7. Open a pull request against `main`. CI runs the full suite on your PR, so you see green or red before a maintainer reviews. Your very first PR may need a one-click maintainer approval before CI starts; after that it runs automatically.
 
 That is the whole loop. The sections below have the detail.
 
@@ -36,9 +37,10 @@ That is the whole loop. The sections below have the detail.
 1. Copy `commands/new-capability.md` as your starting point.
 2. Fill in the frontmatter (name and description).
 3. Write the steps the way the existing commands do: one thing at a time, file tools only, no imports.
-4. Add a test in `tests/` that validates the frontmatter and content.
-5. Run `python -m pytest tests/` and confirm green before submitting.
-6. Open a pull request against `main`. Use the issue template if you are proposing something new before building it.
+4. Register it in `PACK_COMMANDS` in `install.sh`. The catalog parity tests then require it in every other place a command is listed (the README and manual tables, the installer's output, the command counts, and `new-capability.md`'s reserved-name list) and name any you miss.
+5. Add a test in `tests/` that validates the frontmatter and content.
+6. Run `python -m pytest tests/` and confirm green before submitting.
+7. Open a pull request against `main`. Use the issue template if you are proposing something new before building it.
 
 ## Command quality bar
 

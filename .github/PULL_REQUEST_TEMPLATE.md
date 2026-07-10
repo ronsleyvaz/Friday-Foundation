@@ -11,6 +11,7 @@
 - [ ] Has no em dashes anywhere in the text.
 - [ ] Tells the founder what to do next after it runs.
 - [ ] `pytest tests/` run locally and green.
+- [ ] Registered the new command in `PACK_COMMANDS` in `install.sh` (new commands only).
 
 ## Type of change
 

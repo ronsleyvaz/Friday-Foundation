@@ -111,8 +111,15 @@ A command must:
 6. Work on a clean machine with Bash, Python 3, and Claude Code.
 7. Avoid mandatory integrations and accept manual input when practical.
 
-When adding or renaming a command, keep the installer manifest, README, manual,
-tests, and relevant templates consistent.
+When adding or renaming a command:
+
+1. Register it in the `PACK_COMMANDS` array in `install.sh`. This is the one
+   manual wiring step.
+2. Run `python3 -m pytest tests/test_catalog_parity.py`. It fails until the
+   README table, the manual table, the installer usage and completion output,
+   the single-command Available list, `new-capability.md`'s reserved-name list,
+   and the command-count claims all match the command directory.
+3. Add or update a test in `tests/` for the command's frontmatter and structure.
 
 ## Licence Rules
 
