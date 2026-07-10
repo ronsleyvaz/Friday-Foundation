@@ -40,6 +40,7 @@ set -euo pipefail
 
 REPO_RAW="${FRIDAY_REPO_RAW:-https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release}"
 DEST="${HOME}/.claude/commands"
+PROJECT_DIR="$(pwd)"
 
 # Full pack -- every command file installed by the no-arg path.
 # One entry per line: "<capability-slug> <file-name> <slash-command>"
@@ -116,6 +117,21 @@ install_template() {
   fi
 }
 
+activate_brain_file() {
+  # Turn the template into a live CLAUDE.md the first time; never clobber an
+  # existing one. Claude Code reads CLAUDE.md, not the .template, each session.
+  if [ ! -f "./CLAUDE.md.template" ]; then
+    return 0
+  fi
+  if [ -f "./CLAUDE.md" ]; then
+    echo "  Found an existing ./CLAUDE.md. Left it untouched."
+    echo "  The template is saved alongside as ./CLAUDE.md.template to merge in yourself."
+  else
+    cp "./CLAUDE.md.template" "./CLAUDE.md"
+    echo "  Created ./CLAUDE.md from the template. Open it and replace every [bracket]."
+  fi
+}
+
 # ---------------------------------------------------------------------------
 # Claude Code must be present
 # ---------------------------------------------------------------------------
@@ -145,36 +161,30 @@ if [ -z "${CAPABILITY}" ]; then
   done
 
   echo
+  echo "The brain file (CLAUDE.md) and harness guide will be saved to this directory:"
+  echo "  ${PROJECT_DIR}"
+  echo "If that is not your project directory, re-run this from the right place."
+  echo
   install_template
+  activate_brain_file
   echo
   install_harness
 
   echo
-  echo "All done. Open Claude Code in this directory and run:"
-  echo "  /voice-installer   -- set up your voice profile first"
-  echo "  /amplify           -- run the growth diagnostic"
-  echo "  /brief             -- your morning brief"
-  echo "  /decide            -- run the 1-3-1 decision protocol"
-  echo "  /meetingprep       -- prepare for any meeting in five minutes"
-  echo "  /weeklyreview      -- structured weekly review and one clear priority"
-  echo "  /new-capability    -- scaffold your own command"
-  echo "  /explore-idea      -- six forcing questions on a new idea"
-  echo "  /scope-decision    -- force an expansion, hold, or reduction call"
-  echo "  /learnings         -- review, search, and prune what Friday's learned"
-  echo "  /shipping-retro    -- weekly reflection from your real commit history"
-  echo "  /teach-team        -- scaffold an onboarding plan for a team member"
-  echo "  /validate-idea     -- 7-dimension validation, build/pivot/kill verdict"
-  echo "  /go-to-market      -- phased launch plan, pre-launch through 90 days"
-  echo "  /pricing-strategy  -- value-based pricing and tier design"
-  echo "  /offer-creation    -- value-equation review, find the weakest lever"
-  echo "  /competitive-analysis -- competitor teardown, matrix plus SWOT"
-  echo "  /sop-builder       -- turn a repeatable process into a followable SOP"
-  echo "  /product-hunt-launch -- Product Hunt specific launch runbook"
-  echo "  /changelog         -- turn git history into customer-facing release notes"
-  echo "  /positioning       -- build a clear positioning statement and next move"
-  echo "  /roadmap           -- turn a goal into a sequenced 90-day roadmap"
+  echo "All done. The full command pack is installed to ${DEST}."
   echo
-  echo "Read harness/00-how-friday-works.md to understand what you just installed."
+  echo "Open Claude Code in this directory:"
+  echo "  ${PROJECT_DIR}"
+  echo
+  echo "Then start here, in order:"
+  echo "  1. /amplify          Your fastest first win. Five minutes, no setup."
+  echo "                       Writes friday/growth.md: where to push next."
+  echo "  2. /voice-installer  Optional but recommended. Makes every command"
+  echo "                       write in your voice instead of a generic style."
+  echo "  3. /brief            Tomorrow morning. Your priorities, filtered."
+  echo
+  echo "The full list of commands is in README.md and docs/foundation-manual.md."
+  echo "New here? Read harness/00-how-friday-works.md to understand what you installed."
 
 else
   # ---- Single capability install ----

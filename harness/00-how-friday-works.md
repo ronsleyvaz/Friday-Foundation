@@ -16,7 +16,7 @@ These are the slash commands: `/voice-installer`, `/brief`, `/decide`, and the r
 
 This file is read by Claude Code at the start of every session. It carries your identity, your voice, your active projects, and your decision rules. Think of it as the context that makes Claude work like your assistant rather than a generic AI.
 
-Start from `CLAUDE.md.template` in this repo and replace the brackets.
+The installer creates `CLAUDE.md` from `CLAUDE.md.template` for you. Open it and replace the brackets.
 
 **3. The friday/ folder (in your project directory)**
 

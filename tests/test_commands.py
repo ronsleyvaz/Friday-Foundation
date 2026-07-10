@@ -118,6 +118,26 @@ def test_voice_installer_sample_fallbacks():
     assert "## Banned words" in text, "banned-words block must remain intact"
 
 
+def test_brief_soft_starts_nine_decisions():
+    """brief.md offers a starter decision list, accepts three to start, and no longer forbids examples."""
+    text = (COMMANDS_DIR / "brief.md").read_text(encoding="utf-8")
+    lower = text.lower()
+    assert "hire or contract" in lower, "brief must offer a starter decision list"
+    assert "build or buy" in lower, "brief starter list must include the common decisions"
+    assert "adopt, edit, or replace" in lower, "the starter list must be framed as adopt/edit/replace"
+    assert "at least three" in lower, "brief must accept as few as three decisions to start"
+    assert "do not suggest example decisions by default" not in lower, (
+        "the examples-forbidden prohibition must be removed"
+    )
+    # No fabricated padding to nine.
+    assert (
+        "do not pad" in lower or "do not fabricate" in lower or "do not invent decisions" in lower
+    ), "brief must forbid padding the list with filler decisions"
+    # The file identity and required fields survive.
+    assert "# Nine Decisions" in text, "the nine-decisions file header must remain"
+    assert "Last updated:" in text, "the nine-decisions file must keep a Last updated line"
+
+
 def test_roadmap_command_exists():
     """The roadmap command file exists and has valid frontmatter."""
     roadmap = COMMANDS_DIR / "roadmap.md"
