@@ -91,6 +91,18 @@ def test_expected_commands_exist():
     assert not missing, f"Missing command files: {missing}"
 
 
+def test_roadmap_command_exists():
+    """The roadmap command file exists and has valid frontmatter."""
+    roadmap = COMMANDS_DIR / "roadmap.md"
+    assert roadmap.exists(), "roadmap.md is missing from commands/"
+    text = roadmap.read_text(encoding="utf-8")
+    fm, body = parse_frontmatter(text)
+    assert fm is not None, "roadmap.md: missing frontmatter"
+    assert fm.get("name") == "roadmap", f"roadmap.md: name field is '{fm.get('name')}', expected 'roadmap'"
+    assert fm.get("description"), "roadmap.md: missing description field"
+    assert len(body) > 100, "roadmap.md: body too short"
+
+
 def test_positioning_command_matches_issue_contract():
     """The positioning command has the output, voice, and structure requested in #10."""
     text = (COMMANDS_DIR / "positioning.md").read_text(encoding="utf-8")
