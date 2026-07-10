@@ -27,38 +27,47 @@ If it does not exist, run the setup flow:
 
 Tell the founder:
 
-> Setting up your nine decisions. These are not tasks. They are the recurring forks your business turns on. When you get them right consistently, they compound. You will name nine of them now. Examples: "Hire or contract?" / "Build or buy?" / "Which channel gets this week's content?" Take your time. Name the ones that keep coming back.
+> Setting up your recurring decisions. These are not tasks. They are the forks your business turns on. When you get them right consistently, they compound. You do not need all nine today. Three real ones is enough to start, and you can grow the list over time.
 
-Ask the founder to list their nine decisions. Accept them one at a time or as a batch. Do not suggest example decisions by default; if they are stuck after 30 seconds, offer to help them brainstorm. Once you have at least five and they confirm they are done, accept the list.
+Offer the founder a starter list they can adopt, edit, or replace:
+
+> Here are nine decisions many founders turn on. Take the ones that fit, reword them, drop the rest, and add your own:
+>
+> 1. Hire or contract?
+> 2. Build or buy?
+> 3. Which channel gets this week's focus?
+> 4. Change the price or hold?
+> 5. Take this client or pass?
+> 6. Ship now or polish?
+> 7. Delegate this or do it myself?
+> 8. Spend to grow or save runway?
+> 9. Partner or go solo on this?
+
+Accept their decisions one at a time or as a batch, including any they adopt from the starter list. Once you have at least three they are happy with, accept the list. Do not invent decisions they did not choose, and do not pad the list to nine with filler.
 
 Create `friday/nine-decisions.md` in the current directory. Create the `friday/` folder if it does not exist. Write the file in this exact shape:
 
 ```
 # Nine Decisions
 
-These are the nine recurring forks <name>'s business turns on.
+These are the recurring forks <name>'s business turns on.
 Each brief filters today's priorities through this list.
 
 1. <decision one>
 2. <decision two>
 3. <decision three>
-4. <decision four>
-5. <decision five>
-6. <decision six>
-7. <decision seven>
-8. <decision eight>
-9. <decision nine>
+<add more, numbered in order, up to nine, as they name them>
 
 Last updated: <YYYY-MM-DD>
 ```
 
-Fill every `<...>` from what the founder gave you. Print:
+Write only the decisions they actually chose, numbered from 1. Do not fabricate placeholder decisions to reach nine. Print:
 
-> Your nine decisions are saved to `friday/nine-decisions.md`. Every brief you run from now on filters through these. You can update the file any time.
+> Your decisions are saved to `friday/nine-decisions.md`. Every brief filters through these. The file is yours to edit any time, and /brief will nudge you to grow the list toward nine as you go.
 
 ## Step 3: Read the nine decisions
 
-Read `friday/nine-decisions.md`. Hold the list in context for Step 5.
+Read `friday/nine-decisions.md`. Hold the list in context for Step 5. If it contains fewer than nine decisions, you may add a single gentle line at the end of the brief inviting the founder to name another when a new recurring fork shows up. Never rewrite or reorder their file.
 
 ## Step 4: Capture today's priorities
 
