@@ -26,6 +26,8 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- sop-builder       -- installs just /sop-builder
 #   curl -fsSL .../install.sh | bash -s -- product-hunt-launch -- installs just /product-hunt-launch
 #   curl -fsSL .../install.sh | bash -s -- changelog         -- installs just /changelog
+#   curl -fsSL .../install.sh | bash -s -- positioning       -- installs just /positioning
+#   curl -fsSL .../install.sh | bash -s -- roadmap           -- installs just /roadmap
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -62,6 +64,8 @@ PACK_COMMANDS=(
   "sop-builder      sop-builder.md      /sop-builder"
   "product-hunt-launch product-hunt-launch.md /product-hunt-launch"
   "changelog        changelog.md        /changelog"
+  "positioning      positioning.md      /positioning"
+  "roadmap          roadmap.md          /roadmap"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -166,6 +170,9 @@ if [ -z "${CAPABILITY}" ]; then
   echo "  /competitive-analysis -- competitor teardown, matrix plus SWOT"
   echo "  /sop-builder       -- turn a repeatable process into a followable SOP"
   echo "  /product-hunt-launch -- Product Hunt specific launch runbook"
+  echo "  /changelog         -- turn git history into customer-facing release notes"
+  echo "  /positioning       -- build a clear positioning statement and next move"
+  echo "  /roadmap           -- turn a goal into a sequenced 90-day roadmap"
   echo
   echo "Read harness/00-how-friday-works.md to understand what you just installed."
 
@@ -189,7 +196,7 @@ else
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${CAPABILITY}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap"
     exit 1
   fi
 fi

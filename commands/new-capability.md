@@ -14,7 +14,7 @@ Ask the founder:
 
 > What do you want to call this command? Give me a short kebab-case name (e.g. quarterly-plan, project-status, content-brief). This becomes the slash command name.
 
-Wait for their answer. Validate: the name should be lowercase, use hyphens not spaces, and not clash with an existing command name (voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch).
+Wait for their answer. Validate: the name should be lowercase, use hyphens not spaces, and not clash with an existing command name (voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap).
 
 If there is a clash, tell them and ask for a different name.
 

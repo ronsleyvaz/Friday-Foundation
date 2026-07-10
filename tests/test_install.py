@@ -88,16 +88,7 @@ def test_install_full_pack_lands_commands():
             assert result.returncode == 0, f"install.sh failed:\n{result.stdout}\n{result.stderr}"
 
             commands_dir = tmp_home / ".claude" / "commands"
-            expected = [
-                "voice-installer.md",
-                "decide.md",
-                "brief.md",
-                "meetingprep.md",
-                "weeklyreview.md",
-                "new-capability.md",
-                "amplify.md",
-                "changelog.md",
-            ]
+            expected = sorted(f.name for f in (REPO_ROOT / "commands").glob("*.md"))
             missing = [f for f in expected if not (commands_dir / f).exists()]
             assert not missing, f"Commands missing after install: {missing}"
     finally:
