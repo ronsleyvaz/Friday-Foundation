@@ -49,6 +49,7 @@ It is a common founder job that Foundation does not cover yet, and it fits the p
 - [ ] \`commands/$1.md\` with valid frontmatter (name and description)
 - [ ] Reads \`friday/voice.md\` if it exists and writes in the founder's voice
 - [ ] Writes its output to \`$3\`
+- [ ] Registered in \`PACK_COMMANDS\` in \`install.sh\` (keeps it installable; the catalog parity tests enforce the rest)
 - [ ] Tells the founder what to do next after it runs
 - [ ] A test in \`tests/\` that checks the frontmatter and structure
 - [ ] \`python -m pytest tests/\` is green

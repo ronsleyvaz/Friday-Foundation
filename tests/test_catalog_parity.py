@@ -77,6 +77,23 @@ def test_installer_manifest_matches_command_directory():
     assert len(entries) == len(expected), "install.sh: duplicate PACK_COMMANDS entry"
 
 
+def test_installer_usage_block_matches_manifest():
+    """The header usage examples list exactly the single-command manifest slugs.
+
+    No other test covers the usage comment block, so a command added to
+    PACK_COMMANDS but forgotten here would ship incomplete help text.
+    """
+    text = INSTALL_SH.read_text(encoding="utf-8")
+    usage_slugs = re.findall(r"^#.*bash -s -- ([a-z0-9-]+)\b", text, re.MULTILINE)
+    manifest_slugs = {slug for slug, _, _ in installer_entries()}
+    assert set(usage_slugs) == manifest_slugs, (
+        "install.sh usage block out of sync with PACK_COMMANDS: "
+        f"missing {manifest_slugs - set(usage_slugs)}, "
+        f"extra {set(usage_slugs) - manifest_slugs}"
+    )
+    assert len(usage_slugs) == len(manifest_slugs), "install.sh: duplicate usage-block entry"
+
+
 def test_installer_user_facing_lists_match_manifest():
     """Completion and error output list every installable command."""
     expected = command_slugs()

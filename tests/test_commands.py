@@ -7,6 +7,7 @@ import re
 
 REPO_ROOT = Path(__file__).parent.parent
 COMMANDS_DIR = REPO_ROOT / "commands"
+INSTALL_SH = REPO_ROOT / "install.sh"
 
 
 def parse_frontmatter(text: str):
@@ -75,20 +76,46 @@ def test_no_em_dashes_in_commands():
     assert not violations, "Em dashes found in commands:\n" + "\n".join(violations)
 
 
+def manifest_command_files():
+    """Command file names named in install.sh's PACK_COMMANDS manifest."""
+    text = INSTALL_SH.read_text(encoding="utf-8")
+    match = re.search(r"PACK_COMMANDS=\(\n(.*?)\n\)", text, re.DOTALL)
+    assert match, "install.sh: PACK_COMMANDS manifest not found"
+    return re.findall(
+        r'^\s*"[a-z0-9-]+\s+([a-z0-9-]+\.md)\s+/[a-z0-9-]+"\s*$',
+        match.group(1),
+        re.MULTILINE,
+    )
+
+
 def test_expected_commands_exist():
-    """The expected command files from the build manifest exist."""
-    expected = [
-        "voice-installer.md",
-        "decide.md",
-        "brief.md",
-        "meetingprep.md",
-        "weeklyreview.md",
-        "new-capability.md",
-        "amplify.md",
-        "changelog.md",
-    ]
-    missing = [f for f in expected if not (COMMANDS_DIR / f).exists()]
-    assert not missing, f"Missing command files: {missing}"
+    """Every command file named in the installer manifest exists on disk.
+
+    Derived from PACK_COMMANDS rather than a hardcoded list, so this check
+    tracks the installer manifest and cannot drift out of date.
+    """
+    files = manifest_command_files()
+    assert files, "No command files parsed from PACK_COMMANDS in install.sh"
+    missing = [f for f in files if not (COMMANDS_DIR / f).exists()]
+    assert not missing, f"Manifest names missing command files: {missing}"
+
+
+def test_voice_installer_sample_fallbacks():
+    """voice-installer Step 2 offers paste and no-samples paths so it never dead-ends."""
+    text = (COMMANDS_DIR / "voice-installer.md").read_text(encoding="utf-8")
+    lower = text.lower()
+    assert "rather paste" in lower, "voice-installer Step 2 must offer a paste-your-samples option"
+    assert (
+        "no samples" in lower or "nothing handy" in lower or "no writing samples" in lower
+    ), "voice-installer must handle the no-samples case"
+    assert "estimate" in lower, (
+        "voice-installer must let the Rhythm line be marked an estimate when built from the interview"
+    )
+    # The proof mechanism and config plumbing must survive the edit.
+    assert "<!-- FRIDAY-VOICE-START -->" in text and "<!-- FRIDAY-VOICE-END -->" in text, (
+        "voice sentinel block must remain intact"
+    )
+    assert "## Banned words" in text, "banned-words block must remain intact"
 
 
 def test_roadmap_command_exists():

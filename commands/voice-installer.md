@@ -20,13 +20,19 @@ Ask these five questions ONE AT A TIME. Wait for each answer before asking the n
 
 ## Step 2: Read the writing samples
 
-Ask the founder for two or three file paths to things they have written, as plain `.txt` or `.md`. Old emails, posts, drafts. Anything they wrote, not AI-drafted. Read each file.
+You need a feel for how the founder actually writes. Offer three ways in, and use whichever one they pick:
 
-From the samples, work out, by counting and not guessing:
+- They have files: ask for two or three file paths to things they have written, as plain `.txt` or `.md`. Old emails, posts, drafts. Anything they wrote, not AI-drafted. Read each file.
+- They would rather paste: ask them to paste two or three short pieces they wrote straight into the chat. Treat the pasted text exactly like the contents of a file.
+- They have nothing handy: that is fine. Say so, and build the profile from the interview alone. You will mark the rhythm as an estimate in Step 3 and tell them at the close how to sharpen it later.
+
+From the samples or the pasted text, work out, by counting and not guessing:
 
 - Average sentence length in words.
 - Sentence openers and phrases they actually repeat.
 - Whether they run short and direct or long and layered.
+
+If there are no samples at all, do not invent numbers. Skip the counting, and treat the rhythm as an estimate you will state as such.
 
 ## Step 3: Write friday/voice.md
 
@@ -62,6 +68,8 @@ Paste this profile into any AI tool before you ask it to write. It will match yo
 
 Fill every `<...>` from the interview and the samples. Keep the banned-words block as a plain list.
 
+If you built this profile from the interview alone with no samples, change the Rhythm line so it names no measured number, for example: `Rhythm: estimated from the interview, not measured yet. Re-run /voice-installer with real samples to set this from your actual writing.`
+
 ## Step 4: Append a voice block to CLAUDE.md
 
 Add a short voice block to the `CLAUDE.md` in the current directory. Wrap it in these exact sentinel comments so it can be updated cleanly:
@@ -91,10 +99,14 @@ This is a live rewrite, not a word-swap. You have the founder's name, tone, phra
 
 ## Step 6: Close
 
-Print these two lines:
+Print these lines:
 
 - Your voice profile is at `friday/voice.md`. Open it, read it, add to it any time.
 - This is the first capability in your `friday/` config. The next one appends to the same folder.
+
+If you built the profile without any writing samples, also print this line:
+
+- Run /voice-installer again later with two or three real samples. It will sharpen the rhythm from your actual writing.
 
 ## What comes next
 
