@@ -85,6 +85,7 @@ def test_expected_commands_exist():
         "weeklyreview.md",
         "new-capability.md",
         "amplify.md",
+        "changelog.md",
     ]
     missing = [f for f in expected if not (COMMANDS_DIR / f).exists()]
     assert not missing, f"Missing command files: {missing}"

@@ -25,6 +25,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- competitive-analysis -- installs just /competitive-analysis
 #   curl -fsSL .../install.sh | bash -s -- sop-builder       -- installs just /sop-builder
 #   curl -fsSL .../install.sh | bash -s -- product-hunt-launch -- installs just /product-hunt-launch
+#   curl -fsSL .../install.sh | bash -s -- changelog         -- installs just /changelog
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -60,6 +61,7 @@ PACK_COMMANDS=(
   "competitive-analysis competitive-analysis.md /competitive-analysis"
   "sop-builder      sop-builder.md      /sop-builder"
   "product-hunt-launch product-hunt-launch.md /product-hunt-launch"
+  "changelog        changelog.md        /changelog"
 )
 
 # Harness guide files fetched alongside the full pack.
