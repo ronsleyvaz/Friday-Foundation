@@ -79,41 +79,88 @@ HARNESS_FILES=(
   "05-the-amplify-logic.md"
 )
 
+# Download failures are collected, never fatal mid-pack, and reported honestly
+# at the end. These module-level trackers are appended to by the helpers below.
+FAILED_COMMANDS=()
+FAILED_HARNESS=()
+TEMPLATE_FAILED="no"
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
+require_tool() {
+  # $1 = command name, $2 = one-line install hint. Returns 1 if absent.
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "$1 was not found (no '$1' command on your PATH)."
+    echo "$2"
+    echo "Then run this line again."
+    return 1
+  fi
+}
+
 install_one() {
+  # Download one command file into DEST. Backs up a differing existing copy to
+  # <name>.md.bak; replaces identical content silently (no .bak litter on
+  # idempotent re-runs). Returns 1 on any download failure without aborting.
   local file="$1"
-  mkdir -p "${DEST}"
-  curl -fsSL "${REPO_RAW}/commands/${file}" -o "${DEST}/${file}"
-  if [ -s "${DEST}/${file}" ]; then
-    echo "  Installed: ${DEST}/${file}"
-  else
+  local dest="${DEST}/${file}"
+  local tmp
+  # set -e is suppressed inside this function (it is called as `if ! install_one`),
+  # so every failure is checked explicitly and turned into a return 1 the caller
+  # collects. Nothing here may fail silently and still report success.
+  mkdir -p "${DEST}" || {
+    echo "  Failed to create ${DEST}"
+    return 1
+  }
+  tmp="$(mktemp "${TMPDIR:-/tmp}/friday-install.XXXXXX")" || {
+    echo "  Failed to create a temp file for: ${file}"
+    return 1
+  }
+  if ! curl -fsSL "${REPO_RAW}/commands/${file}" -o "${tmp}" || [ ! -s "${tmp}" ]; then
+    rm -f "${tmp}"
     echo "  Failed to download: ${file}"
     return 1
   fi
+  if [ -f "${dest}" ] && ! cmp -s "${tmp}" "${dest}"; then
+    if ! mv "${dest}" "${dest}.bak"; then
+      echo "  Could not back up your existing ${file}; leaving it untouched."
+      rm -f "${tmp}"
+      return 1
+    fi
+    echo "  Backed up your existing ${file} to ${file}.bak"
+  fi
+  if ! mv "${tmp}" "${dest}"; then
+    echo "  Failed to install: ${file}"
+    rm -f "${tmp}"
+    return 1
+  fi
+  echo "  Installed: ${dest}"
+  return 0
 }
 
 install_harness() {
   echo "Fetching the harness guide..."
   mkdir -p "./harness"
+  local f
   for f in "${HARNESS_FILES[@]}"; do
-    curl -fsSL "${REPO_RAW}/harness/${f}" -o "./harness/${f}"
-    if [ -s "./harness/${f}" ]; then
+    if curl -fsSL "${REPO_RAW}/harness/${f}" -o "./harness/${f}" && [ -s "./harness/${f}" ]; then
       echo "  Fetched: ./harness/${f}"
     else
+      rm -f "./harness/${f}"
       echo "  Failed to fetch harness file: ${f}"
+      FAILED_HARNESS+=("${f}")
     fi
   done
 }
 
 install_template() {
-  curl -fsSL "${REPO_RAW}/CLAUDE.md.template" -o "./CLAUDE.md.template"
-  if [ -s "./CLAUDE.md.template" ]; then
+  if curl -fsSL "${REPO_RAW}/CLAUDE.md.template" -o "./CLAUDE.md.template" && [ -s "./CLAUDE.md.template" ]; then
     echo "  Fetched: ./CLAUDE.md.template"
   else
+    rm -f "./CLAUDE.md.template"
     echo "  Failed to fetch CLAUDE.md.template"
+    TEMPLATE_FAILED="yes"
   fi
 }
 
@@ -132,32 +179,16 @@ activate_brain_file() {
   fi
 }
 
-# ---------------------------------------------------------------------------
-# Claude Code must be present
-# ---------------------------------------------------------------------------
-
-if ! command -v claude >/dev/null 2>&1; then
-  echo "Claude Code was not found (no 'claude' command on your PATH)."
-  echo "Install it first: https://docs.anthropic.com/claude-code"
-  echo "Then run this line again."
-  exit 1
-fi
-
-# ---------------------------------------------------------------------------
-# Route: no-arg = full pack; arg = single capability
-# ---------------------------------------------------------------------------
-
-CAPABILITY="${1:-}"
-
-if [ -z "${CAPABILITY}" ]; then
-  # ---- Full pack install ----
+install_full_pack() {
   echo "Friday Foundation: installing the full command pack"
   echo
 
+  local entry file
   for entry in "${PACK_COMMANDS[@]}"; do
-    slug=$(echo "${entry}" | awk '{print $1}')
     file=$(echo "${entry}" | awk '{print $2}')
-    install_one "${file}"
+    if ! install_one "${file}"; then
+      FAILED_COMMANDS+=("${file}")
+    fi
   done
 
   echo
@@ -169,6 +200,30 @@ if [ -z "${CAPABILITY}" ]; then
   activate_brain_file
   echo
   install_harness
+
+  # Honest close: never claim success while any file is missing.
+  if [ ${#FAILED_COMMANDS[@]} -gt 0 ] || [ "${TEMPLATE_FAILED}" = "yes" ] || [ ${#FAILED_HARNESS[@]} -gt 0 ]; then
+    echo
+    echo "Finished, but some files did not download:"
+    if [ ${#FAILED_COMMANDS[@]} -gt 0 ]; then
+      local c
+      for c in "${FAILED_COMMANDS[@]}"; do
+        echo "  command: ${c}"
+      done
+    fi
+    if [ "${TEMPLATE_FAILED}" = "yes" ]; then
+      echo "  CLAUDE.md.template (so no CLAUDE.md was created for you)"
+    fi
+    if [ ${#FAILED_HARNESS[@]} -gt 0 ]; then
+      local h
+      for h in "${FAILED_HARNESS[@]}"; do
+        echo "  harness: ${h}"
+      done
+    fi
+    echo
+    echo "Re-run the same install line to retry. Anything already installed is reused, so only the missing files are fetched again."
+    exit 1
+  fi
 
   echo
   echo "All done. The full command pack is installed to ${DEST}."
@@ -185,28 +240,54 @@ if [ -z "${CAPABILITY}" ]; then
   echo
   echo "The full list of commands is in README.md and docs/foundation-manual.md."
   echo "New here? Read harness/00-how-friday-works.md to understand what you installed."
+  exit 0
+}
 
-else
-  # ---- Single capability install ----
-  matched=""
+install_single() {
+  local capability="$1"
+  local entry slug file slash matched=""
   for entry in "${PACK_COMMANDS[@]}"; do
     slug=$(echo "${entry}" | awk '{print $1}')
     file=$(echo "${entry}" | awk '{print $2}')
     slash=$(echo "${entry}" | awk '{print $3}')
-    if [ "${slug}" = "${CAPABILITY}" ]; then
+    if [ "${slug}" = "${capability}" ]; then
       matched="yes"
       echo "Friday Foundation: installing ${slug}"
       echo
-      install_one "${file}"
-      echo
-      echo "Next step: open Claude Code and run  ${slash}"
+      if install_one "${file}"; then
+        echo
+        echo "Next step: open Claude Code and run  ${slash}"
+      else
+        echo
+        echo "That did not install. Re-run the same line to retry."
+        exit 1
+      fi
       break
     fi
   done
 
   if [ -z "${matched}" ]; then
-    echo "Unknown capability: ${CAPABILITY}"
+    echo "Unknown capability: ${capability}"
     echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap"
     exit 1
   fi
-fi
+}
+
+# ---------------------------------------------------------------------------
+# Entry point. All work lives in main() and runs only from the final line, so a
+# curl | bash download cut off mid-transfer never executes a partial install.
+# ---------------------------------------------------------------------------
+
+main() {
+  require_tool curl "Install curl first: it ships with macOS and most Linux distributions (for example 'sudo apt-get install curl')." || exit 1
+  require_tool claude "Install Claude Code first: https://docs.anthropic.com/claude-code" || exit 1
+
+  local capability="${1:-}"
+  if [ -z "${capability}" ]; then
+    install_full_pack
+  else
+    install_single "${capability}"
+  fi
+}
+
+main "$@"

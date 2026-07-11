@@ -8,7 +8,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,6 +22,18 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Pin installer tests to stock bash on macOS
+        # GitHub's macOS runners put Homebrew bash 5 ahead of /bin/bash on PATH.
+        # Point the installer tests at /bin/bash so they exercise the stock 3.2
+        # that real macOS installers run, and record the version in the log.
+        run: |
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            echo "FRIDAY_TEST_BASH=/bin/bash" >> "$GITHUB_ENV"
+            /bin/bash --version | head -1
+          else
+            bash --version | head -1
+          fi
+
       - name: Install test runner
         run: python3 -m pip install -r requirements-dev.txt
 
@@ -25,6 +41,11 @@ jobs:
         run: python3 -m pytest tests/ -v
 
       - name: Raw grep sweep for proprietary terms (belt and suspenders)
+        # The Python content sweep (tests/test_content_sweep.py) is the
+        # authoritative cross-platform check and runs on every leg. This raw grep
+        # is a duplicate safety net, scoped to Linux to avoid BSD versus GNU grep
+        # divergence on the macOS leg.
+        if: matrix.os == 'ubuntu-latest'
         run: |
           set -uo pipefail
           PATTERN=$(python3 -c "from tests.test_cleanroom import FORBIDDEN_PATTERNS; print('|'.join(FORBIDDEN_PATTERNS))")
