@@ -143,7 +143,7 @@ Pull requests are open, and the test gate runs on every one, so you get fast fee
 
 New here? The best place to start is a [good first issue](https://github.com/ronsleyvaz/Friday-Foundation/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). Each one is a self-contained command to build, with the founder problem and the definition of done written out.
 
-You can ship your first command in about ten minutes. `CONTRIBUTING.md` has the step by step, the quality bar, and how to get credit for what you add.
+You can scaffold your first command in about ten minutes, and polish it into something you would ship in an hour or two. `CONTRIBUTING.md` has the step by step, the quality bar, and how to get credit for what you add.
 
 If Foundation is useful to you, star the repo. It is the cheapest way to help more founders find it.
 

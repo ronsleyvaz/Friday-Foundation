@@ -22,13 +22,18 @@ Report a security issue if you find:
 
 ## How to report
 
-Open a GitHub issue with the label `security`. Include:
+Report a sensitive vulnerability privately, not in a public issue.
+
+- **Preferred:** open the repository's **Security** tab and choose **Report a vulnerability**. This opens a private advisory that only the maintainers can see.
+- **If that option is not visible:** open a public issue containing only `security: request private contact` with no details, and a maintainer will follow up privately.
+
+Once you have a private channel, include:
 
 1. A short description of the issue.
 2. Steps to reproduce.
 3. The file or line where the issue appears.
 
-Do not include exploits or proof-of-concept attack code in public issues. If the issue is sensitive, email amplifyais.com directly.
+Do not post proof-of-concept or exploit code in a public issue. For a non-sensitive issue, open a normal GitHub issue with the label `security` and include the same three details.
 
 ## Response
 

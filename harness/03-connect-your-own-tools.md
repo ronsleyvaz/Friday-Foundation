@@ -26,10 +26,13 @@ Claude Code supports Model Context Protocol (MCP) servers. These are small serve
 
 Official MCP servers exist for: GitHub, Slack, Linear, Notion, Google Calendar, Supabase, and more.
 
-To add an MCP server:
-1. Follow the setup guide at https://docs.anthropic.com/claude-code (look for MCP configuration).
-2. Add the server to your `~/.claude/claude.json` config.
-3. In your command, reference the tool name the server exposes.
+To add an MCP server, run `claude mcp add` from your terminal (run `claude mcp add --help` for the full syntax). You give it a name, a transport, and the server's URL or launch command:
+
+```
+claude mcp add --scope user --transport http <name> <server-url>
+```
+
+The `--scope` flag decides where the server is saved. `user` (all your projects) and the default `local` (this project only) both write to `~/.claude.json` in your home folder. `project` writes a `.mcp.json` file in the project root that you can commit and share with teammates. Then, in your command, reference the tool name the server exposes.
 
 Your credentials stay on your machine. You configure the MCP server with your own API keys.
 

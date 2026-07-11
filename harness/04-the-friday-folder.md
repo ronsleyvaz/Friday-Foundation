@@ -20,11 +20,15 @@ Custom commands you build will add their own files here.
 
 ---
 
-## The folder is append-friendly
+## How the files behave
 
-Most commands append to existing files rather than overwrite them. `friday/decisions.md` grows with every decision you run. `friday/voice.md` gets updated when you re-run `/voice-installer`.
+The files here fall into three groups, and it helps to know which is which:
 
-The exception is `friday/morning.md` -- the brief overwrites each day, so it always shows today's priorities.
+- **Snapshots, rewritten each run.** `friday/morning.md` (the brief) and `friday/growth.md` (the Amplify diagnostic), along with the other one-off analysis outputs, are regenerated from scratch every time. The latest run replaces the last.
+- **Logs, appended to.** `friday/decisions.md`, `friday/meetings.md`, `friday/review.md`, and `friday/shipping-retro.md` grow over time. Each run adds a new entry below the previous ones, so the history stays intact.
+- **Config, kept and edited.** `friday/nine-decisions.md` and `friday/voice.md` are written once, then persist. You edit them directly, and commands read them rather than overwrite them.
+
+`friday/learnings.md` sits between the last two: you add to it over time, but `/learnings` also lets you review and prune it, so treat it as a curated log rather than an immutable one.
 
 ---
 

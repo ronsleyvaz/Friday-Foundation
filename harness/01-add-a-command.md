@@ -1,6 +1,6 @@
 # 01 - Add a Command
 
-A command is a markdown file in `~/.claude/commands/`. Claude Code reads the frontmatter to name the command, and reads the body to know what to do when you run it.
+A command is a markdown file in `~/.claude/commands/`. The filename becomes the command name -- `hello.md` runs as `/hello`. Claude Code reads the body to know what to do when you run it, and shows the frontmatter `description` in the command picker.
 
 You can write one yourself in under ten minutes. Here is how.
 
@@ -26,6 +26,8 @@ name: your-command-name
 description: One line on what this command does. Claude Code shows this in the command picker.
 ---
 ```
+
+Give the file and the `name` field the same value -- the filename is what you actually type after `/`, and Foundation keeps `name` matching it so its tests can find the command.
 
 **Body** (everything after the frontmatter):
 
