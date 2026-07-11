@@ -8,7 +8,15 @@ Build a new Friday command from scratch. This command prompts you for a name and
 
 You, Claude, run the whole flow below in order, using your own file tools. Nothing phones home. Everything happens in this session.
 
-## Step 1: Get the command name
+## Step 1: Read the founder's voice profile (if it exists)
+
+Check whether `friday/voice.md` exists in the current directory. If it does, read it and use the founder's voice for your questions, explanations, and confirmation messages throughout this flow.
+
+If `friday/voice.md` does not exist, use a direct, plain style: short sentences, active voice, no hedging.
+
+Keep the generated command template structurally exact. Apply the voice profile to prose you synthesize, not to frontmatter keys, headings, paths, placeholders, or code fences.
+
+## Step 2: Get the command name
 
 Ask the founder:
 
@@ -18,7 +26,7 @@ Wait for their answer. Validate: the name should be lowercase, use hyphens not s
 
 If there is a clash, tell them and ask for a different name.
 
-## Step 2: Get the purpose
+## Step 3: Get the purpose
 
 Ask:
 
@@ -26,7 +34,7 @@ Ask:
 
 Wait for their answer.
 
-## Step 3: Get the output
+## Step 4: Get the output
 
 Ask:
 
@@ -34,7 +42,7 @@ Ask:
 
 If they say they are not sure or skip this, default to `friday/<name>.md`.
 
-## Step 4: Scaffold the command file
+## Step 5: Scaffold the command file
 
 Check whether `commands/<name>.md` already exists in the current directory. If it does, ask:
 
@@ -88,7 +96,7 @@ After writing, print:
 Built by Amplify AI at amplifyais.com
 ```
 
-## Step 5: Write or refresh the skill-writing playbook
+## Step 6: Write or refresh the skill-writing playbook
 
 Check whether `docs/skill-writing-playbook.md` exists in the current directory.
 
@@ -140,9 +148,9 @@ A command that passes all five stays reliable the tenth time you run it, not jus
 Built by Amplify AI at amplifyais.com
 ```
 
-If `docs/skill-writing-playbook.md` already exists, leave it as-is and skip straight to Step 6.
+If `docs/skill-writing-playbook.md` already exists, leave it as-is and skip straight to Step 7.
 
-## Step 6: Confirm
+## Step 7: Confirm
 
 After writing the file, print:
 

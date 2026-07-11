@@ -39,9 +39,16 @@ Build a feature and positioning matrix comparing the founder's product against e
 
 Make sure the rows actually differentiate. If two competitors would get identical entries across every row, that's a signal to dig for a real distinction, not a reason to leave the rows blank.
 
-## Step 5: Run a SWOT for the founder's own position
+## Step 5: Run a SWOT for each competitor and the founder's position
 
-Given everything gathered:
+For each named competitor, build a separate SWOT from that competitor's point of view. Base every item on what the founder supplied in Step 3 and what the comparison matrix shows. Mark unknowns plainly instead of inventing evidence.
+
+- **Strengths:** what does this competitor do well in this market?
+- **Weaknesses:** where is this competitor genuinely behind or exposed?
+- **Opportunities:** what customer, channel, product, or market opening could this competitor exploit?
+- **Threats:** what changes, rivals, or founder advantages could weaken this competitor's position?
+
+Then build one overall SWOT for the founder's own position:
 
 - **Strengths:** what does the founder's product do well, relative to this specific set of competitors?
 - **Weaknesses:** where is the founder's product genuinely behind?
@@ -86,7 +93,18 @@ Weaknesses: <where they're weak>
 
 <The matrix from Step 4, as a markdown table.>
 
-## SWOT
+## Competitor SWOTs
+
+### <Competitor 1 name>
+
+| | Helpful | Harmful |
+|---|---|---|
+| **Internal** | Strengths: <list> | Weaknesses: <list> |
+| **External** | Opportunities: <list> | Threats: <list> |
+
+<Repeat the SWOT table for each named competitor.>
+
+## Your position SWOT
 
 | | Helpful | Harmful |
 |---|---|---|

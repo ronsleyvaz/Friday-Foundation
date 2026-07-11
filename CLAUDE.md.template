@@ -69,7 +69,7 @@ See `friday/nine-decisions.md` for the full list once it is created.
 
 ## The friday/ folder
 
-Every capability I run writes to `friday/`. These files are my config, growing over time:
+Every workflow capability I run writes to `friday/`. These files are my config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 - `friday/voice.md` - my voice profile (created by `/voice-installer`)
 - `friday/decisions.md` - my decision log (created by `/decide`)

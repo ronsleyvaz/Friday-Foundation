@@ -180,3 +180,51 @@ def test_positioning_command_matches_issue_contract():
     ]
     for term in required_terms:
         assert term in body
+
+
+def test_every_command_after_voice_installer_reads_voice_first():
+    """Every other command reads voice in its top-level first step."""
+    expected_heading = "## Step 1: Read the founder's voice profile (if it exists)"
+
+    for path in get_command_files():
+        if path.name == "voice-installer.md":
+            continue
+
+        text = path.read_text(encoding="utf-8")
+        _, body = parse_frontmatter(text)
+        first_step = body.split("## Step 2", 1)[0]
+        assert expected_heading in first_step, f"{path.name}: voice read is not the first step"
+        assert "Check whether `friday/voice.md` exists" in first_step, (
+            f"{path.name}: first step does not check friday/voice.md"
+        )
+        assert "does not exist" in first_step, f"{path.name}: first step has no neutral fallback"
+
+
+def test_competitive_analysis_has_swot_per_competitor():
+    """The implementation fulfills its promise of a separate SWOT per competitor."""
+    text = (COMMANDS_DIR / "competitive-analysis.md").read_text(encoding="utf-8")
+
+    assert "## Step 5: Run a SWOT for each competitor" in text
+    assert "For each named competitor, build a separate SWOT" in text
+    assert "## Competitor SWOTs" in text
+    assert "<Repeat the SWOT table for each named competitor.>" in text
+    assert "## Your position SWOT" in text
+
+
+def test_docs_name_new_capability_output_exception():
+    """Every broad friday-folder explanation names the developer-tool exception."""
+    paths = [
+        REPO_ROOT / "README.md",
+        REPO_ROOT / "docs" / "foundation-manual.md",
+        REPO_ROOT / "harness" / "00-how-friday-works.md",
+        REPO_ROOT / "harness" / "04-the-friday-folder.md",
+        REPO_ROOT / "CLAUDE.md.template",
+        REPO_ROOT / "AGENTS.md",
+    ]
+
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        assert "/new-capability" in text, f"{path}: missing /new-capability exception"
+        assert "developer-tool exception" in text, f"{path}: exception is not explicit"
+        assert "commands/<name>.md" in text, f"{path}: scaffold output is not documented"
+        assert "docs/skill-writing-playbook.md" in text, f"{path}: playbook output is not documented"

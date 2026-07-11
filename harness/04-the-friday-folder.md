@@ -2,7 +2,7 @@
 
 The `friday/` folder is where everything lands.
 
-Every command writes to it. Every file in it is yours to read, edit, and share. As you run more capabilities, the folder grows into a config that represents how you work.
+Every workflow command writes to it. Every file in it is yours to read, edit, and share. As you run more capabilities, the folder grows into a config that represents how you work. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 ---
 

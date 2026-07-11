@@ -5,7 +5,7 @@
 
 Build your own AI Chief of Staff inside Claude Code. 22 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
-Free and open-source. No account. No server. Everything runs on your machine.
+Free to install. No separate Foundation account or backend. Claude Code supplies the AI and has its own account and network requirements. Foundation keeps its durable outputs as local files in your project.
 
 ![Installing Friday Foundation: one curl command, then running your first command inside Claude Code](docs/assets/install-demo.gif)
 
@@ -72,11 +72,11 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/pricing-strategy` | Value-based pricing model and tier design with real numbers | `friday/pricing.md` |
 | `/offer-creation` | Value-equation review, finds your offer's weakest lever | `friday/offer.md` |
 | `/positioning` | Builds a clear positioning statement and next move | `friday/positioning.md` |
-| `/competitive-analysis` | Competitor teardown: comparison matrix plus SWOT | `friday/competitive-analysis.md` |
+| `/competitive-analysis` | Competitor teardown: comparison matrix plus a SWOT for each competitor | `friday/competitive-analysis.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook, pre-launch through post-launch | `friday/product-hunt-launch.md` |
 
-Each command writes to a `friday/` folder in your project directory. That folder is your config, growing over time.
+Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 ---
 
