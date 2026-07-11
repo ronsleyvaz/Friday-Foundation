@@ -37,6 +37,32 @@ def test_ci_pins_python_version():
     assert re.search(r"python-version:\s*['\"]?3\.12", text), "ci.yml must pin Python to 3.12"
 
 
+def test_ci_runs_os_matrix():
+    """Story 4.2 AC1: CI runs a matrix of ubuntu and macOS, both with pinned setup-python."""
+    text = CI.read_text(encoding="utf-8")
+    assert "matrix" in text, "ci.yml must use a job matrix"
+    assert "ubuntu-latest" in text, "ci.yml matrix must include ubuntu-latest"
+    assert "macos-latest" in text, "ci.yml matrix must include macos-latest"
+    assert "actions/setup-python" in text, "both matrix legs must pin Python via setup-python"
+
+
+def test_ci_macos_leg_exercises_stock_bash():
+    """Story 4.2 AC2: the macOS leg points installer tests at stock /bin/bash 3.2."""
+    text = CI.read_text(encoding="utf-8")
+    assert "FRIDAY_TEST_BASH=/bin/bash" in text, (
+        "ci.yml macOS leg must set FRIDAY_TEST_BASH=/bin/bash so the installer tests exercise stock bash 3.2"
+    )
+
+
+def test_ci_raw_grep_sweep_scoped_to_ubuntu():
+    """Story 4.2 AC3: the raw grep sweep is scoped to the ubuntu leg (the Python
+    content sweep runs on both), so BSD versus GNU grep divergence cannot red macOS."""
+    text = CI.read_text(encoding="utf-8")
+    assert "if: matrix.os == 'ubuntu-latest'" in text, (
+        "the raw grep sweep step must be guarded by `if: matrix.os == 'ubuntu-latest'`"
+    )
+
+
 def test_docs_use_python3_not_bare_python():
     """No bare `python -m pytest` in the docs a contributor copies (fails on clean macOS)."""
     for path in [CONTRIBUTING, SEED_SCRIPT]:
