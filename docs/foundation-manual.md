@@ -101,7 +101,7 @@ Each capability is a markdown file in `~/.claude/commands/`. When you run a comm
 
 ### The friday/ folder
 
-Every command writes to a `friday/` folder in your project directory. That folder is your config, growing over time.
+Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 | File | Created by | What it holds |
 |---|---|---|
@@ -176,7 +176,7 @@ Recommended early, though optional. Every other command reads this profile if it
 | `/pricing-strategy` | Value-based pricing model and tier design with real numbers | `friday/pricing.md` |
 | `/offer-creation` | Value-equation review, finds your offer's weakest lever | `friday/offer.md` |
 | `/positioning` | Builds a clear positioning statement and next move | `friday/positioning.md` |
-| `/competitive-analysis` | Competitor teardown: comparison matrix plus SWOT | `friday/competitive-analysis.md` |
+| `/competitive-analysis` | Competitor teardown: comparison matrix plus a SWOT for each competitor | `friday/competitive-analysis.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook | `friday/product-hunt-launch.md` |
 
 ### Idea and scope

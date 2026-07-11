@@ -20,7 +20,7 @@ The installer creates `CLAUDE.md` from `CLAUDE.md.template` for you. Open it and
 
 **3. The friday/ folder (in your project directory)**
 
-Every command writes output here. `friday/voice.md` is your voice profile. `friday/decisions.md` is your decision log. `friday/morning.md` is today's brief. This folder is your config growing on disk.
+Every workflow command writes output here. `friday/voice.md` is your voice profile. `friday/decisions.md` is your decision log. `friday/morning.md` is today's brief. This folder is your config growing on disk. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 ---
 

@@ -25,9 +25,12 @@ Claude Code. It serves founders, solo operators, and small teams who want
 guided help with decisions, planning, meetings, growth, launches, pricing, and
 operations while keeping control of their files and actions.
 
-The product is Markdown plus a small Bash installer. Slash-command definitions
-run inside Claude Code and write durable output into a user's `friday/` folder.
-There is no application server, database, runtime package, or background worker.
+The product is Markdown plus a small Bash installer. Workflow slash-command
+definitions run inside Claude Code and write durable output into a user's
+`friday/` folder. `/new-capability` is the developer-tool exception: it
+scaffolds `commands/<name>.md` and may create
+`docs/skill-writing-playbook.md` on its first run. There is no application
+server, database, runtime package, or background worker.
 
 ## Folder Map
 
@@ -112,7 +115,8 @@ A command must:
 
 1. Work inside a Claude Code session without importing a runtime module.
 2. Read `friday/voice.md` when present and follow the founder's voice.
-3. Produce a real file under `friday/`.
+3. Produce a real file under `friday/`. The `/new-capability` developer tool is
+   the exception described above; it writes its scaffold and playbook instead.
 4. Write only its owned output and never overwrite unrelated files.
 5. Tell the founder what it wrote and what to do next.
 6. Work on a clean machine with Bash, Python 3, and Claude Code.
