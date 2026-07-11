@@ -7,7 +7,7 @@ on:
     branches: [main, release]
 
 jobs:
-  test:
+  suite:
     strategy:
       fail-fast: false
       matrix:
@@ -59,3 +59,14 @@ jobs:
             exit 1
           fi
           echo "Raw grep sweep clean"
+
+  # Single required status check. Branch protection requires the context "test",
+  # but a matrix job only ever reports per-leg contexts ("suite (ubuntu-latest)",
+  # "suite (macos-latest)"). This aggregator provides one stable "test" context
+  # that passes only when every matrix leg above has passed.
+  test:
+    needs: suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: All matrix legs passed
+        run: echo "ubuntu-latest and macos-latest suite legs are green"
