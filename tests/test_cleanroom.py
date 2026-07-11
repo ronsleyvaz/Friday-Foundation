@@ -3,7 +3,8 @@ Clean-room guard: verify the public repo contains zero operator identity,
 proprietary markers, or secrets.
 
 Scans: commands/, harness/, docs/, examples/, README.md, CONTRIBUTING.md,
-       SECURITY.md, CLAUDE.md.template, install.sh, LICENSE-CONTENT.
+       RELEASING.md, SECURITY.md, AGENTS.md, CLAUDE.md, CLAUDE.md.template,
+       install.sh, LICENSE-CONTENT.
 Excludes: tests/ (contains pattern strings by necessity), LICENSE (MIT text).
 """
 import re
@@ -23,6 +24,8 @@ SCAN_FILES = [
     "CONTRIBUTING.md",
     "RELEASING.md",
     "SECURITY.md",
+    "AGENTS.md",
+    "CLAUDE.md",
     "CLAUDE.md.template",
     "install.sh",
     "LICENSE-CONTENT",

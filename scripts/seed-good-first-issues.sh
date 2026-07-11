@@ -44,6 +44,10 @@ Build a new \`/$1\` command that $2
 
 It is a common founder job that Foundation does not cover yet, and it fits the pack cleanly alongside the existing commands.
 
+## How to claim
+
+Comment on this issue to claim it, and a maintainer will assign it to you. If it is already assigned or has a claim comment, please pick another so no one duplicates work.
+
 ## What a good solution looks like
 
 - [ ] \`commands/$1.md\` with valid frontmatter (name and description)
@@ -52,7 +56,7 @@ It is a common founder job that Foundation does not cover yet, and it fits the p
 - [ ] Registered in \`PACK_COMMANDS\` in \`install.sh\` (keeps it installable; the catalog parity tests enforce the rest)
 - [ ] Tells the founder what to do next after it runs
 - [ ] A test in \`tests/\` that checks the frontmatter and structure
-- [ ] \`python -m pytest tests/\` is green
+- [ ] \`python3 -m pytest tests/\` is green
 
 ## Suggested starting point
 

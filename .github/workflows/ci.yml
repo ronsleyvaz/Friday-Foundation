@@ -13,8 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install test runner
-        run: pip install pytest==9.0.3
+        run: python3 -m pip install -r requirements-dev.txt
 
       - name: Run test suite
         run: python3 -m pytest tests/ -v
@@ -25,7 +30,7 @@ jobs:
           PATTERN=$(python3 -c "from tests.test_cleanroom import FORBIDDEN_PATTERNS; print('|'.join(FORBIDDEN_PATTERNS))")
           MATCHES=$(grep -rEn "$PATTERN" \
             --include='*.md' --include='*.sh' --include='*.txt' --include='*.yml' --include='*.yaml' \
-            commands docs harness .github README.md CONTRIBUTING.md SECURITY.md CLAUDE.md.template install.sh LICENSE-CONTENT \
+            commands docs harness .github README.md CONTRIBUTING.md SECURITY.md AGENTS.md CLAUDE.md CLAUDE.md.template install.sh LICENSE-CONTENT \
             2>/dev/null | grep -v 'amplifyais.com' || true)
           if [ -n "$MATCHES" ]; then
             echo "Proprietary term found by raw grep sweep:"

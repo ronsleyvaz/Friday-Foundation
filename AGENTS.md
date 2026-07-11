@@ -49,9 +49,10 @@ Ignore generated caches such as `.pytest_cache/` and `__pycache__/`.
 
 ## Run and Test
 
-Run the same full suite as CI:
+Install the one dev dependency (pytest), then run the same full suite as CI:
 
 ```bash
+python3 -m pip install -r requirements-dev.txt
 python3 -m pytest tests/ -v
 ```
 
@@ -78,8 +79,8 @@ requests it. It creates GitHub labels and issues.
 
 ## Hard Constraints
 
-- Add no runtime or development dependencies.
-- Add no package manifests, lockfiles, frameworks, or vendored libraries.
+- Add no runtime dependencies, and no development dependencies beyond pytest (pinned in `requirements-dev.txt`).
+- Add no package manifests, lockfiles, frameworks, or vendored libraries, apart from `requirements-dev.txt`, which pins the single dev dependency.
 - Keep Python tests on pytest plus the standard library.
 - Keep Bash in the existing style: `set -euo pipefail` and portable constructs
   where practical.
@@ -95,6 +96,12 @@ requests it. It creates GitHub labels and issues.
 - Do not promote, force-push, or otherwise rewrite `release` without explicit
   maintainer instruction.
 - Preserve user changes and keep unrelated edits out of the patch.
+
+## Claiming an Issue
+
+Before starting work tied to an open issue, claim it: comment to say you are
+taking it, and a maintainer assigns it. If an issue is already assigned or has a
+claim comment, pick another so no two contributors build the same thing.
 
 ## Command Changes
 
