@@ -157,7 +157,7 @@ commit:
   `id_rsa*`, or `id_ed25519*`.
 - `credentials*.json`, `client_secret*.json`, `service-account*.json`, or
   `secrets.*`.
-- `~/.claude/claude.json`, `~/.claude.json`, or MCP credential configuration.
+- `~/.claude.json` or MCP credential configuration.
 - `~/.ssh/**`, `~/.gnupg/**`, `~/.aws/**`, `~/.config/gcloud/**`, or
   `~/.kube/config`.
 - `~/.netrc`, `~/.npmrc`, `~/.pypirc`, authenticated CLI configuration, shell

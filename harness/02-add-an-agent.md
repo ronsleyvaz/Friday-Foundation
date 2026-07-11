@@ -103,15 +103,9 @@ Claude routes the task to the specialist agent.
 
 ---
 
-## Logging new agents
+## Keeping track
 
-When you add a new agent, add one line to `memory/spawned-agents.md` (create it if it does not exist):
-
-```
-- [agent-name]: [what it does] -- added [YYYY-MM-DD]
-```
-
-This keeps an index of what you have built.
+When you add a new agent, keep a note wherever you track your setup so you remember what you have built. There is no special file Claude Code reads for this; the agent works the moment its file is saved.
 
 ---
 

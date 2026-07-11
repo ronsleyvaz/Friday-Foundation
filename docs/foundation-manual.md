@@ -246,7 +246,7 @@ Three patterns work well:
 
 **Read a file.** Your tool exports a CSV or JSON file. Your command reads it. No API key needed.
 
-**Add an MCP server.** Claude Code supports Model Context Protocol servers. Official ones exist for GitHub, Slack, Notion, Google Calendar, Supabase, and more. Configure them in `~/.claude/claude.json` with your own keys. Your credentials stay on your machine.
+**Add an MCP server.** Claude Code supports Model Context Protocol servers. Official ones exist for GitHub, Slack, Notion, Google Calendar, Supabase, and more. Add one with `claude mcp add` from your terminal; with `--scope user` it saves to `~/.claude.json` in your home folder, and with `--scope project` it writes a shareable `.mcp.json` in the project root. Your credentials stay on your machine.
 
 **Shell commands in an agent.** Give an agent the `Bash` tool and it can call any CLI: the GitHub CLI, the Notion CLI, curl, any script you have written.
 

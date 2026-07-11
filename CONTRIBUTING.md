@@ -4,7 +4,9 @@ Thank you for building here.
 
 Friday Foundation is an open-source founder harness built on top of Claude Code. Contributions are welcome. Here is what you need to know before you open a pull request.
 
-## Ship your first command in ten minutes
+## Ship your first command
+
+Scaffolding a command takes about ten minutes with `/new-capability`; polishing it into something you would ship usually takes an hour or two, which matches the estimate on each good first issue.
 
 The fastest way in is to pick a [good first issue](https://github.com/ronsleyvaz/Friday-Foundation/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and build the command it describes.
 
@@ -64,7 +66,7 @@ A command is ready when:
 - It produces a real file output (not just printed text).
 - It works on a clean machine with only Claude Code installed.
 - It reads `friday/voice.md` if it exists and writes in the founder's voice.
-- It appends to the `friday/` folder rather than overwriting unrelated files.
+- It writes only its own output into the `friday/` folder and never overwrites unrelated files.
 - It has no em dashes in the text.
 - It tells the founder what to do next after it runs.
 
@@ -86,7 +88,9 @@ When your command is merged, add a line for yourself under Contributors in `CRED
 
 ## Licence
 
-By contributing, you agree that your contribution is licensed under MIT (for code) or the content licence in `LICENSE-CONTENT` (for framework-derived content). See those files for terms.
+All contributions are MIT licensed. By opening a pull request, you agree your contribution ships under the MIT `LICENSE`.
+
+Three files carry the separate `LICENSE-CONTENT` licence instead: `commands/amplify.md`, `harness/05-the-amplify-logic.md`, and `docs/why-guides/amplify-why-guide.md`. These are maintainer-owned. A pull request must not add files to that list, remove the content-licence header from them, or change the terms in `LICENSE-CONTENT`.
 
 ---
 
