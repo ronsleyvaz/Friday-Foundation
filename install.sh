@@ -28,6 +28,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- changelog         -- installs just /changelog
 #   curl -fsSL .../install.sh | bash -s -- positioning       -- installs just /positioning
 #   curl -fsSL .../install.sh | bash -s -- roadmap           -- installs just /roadmap
+#   curl -fsSL .../install.sh | bash -s -- risk-register       -- installs just /risk-register
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -67,6 +68,7 @@ PACK_COMMANDS=(
   "changelog        changelog.md        /changelog"
   "positioning      positioning.md      /positioning"
   "roadmap          roadmap.md          /roadmap"
+  "risk-register    risk-register.md    /risk-register"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -268,7 +270,7 @@ install_single() {
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${capability}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, risk-register"
     exit 1
   fi
 }

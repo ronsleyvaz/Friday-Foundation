@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 22 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
+The installer puts all 23 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -145,7 +145,7 @@ Never use the words on the banned list.
 
 ---
 
-## The 22 commands
+## The 23 commands
 
 ### Set up first
 
@@ -193,6 +193,7 @@ Recommended early, though optional. Every other command reads this profile if it
 | Command | What it does | Output |
 |---|---|---|
 | `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
+| `/risk-register` | Turns a plan into a risk register with probability, impact, trigger, mitigation, and owner | `friday/risk-register.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
 
 ### Extend
@@ -256,7 +257,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, 22 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, 23 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

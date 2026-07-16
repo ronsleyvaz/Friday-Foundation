@@ -150,6 +150,28 @@ def test_roadmap_command_exists():
     assert len(body) > 100, "roadmap.md: body too short"
 
 
+def test_risk_register_command_exists():
+    """The risk-register command file exists and has valid frontmatter."""
+    register = COMMANDS_DIR / "risk-register.md"
+    assert register.exists(), "risk-register.md is missing from commands/"
+    text = register.read_text(encoding="utf-8")
+    fm, body = parse_frontmatter(text)
+    assert fm is not None, "risk-register.md: missing frontmatter"
+    assert fm.get("name") == "risk-register", f"risk-register.md: name field is '{fm.get('name')}', expected 'risk-register'"
+    assert fm.get("description"), "risk-register.md: missing description field"
+    assert len(body) > 100, "risk-register.md: body too short"
+    # Must read voice profile as Step 1
+    first_step = body.split("## Step 2", 1)[0]
+    assert "## Step 1: Read the founder's voice profile (if it exists)" in first_step, "risk-register.md: voice read is not the first step"
+    assert "friday/voice.md" in first_step, "risk-register.md: first step does not check friday/voice.md"
+    assert "does not exist" in first_step, "risk-register.md: first step has no neutral fallback"
+    # Must write to friday/risk-register.md
+    assert "friday/risk-register.md" in text, "risk-register.md: output path not mentioned"
+    # Must have the required risk fields
+    for field in ["Probability", "Impact", "Early trigger", "Mitigation", "Contingency", "Owner"]:
+        assert field in text, f"risk-register.md: missing '{field}' field"
+
+
 def test_positioning_command_matches_issue_contract():
     """The positioning command has the output, voice, and structure requested in #10."""
     text = (COMMANDS_DIR / "positioning.md").read_text(encoding="utf-8")
