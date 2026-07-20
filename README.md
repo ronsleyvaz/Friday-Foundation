@@ -3,7 +3,7 @@
 [![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Build your own AI Chief of Staff inside Claude Code. 22 commands, a growth diagnostic, and a harness to extend it to your workflow.
+Build your own AI Chief of Staff inside Claude Code. 23 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
 Free to install. No separate Foundation account or backend. Claude Code supplies the AI and has its own account and network requirements. Foundation keeps its durable outputs as local files in your project.
 
@@ -65,6 +65,7 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/learnings` | Reviews, searches, and prunes what Friday has learned about your business | `friday/learnings.md` |
 | `/shipping-retro` | Weekly reflection built from your real git commit history | `friday/shipping-retro.md` |
 | `/changelog` | Turns git history into customer-facing release notes | `friday/changelog.md` |
+| `/customer-feedback` | Synthesizes customer notes into themes, evidence, questions, and actions | `friday/customer-feedback.md` |
 | `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
 | `/validate-idea` | 7-dimensional validation pass, build, pivot, or kill verdict | `friday/validation.md` |
 | `/roadmap` | Turns a goal into a sequenced 90-day roadmap | `friday/roadmap.md` |
@@ -119,7 +120,7 @@ For a full walkthrough, read the harness guide (fetched to `./harness/` when you
 
 ## The soft ladder
 
-**Friday Foundation (here):** free, open-source, 22 commands, bring your own Claude Code.
+**Friday Foundation (here):** free, open-source, 23 commands, bring your own Claude Code.
 
 **The Amplify book:** the full framework behind the growth diagnostic. Read it for the complete methodology. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
