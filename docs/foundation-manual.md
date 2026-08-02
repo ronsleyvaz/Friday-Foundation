@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 22 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
+The installer puts all 23 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -117,6 +117,7 @@ Workflow commands write to a `friday/` folder in your project directory. That fo
 | `friday/learnings.md` | `/learnings` | A running log of patterns, preferences, and pitfalls |
 | `friday/shipping-retro.md` | `/shipping-retro` | Weekly reflection built from your git commit history |
 | `friday/changelog.md` | `/changelog` | Customer-facing release notes built from git history |
+| `friday/customer-feedback.md` | `/customer-feedback` | Customer feedback themes, evidence, questions, and actions |
 | `friday/teaching/<topic>.md` | `/teach-team` | Onboarding plans for team members or contractors |
 | `friday/validation.md` | `/validate-idea` | A 7-dimension idea validation and verdict |
 | `friday/roadmap.md` | `/roadmap` | A sequenced 90-day roadmap and first-week action |
@@ -145,7 +146,7 @@ Never use the words on the banned list.
 
 ---
 
-## The 22 commands
+## The 23 commands
 
 ### Set up first
 
@@ -166,6 +167,7 @@ Recommended early, though optional. Every other command reads this profile if it
 | `/shipping-retro` | Weekly reflection built from your real git commit history | `friday/shipping-retro.md` |
 | `/learnings` | Reviews, searches, and prunes what Friday has learned about your business | `friday/learnings.md` |
 | `/changelog` | Turns git history into customer-facing release notes | `friday/changelog.md` |
+| `/customer-feedback` | Synthesizes customer notes into themes, evidence, questions, and actions | `friday/customer-feedback.md` |
 
 ### Growth
 
@@ -256,7 +258,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, 22 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, 23 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
