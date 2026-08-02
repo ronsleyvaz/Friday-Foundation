@@ -157,8 +157,49 @@ def test_no_precedence_clause() -> None:
 
 def test_second_person_not_third() -> None:
     """Buyer copy addresses the reader directly. 'the founder' is what the Mk5
-    export map produces from a leaked 'Ronsley', and it reads as a stranger."""
+    export map produces from a leaked 'Ronsley', and it reads as a stranger.
+
+    The label phrases are allowed inside the address-by-name rule, which has to
+    quote them to ban them. Everywhere else they are a failure.
+    """
     section = friday_format_section()
+    body = "\n".join(
+        line for line in section.splitlines()
+        if not line.startswith("**Address me by name.**")
+    )
     for banned in ("the founder", "the buyer", " his ", " her "):
-        assert banned not in section, f"third-person phrasing {banned!r} in buyer copy"
+        assert banned not in body, f"third-person phrasing {banned!r} in buyer copy"
     assert " you" in section, "the section never addresses the reader"
+
+
+def test_address_by_name_rule_is_present() -> None:
+    """Ronsley, 2026-08-02: "instead of Ronsley ... Friday should use the
+    user's name like me." A reply that says "the user" is the failure."""
+    section = friday_format_section()
+    assert "**Address me by name.**" in section, "the address-by-name rule is missing"
+    for label in ('"the user"', '"the founder"', '"the operator"'):
+        assert label in section, f"the rule does not ban the label {label}"
+
+
+def test_name_resolution_has_a_source_and_a_fallback() -> None:
+    """A rule that says 'use their name' without saying where the name comes
+    from is a wish. Foundation resolves it from the template's own Identity
+    section, and says what to do when that is still a placeholder."""
+    section = friday_format_section()
+    assert "Identity section at the top of this file" in section
+    assert "what I tell you to call me" in section
+    assert 'say "you" and ask me once' in section
+
+
+def test_name_use_is_bounded() -> None:
+    """Unbounded 'use their name' produces a reply that says it every
+    paragraph, which reads worse than not using it at all."""
+    section = friday_format_section()
+    assert "Names land, they do not decorate" in section
+    assert "Not in every paragraph" in section
+
+
+def test_no_operator_name_in_the_name_rule() -> None:
+    """The global Friday OG copy of this rule names Ronsley, because that is
+    what it resolves to there. The public template must not inherit that."""
+    assert "Ronsley" not in friday_format_section()
