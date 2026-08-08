@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 24 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
+The installer puts all 25 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), and downloads the six-part harness guide to `./harness/`.
 
 ### Install a single command
 
@@ -147,7 +147,7 @@ Never use the words on the banned list.
 
 ---
 
-## The 24 commands
+## The 25 commands
 
 ### Set up first
 
@@ -170,6 +170,7 @@ Recommended early, though optional. Every other command reads this profile if it
 | `/changelog` | Turns git history into customer-facing release notes | `friday/changelog.md` |
 | `/customer-feedback` | Synthesizes customer notes into themes, evidence, questions, and actions | `friday/customer-feedback.md` |
 | `/risk-register` | Turns a plan into risks with an observable trigger and a named owner for each | `friday/risk-register.md` |
+| `/delegation-brief` | Delegation handoff with outcome, context, owner, and checkpoints | `friday/delegation/<task>.md` |
 
 ### Growth
 
@@ -260,7 +261,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, 24 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, 25 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

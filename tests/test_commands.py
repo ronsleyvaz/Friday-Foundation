@@ -182,6 +182,39 @@ def test_positioning_command_matches_issue_contract():
         assert term in body
 
 
+def test_delegation_brief_command_contract():
+    """The delegation-brief command matches the issue #22 contract."""
+    text = (COMMANDS_DIR / "delegation-brief.md").read_text(encoding="utf-8")
+    fm, body = parse_frontmatter(text)
+
+    assert fm["name"] == "delegation-brief"
+    assert "friday/voice.md" in fm["description"]
+    assert "friday/delegation/" in fm["description"]
+
+    required_sections = [
+        "# /delegation-brief",
+        "## Step 1: Read the founder's voice profile (if it exists)",
+        "## Step 2: Capture the task",
+        "## Step 3: Define the outcome",
+        "## Step 4: Gather context",
+        "## Step 5: Set constraints and boundaries",
+        "## Step 6: Name the owner",
+        "## Step 7: Define checkpoints",
+        "## Step 8: Establish definition of done",
+    ]
+    for section in required_sections:
+        assert section in body
+
+    required_terms = [
+        "definition of done",
+        "checkpoints",
+        "friday/delegation/",
+        "what to do next",
+    ]
+    for term in required_terms:
+        assert term in body
+
+
 def test_every_command_after_voice_installer_reads_voice_first():
     """Every other command reads voice in its top-level first step."""
     expected_heading = "## Step 1: Read the founder's voice profile (if it exists)"
