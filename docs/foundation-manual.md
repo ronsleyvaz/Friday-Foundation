@@ -3,6 +3,9 @@
 
 **Free. Open-source. Runs on your machine, with your keys.**
 
+**Runs on macOS, Ubuntu Linux, and Windows through WSL2.** On Windows, run the
+install line inside WSL2 rather than PowerShell.
+
 Foundation is the skeleton. Install it, run the commands, and your AI starts writing in your voice, filtering your priorities through your nine business decisions, and diagnosing where to push next.
 
 There are no specialists running in the background. No overnight queue. No connected inbox. Those live in the paid stack. Foundation is what you build yourself, step by step, with full visibility into every command you run.

@@ -21,6 +21,11 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
+**What it runs on.** macOS, Ubuntu Linux, and Windows through WSL2. The
+installer is plain `bash` and copies command files into your home directory, so
+anything with `bash` and `curl` will do. On Windows, run it inside WSL2 rather
+than PowerShell.
+
 The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, and tells you what to do next.
 
 ---
