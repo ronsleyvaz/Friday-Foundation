@@ -21,12 +21,37 @@ LABEL="good first issue"
 gh label create "$LABEL" --repo "$REPO" --color "7057ff" \
   --description "A contained task suitable for a first contribution" 2>/dev/null || true
 
+# check_command_exists: returns 0 if a command file is already in commands/ or PACK_COMMANDS
+check_command_exists() {
+  local cmd_name="$1"
+  # Check if the command markdown file exists
+  if [ -f "commands/${cmd_name}.md" ]; then
+    return 0
+  fi
+  # Check if the command is listed in PACK_COMMANDS in install.sh
+  if grep -q "\"${cmd_name} " install.sh 2>/dev/null; then
+    return 0
+  fi
+  return 1
+}
+
 create_issue() {
   local title="$1"
   local body="$2"
-  if gh issue list --repo "$REPO" --state open --search "\"$title\" in:title" \
-       --json title --jq '.[].title' 2>/dev/null | grep -Fxq "$title"; then
-    echo "SKIP (already open): $title"
+  # Extract the command name from the title (e.g., "/standup command" -> "standup")
+  local cmd_name
+  cmd_name=$(echo "$title" | sed -n 's/.*\/\([a-z0-9-]*\) command.*/\1/p')
+
+  # Skip if a command with this name already exists on disk or in the manifest
+  if [ -n "$cmd_name" ] && check_command_exists "$cmd_name"; then
+    echo "SKIP (command '$cmd_name' already exists): $title"
+    return 0
+  fi
+
+  # Check both open AND closed issues to avoid recreating closed ones
+  if gh issue list --repo "$REPO" --search "\"$title\" in:title" \
+       --json title,state --jq '.[].title' 2>/dev/null | grep -Fxq "$title"; then
+    echo "SKIP (already exists): $title"
     return 0
   fi
   gh issue create --repo "$REPO" --title "$title" --body "$body" --label "$LABEL" >/dev/null
