@@ -17,6 +17,11 @@ set -euo pipefail
 REPO="ronsleyvaz/Friday-Foundation"
 LABEL="good first issue"
 
+# Resolve the repo root from the script location so the dedup guards work
+# regardless of the directory the script is invoked from.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 # Ensure the label exists. Ignore the error if it already does.
 gh label create "$LABEL" --repo "$REPO" --color "7057ff" \
   --description "A contained task suitable for a first contribution" 2>/dev/null || true
@@ -25,11 +30,11 @@ gh label create "$LABEL" --repo "$REPO" --color "7057ff" \
 check_command_exists() {
   local cmd_name="$1"
   # Check if the command markdown file exists
-  if [ -f "commands/${cmd_name}.md" ]; then
+  if [ -f "$REPO_ROOT/commands/${cmd_name}.md" ]; then
     return 0
   fi
   # Check if the command is listed in PACK_COMMANDS in install.sh
-  if grep -q "\"${cmd_name} " install.sh 2>/dev/null; then
+  if grep -q "\"${cmd_name} " "$REPO_ROOT/install.sh" 2>/dev/null; then
     return 0
   fi
   return 1
@@ -48,8 +53,10 @@ create_issue() {
     return 0
   fi
 
-  # Check both open AND closed issues to avoid recreating closed ones
-  if gh issue list --repo "$REPO" --search "\"$title\" in:title" \
+  # Check both open AND closed issues to avoid recreating closed ones.
+  # `gh issue list` defaults to --state open, so --state all is required
+  # for the dedup guard to actually see closed issues.
+  if gh issue list --repo "$REPO" --state all --search "\"$title\" in:title" \
        --json title,state --jq '.[].title' 2>/dev/null | grep -Fxq "$title"; then
     echo "SKIP (already exists): $title"
     return 0
