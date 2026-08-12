@@ -78,7 +78,7 @@ This is the first capability. Installed by hand, producing one visible result.
 
 The Decision Runner comes next. It adds decision reasoning. Your AI will run a simple protocol on any real decision you paste in: one problem, three options, one pick. Same `friday/` folder. One more file on disk.
 
-The full stack, nine specialists wired together and running while you sleep, is Friday. That is the $1,499 product. This is what one piece of it feels like.
+The full stack, nine specialists wired together and running while you sleep, is Friday SYSTEM. This is what one piece of it feels like.
 
 When you hit something that needs your inbox, your calendar, or your transcript archive, it will not do it. That is by design. That is the wall. And that is when the upgrade makes sense.
 
