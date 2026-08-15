@@ -106,6 +106,146 @@ def run_install(tmp_home: Path, cwd: Path, repo_raw_url: str, capability: str = 
     )
 
 
+def run_install_with_lead(
+    tmp_home: Path, cwd: Path, repo_raw_url: str, context_url: str, lead: str,
+) -> subprocess.CompletedProcess:
+    """Run install.sh --lead <lead>, isolated HOME, both source URLs overridden."""
+    fake_bin = make_fake_claude(tmp_home / "bin")
+    env = os.environ.copy()
+    env["HOME"] = str(tmp_home)
+    env["FRIDAY_REPO_RAW"] = repo_raw_url
+    env["FRIDAY_CONTEXT_URL"] = context_url
+    env["PATH"] = fake_bin + ":" + env.get("PATH", "")
+    cmd = [BASH, str(INSTALL_SH), "--lead", lead]
+    return subprocess.run(cmd, env=env, capture_output=True, text=True, cwd=str(cwd))
+
+
+# ---------------------------------------------------------------------------
+# OnePath-S3: --lead flag, pre-filled CLAUDE.md with honest fallback
+# ---------------------------------------------------------------------------
+
+
+def test_lead_flag_prefills_claude_md_from_context_endpoint():
+    """--lead fetches the pre-filled file and no bracket placeholder from the
+    template survives for fields it filled."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        context_dir = Path(tmp) / "context"
+        context_dir.mkdir()
+        (context_dir / "lead-abc").write_text(
+            "# Priya's AI Chief of Staff\n\nWho I am: I am Priya's AI Chief of Staff for a bookkeeping practice.\n"
+        )
+        context_httpd, context_port = start_local_server(context_dir)
+        context_url = f"http://127.0.0.1:{context_port}"
+
+        try:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install_with_lead(tmp_home, cwd, repo_raw, context_url, "lead-abc")
+            assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+
+            claude_md = (cwd / "CLAUDE.md").read_text()
+            assert "Priya" in claude_md
+            assert "bookkeeping practice" in claude_md
+        finally:
+            context_httpd.shutdown()
+            context_httpd.server_close()
+            httpd.shutdown()
+            httpd.server_close()
+
+
+def test_lead_flag_falls_back_to_template_on_bogus_token():
+    """A 404 from the context endpoint (bogus token) falls back to the stock
+    template and still exits 0 -- install must never break on personalisation."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        context_dir = Path(tmp) / "context"  # empty: every id 404s
+        context_dir.mkdir()
+        context_httpd, context_port = start_local_server(context_dir)
+        context_url = f"http://127.0.0.1:{context_port}"
+
+        try:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install_with_lead(tmp_home, cwd, repo_raw, context_url, "bogus-token")
+            assert result.returncode == 0, f"install must still exit 0:\n{result.stdout}\n{result.stderr}"
+
+            claude_md = (cwd / "CLAUDE.md").read_text()
+            template = (cwd / "CLAUDE.md.template").read_text()
+            assert claude_md == template, "on a bogus token, CLAUDE.md must be the stock template"
+        finally:
+            context_httpd.shutdown()
+            context_httpd.server_close()
+            httpd.shutdown()
+            httpd.server_close()
+
+
+def test_lead_flag_falls_back_to_template_with_no_network():
+    """No reachable context endpoint at all -- same honest fallback, exit 0."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install_with_lead(
+                tmp_home, cwd, repo_raw, "http://127.0.0.1:9/unused", "any-token",
+            )
+            assert result.returncode == 0, f"install must still exit 0:\n{result.stdout}\n{result.stderr}"
+
+            claude_md = (cwd / "CLAUDE.md").read_text()
+            template = (cwd / "CLAUDE.md.template").read_text()
+            assert claude_md == template
+    finally:
+        httpd.shutdown()
+        httpd.server_close()
+
+
+def test_lead_flag_alone_still_installs_full_pack():
+    """--lead does not replace the full-pack install; commands still land."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        context_dir = Path(tmp) / "context"
+        context_dir.mkdir()
+        context_httpd, context_port = start_local_server(context_dir)
+        context_url = f"http://127.0.0.1:{context_port}"
+
+        try:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install_with_lead(tmp_home, cwd, repo_raw, context_url, "any-token")
+            assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+
+            commands_dir = tmp_home / ".claude" / "commands"
+            expected = sorted(f.name for f in (REPO_ROOT / "commands").glob("*.md"))
+            missing = [f for f in expected if not (commands_dir / f).exists()]
+            assert not missing, f"Commands missing after --lead install: {missing}"
+        finally:
+            context_httpd.shutdown()
+            context_httpd.server_close()
+            httpd.shutdown()
+            httpd.server_close()
+
+
 def test_install_full_pack_lands_commands():
     """Full-pack install places all command files in ~/.claude/commands/."""
     httpd, port = start_local_server(REPO_ROOT)

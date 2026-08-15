@@ -44,6 +44,13 @@ REPO_RAW="${FRIDAY_REPO_RAW:-https://raw.githubusercontent.com/ronsleyvaz/Friday
 DEST="${HOME}/.claude/commands"
 PROJECT_DIR="$(pwd)"
 
+# OnePath-S3: --lead <token> fetches a pre-filled CLAUDE.md from the landing
+# site instead of the blank template, when the founder came from
+# friday.amplifyais.com's signup flow. LEAD_TOKEN is set by main()'s argument
+# parsing; empty means no --lead was passed.
+CONTEXT_BASE="${FRIDAY_CONTEXT_URL:-https://friday.amplifyais.com/api/context}"
+LEAD_TOKEN=""
+
 # Full pack -- every command file installed by the no-arg path.
 # One entry per line: "<capability-slug> <file-name> <slash-command>"
 PACK_COMMANDS=(
@@ -168,6 +175,24 @@ install_template() {
   fi
 }
 
+fetch_prefilled_claude_md() {
+  # Attempts to fetch a pre-filled CLAUDE.md for LEAD_TOKEN. On success writes
+  # ./CLAUDE.md.prefilled and returns 0. On ANY failure (no token, bad token,
+  # no network) returns 1 and writes nothing -- the caller falls back to the
+  # stock template. Install must never break on personalisation.
+  if [ -z "${LEAD_TOKEN}" ]; then
+    return 1
+  fi
+  local tmp
+  tmp="$(mktemp "${TMPDIR:-/tmp}/friday-context.XXXXXX")" || return 1
+  if curl -fsSL "${CONTEXT_BASE}/${LEAD_TOKEN}" -o "${tmp}" && [ -s "${tmp}" ]; then
+    mv "${tmp}" "./CLAUDE.md.prefilled"
+    return 0
+  fi
+  rm -f "${tmp}"
+  return 1
+}
+
 activate_brain_file() {
   # Turn the template into a live CLAUDE.md the first time; never clobber an
   # existing one. Claude Code reads CLAUDE.md, not the .template, each session.
@@ -177,10 +202,15 @@ activate_brain_file() {
   if [ -f "./CLAUDE.md" ]; then
     echo "  Found an existing ./CLAUDE.md. Left it untouched."
     echo "  The template is saved alongside as ./CLAUDE.md.template to merge in yourself."
-  else
-    cp "./CLAUDE.md.template" "./CLAUDE.md"
-    echo "  Created ./CLAUDE.md from the template. Open it and replace every [bracket]."
+    return 0
   fi
+  if fetch_prefilled_claude_md; then
+    mv "./CLAUDE.md.prefilled" "./CLAUDE.md"
+    echo "  Created ./CLAUDE.md pre-filled with what you told us. Open it and check the rest."
+    return 0
+  fi
+  cp "./CLAUDE.md.template" "./CLAUDE.md"
+  echo "  Created ./CLAUDE.md from the template. Open it and replace every [bracket]."
 }
 
 install_full_pack() {
@@ -286,7 +316,20 @@ main() {
   require_tool curl "Install curl first: it ships with macOS and most Linux distributions (for example 'sudo apt-get install curl')." || exit 1
   require_tool claude "Install Claude Code first: https://docs.anthropic.com/claude-code" || exit 1
 
-  local capability="${1:-}"
+  local capability=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --lead)
+        LEAD_TOKEN="${2:-}"
+        shift 2
+        ;;
+      *)
+        capability="$1"
+        shift
+        ;;
+    esac
+  done
+
   if [ -z "${capability}" ]; then
     install_full_pack
   else
