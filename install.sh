@@ -95,6 +95,7 @@ HARNESS_FILES=(
 FAILED_COMMANDS=()
 FAILED_HARNESS=()
 TEMPLATE_FAILED="no"
+SPINNER_SETTINGS_TEMPLATE_FAILED="no"
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -213,6 +214,81 @@ activate_brain_file() {
   echo "  Created ./CLAUDE.md from the template. Open it and replace every [bracket]."
 }
 
+install_spinner_settings_template() {
+  if curl -fsSL "${REPO_RAW}/spinner-settings.json.template" -o "./spinner-settings.json.template" && [ -s "./spinner-settings.json.template" ]; then
+    echo "  Fetched: ./spinner-settings.json.template"
+  else
+    rm -f "./spinner-settings.json.template"
+    echo "  Failed to fetch spinner-settings.json.template (the spinner settings step will be skipped)"
+    SPINNER_SETTINGS_TEMPLATE_FAILED="yes"
+  fi
+}
+
+activate_spinner_settings() {
+  # Gives Claude Code Friday's own spinner words and tips, scoped to this
+  # project's ./.claude/settings.json only -- never the founder's global
+  # config. Best-effort throughout: every branch below is guarded so a
+  # failure here never fails the install (a founder's global settings.json
+  # is not something a free public installer gets to break).
+  if [ ! -f "./spinner-settings.json.template" ]; then
+    return 0
+  fi
+
+  local settings="./.claude/settings.json"
+
+  if [ ! -f "${settings}" ]; then
+    if ! mkdir -p "./.claude"; then
+      echo "  Could not create ./.claude; skipped the spinner settings step."
+      return 0
+    fi
+    if cp "./spinner-settings.json.template" "${settings}"; then
+      echo "  Created ${settings} with Friday's spinner words and tips."
+    else
+      echo "  Could not write ${settings}; skipped the spinner settings step."
+    fi
+    return 0
+  fi
+
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "  python3 was not found, so the spinner settings step was skipped."
+    echo "  Merge ./spinner-settings.json.template into ${settings} yourself."
+    return 0
+  fi
+
+  local backup="${settings}.pre-friday-$(date +%F).bak"
+  if ! cp "${settings}" "${backup}"; then
+    echo "  Could not back up ${settings}; skipped the spinner settings step."
+    return 0
+  fi
+
+  # A single physical line by design (not a heredoc): install.sh's own test
+  # suite (test_install_wraps_all_logic_in_main) scans every column-0 line in
+  # this file and rejects anything outside a function definition, so a
+  # multi-line inline script would misread as top-level bash. json.load()
+  # raises on invalid JSON, which python turns into exit code 1 with no
+  # explicit try/except needed; the case below treats that as "skip and
+  # restore", never as a reason to fail the install.
+  local merge_rc=0
+  python3 -c 'import json,sys; s=json.load(open(sys.argv[1])); t=json.load(open(sys.argv[2])); (sys.exit(2) if ("spinnerVerbs" in s or "spinnerTipsOverride" in s) else None); s["spinnerVerbs"]=t["spinnerVerbs"]; s["spinnerTipsOverride"]=t["spinnerTipsOverride"]; f=open(sys.argv[1],"w"); json.dump(s,f,indent=2); f.write("\n"); f.close()' "${settings}" "./spinner-settings.json.template" || merge_rc=$?
+
+  case "${merge_rc}" in
+    0)
+      echo "  Backed up your existing settings to ${backup}"
+      echo "  Added Friday's spinner words and tips to ${settings}"
+      ;;
+    2)
+      rm -f "${backup}"
+      echo "  ${settings} already has spinner settings. Left it untouched."
+      echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
+      ;;
+    *)
+      rm -f "${backup}"
+      echo "  Could not merge spinner settings into ${settings}; left it untouched."
+      echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
+      ;;
+  esac
+}
+
 install_full_pack() {
   echo "Friday Foundation: installing the full command pack"
   echo
@@ -232,6 +308,9 @@ install_full_pack() {
   echo
   install_template
   activate_brain_file
+  echo
+  install_spinner_settings_template
+  activate_spinner_settings
   echo
   install_harness
 
