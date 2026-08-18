@@ -42,6 +42,7 @@ server, database, runtime package, or background worker.
 - `scripts/`: maintainer utilities that may create external state.
 - `.github/`: CI, pull request template, and issue templates.
 - `install.sh`: full-pack and single-command installer.
+- `VERSION`: current release, `friday-foundation-vX.Y.Z`. Bump on every release tag; the installer fetches and prints it.
 - `CLAUDE.md.template`: template shipped to Foundation users, not repo guidance.
 - `AGENTS.md`: shared coding-agent guidance.
 - `CLAUDE.md`: Claude Code entrypoint importing this file.

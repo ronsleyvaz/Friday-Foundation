@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 24 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), downloads the six-part harness guide to `./harness/`, and writes Friday's own spinner words and tips into your project's `./.claude/settings.json`. That last step never touches your global Claude Code config: if the project already has a `settings.json`, the two new keys are merged in and the original is backed up first; if it already opts into its own spinner settings, nothing changes.
+The installer puts all 24 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), downloads the six-part harness guide to `./harness/`, writes Friday's own spinner words and tips into your project's `./.claude/settings.json`, and prints the version it just installed. The spinner settings step never touches your global Claude Code config: if the project already has a `settings.json`, the two new keys are merged in and the original is backed up first; if it already opts into its own spinner settings, nothing changes. The version comes from a `VERSION` file fetched alongside the brain file; if that fetch fails, the install still finishes and says the version is unknown rather than guessing.
 
 ### Install a single command
 

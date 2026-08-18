@@ -26,7 +26,7 @@ installer is plain `bash` and copies command files into your home directory, so
 anything with `bash` and `curl` will do. On Windows, run it inside WSL2 rather
 than PowerShell.
 
-The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, gives your project's `./.claude/settings.json` Friday's own spinner words and tips (merged in if the file already exists, never touching your global config), and tells you what to do next.
+The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, gives your project's `./.claude/settings.json` Friday's own spinner words and tips (merged in if the file already exists, never touching your global config), prints the version it just installed, and tells you what to do next.
 
 ---
 

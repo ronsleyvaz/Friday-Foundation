@@ -43,12 +43,13 @@ def start_local_server(directory: Path):
 
 
 def build_served_repo(dest: Path, omit=()):
-    """Mirror the installer-fetched surface (commands/, harness/, template) into
+    """Mirror the installer-fetched surface (commands/, harness/, template, VERSION) into
     `dest`, skipping any repo-relative paths in `omit` so they 404 when served."""
     omit = set(omit)
     shutil.copytree(REPO_ROOT / "commands", dest / "commands")
     shutil.copytree(REPO_ROOT / "harness", dest / "harness")
     shutil.copy2(REPO_ROOT / "CLAUDE.md.template", dest / "CLAUDE.md.template")
+    shutil.copy2(REPO_ROOT / "VERSION", dest / "VERSION")
     for rel in omit:
         target = dest / rel
         if target.exists():
@@ -739,3 +740,105 @@ def test_no_bak_on_identical_rerun():
     finally:
         httpd.shutdown()
         httpd.server_close()
+
+
+# ---------------------------------------------------------------------------
+# Versioning: install.sh fetches VERSION the same way it fetches
+# CLAUDE.md.template and tells the founder which version they installed.
+# ---------------------------------------------------------------------------
+
+def test_install_prints_the_fetched_version():
+    """AC1: a fresh install prints the version it installed, and that string
+    matches the real VERSION file this repo ships."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install(tmp_home, cwd, repo_raw)
+            assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+
+            expected = (REPO_ROOT / "VERSION").read_text().strip()
+            assert expected in result.stdout, (
+                f"installer must print the fetched version {expected!r}, got:\n{result.stdout}"
+            )
+    finally:
+        httpd.shutdown()
+        httpd.server_close()
+
+
+def test_install_prints_the_served_version_not_a_hardcoded_one():
+    """Unit check: the printed version comes from the fetched file, not a
+    literal baked into install.sh. Serves a VERSION distinct from the repo's
+    own, and expects that distinct string back, not the repo's real one."""
+    with tempfile.TemporaryDirectory() as tmp:
+        served = Path(tmp) / "served"
+        served.mkdir()
+        build_served_repo(served)
+        distinct_version = "friday-foundation-v9.9.9-test-only"
+        (served / "VERSION").write_text(distinct_version + "\n")
+
+        httpd, port = start_local_server(served)
+        repo_raw = f"http://127.0.0.1:{port}"
+
+        try:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install(tmp_home, cwd, repo_raw)
+            assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+            assert distinct_version in result.stdout, (
+                f"installer must print the served version, not a hardcoded one:\n{result.stdout}"
+            )
+            real_version = (REPO_ROOT / "VERSION").read_text().strip()
+            assert real_version not in result.stdout, (
+                "installer printed the repo's real VERSION instead of the served one"
+            )
+        finally:
+            httpd.shutdown()
+            httpd.server_close()
+
+
+def test_install_honest_when_version_fetch_fails():
+    """AC2: a missing VERSION must never fail the install. Exit 0, says unknown."""
+    with tempfile.TemporaryDirectory() as tmp:
+        served = Path(tmp) / "served"
+        served.mkdir()
+        build_served_repo(served, omit=["VERSION"])
+        httpd, port = start_local_server(served)
+        repo_raw = f"http://127.0.0.1:{port}"
+
+        try:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+
+            result = run_install(tmp_home, cwd, repo_raw)
+            assert result.returncode == 0, (
+                f"a missing VERSION must never fail the install:\n{result.stdout}\n{result.stderr}"
+            )
+            assert "unknown" in result.stdout.lower(), (
+                f"installer must say the version is unknown when the fetch fails:\n{result.stdout}"
+            )
+        finally:
+            httpd.shutdown()
+            httpd.server_close()
+
+
+def test_version_file_shape():
+    """Unit check: VERSION follows the friday-foundation-vX.Y.Z convention
+    used by the other Friday products (friday-mk-i-vX.Y.Z, friday-mk-v-vX.Y.Z)."""
+    version_file = REPO_ROOT / "VERSION"
+    assert version_file.exists(), "VERSION file is missing from the repo root"
+    content = version_file.read_text().strip()
+    assert re.match(r"^friday-foundation-v\d+\.\d+\.\d+$", content), (
+        f"VERSION must read friday-foundation-vX.Y.Z, got {content!r}"
+    )

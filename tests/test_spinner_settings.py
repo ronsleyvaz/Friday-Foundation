@@ -364,3 +364,43 @@ def test_negative_case_unshipped_command_would_fail_membership_check():
     assert match and match.group(1) not in shipped, (
         "sanity check failed -- the fake command must not be in the shipped set"
     )
+
+
+# ---------------------------------------------------------------------------
+# AC3 (fix): a no-op install must leave no new files behind at all, not even
+# a backup that gets cleaned up again later. The prior implementation wrote
+# the backup before checking whether spinner settings already existed, so a
+# process killed between the backup and the cleanup left a stray .bak.
+# ---------------------------------------------------------------------------
+
+def test_noop_install_leaves_no_new_files_behind():
+    """A settings.json that already opts into spinnerVerbs must come out of
+    the install with the exact same set of files in .claude/ it started
+    with -- no backup ever written, not just one cleaned up afterward."""
+    httpd, port = start_local_server(REPO_ROOT)
+    repo_raw = f"http://127.0.0.1:{port}"
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_home = Path(tmp) / "home"
+            cwd = Path(tmp) / "project"
+            tmp_home.mkdir()
+            cwd.mkdir()
+            claude_dir = cwd / ".claude"
+            claude_dir.mkdir()
+            settings_path = claude_dir / "settings.json"
+            settings_path.write_text(
+                json.dumps({"spinnerVerbs": {"mode": "replace", "verbs": ["Custom"]}}, indent=2) + "\n"
+            )
+
+            before = sorted(p.name for p in claude_dir.iterdir())
+
+            result = run_install(tmp_home, cwd, repo_raw)
+            assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+
+            after = sorted(p.name for p in claude_dir.iterdir())
+            assert after == before, (
+                f"no-op install must leave no new files behind, found {sorted(set(after) - set(before))}"
+            )
+    finally:
+        httpd.shutdown()
+        httpd.server_close()

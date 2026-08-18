@@ -96,6 +96,7 @@ FAILED_COMMANDS=()
 FAILED_HARNESS=()
 TEMPLATE_FAILED="no"
 SPINNER_SETTINGS_TEMPLATE_FAILED="no"
+VERSION_VALUE=""
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -173,6 +174,20 @@ install_template() {
     rm -f "./CLAUDE.md.template"
     echo "  Failed to fetch CLAUDE.md.template"
     TEMPLATE_FAILED="yes"
+  fi
+}
+
+install_version() {
+  # Fetched the same way as CLAUDE.md.template. A missing or unfetchable
+  # VERSION must never fail the install -- it is not added to the
+  # FAILED_* trackers that flip install_full_pack's exit code, so a founder
+  # always finishes with a working install even if this one file 404s.
+  if curl -fsSL "${REPO_RAW}/VERSION" -o "./VERSION" && [ -s "./VERSION" ]; then
+    VERSION_VALUE="$(cat "./VERSION")"
+    echo "  Fetched: ./VERSION (${VERSION_VALUE})"
+  else
+    rm -f "./VERSION"
+    echo "  Failed to fetch VERSION (version unknown)"
   fi
 }
 
@@ -255,6 +270,25 @@ activate_spinner_settings() {
     return 0
   fi
 
+  # Check first, before ever touching disk: a settings.json that already
+  # opts into spinner settings is a true no-op, never even a transient
+  # backup file. (The check used to happen inside the merge step, after the
+  # backup was already written and merely cleaned up again on a no-op --
+  # a run killed between those two steps left a stray .bak behind.)
+  local check_rc=0
+  python3 -c 'import json,sys; s=json.load(open(sys.argv[1])); sys.exit(2 if ("spinnerVerbs" in s or "spinnerTipsOverride" in s) else 0)' "${settings}" || check_rc=$?
+
+  if [ "${check_rc}" = "2" ]; then
+    echo "  ${settings} already has spinner settings. Left it untouched."
+    echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
+    return 0
+  fi
+  if [ "${check_rc}" != "0" ]; then
+    echo "  Could not merge spinner settings into ${settings}; left it untouched."
+    echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
+    return 0
+  fi
+
   local backup="${settings}.pre-friday-$(date +%F).bak"
   if ! cp "${settings}" "${backup}"; then
     echo "  Could not back up ${settings}; skipped the spinner settings step."
@@ -266,27 +300,19 @@ activate_spinner_settings() {
   # this file and rejects anything outside a function definition, so a
   # multi-line inline script would misread as top-level bash. json.load()
   # raises on invalid JSON, which python turns into exit code 1 with no
-  # explicit try/except needed; the case below treats that as "skip and
+  # explicit try/except needed; the check below treats that as "skip and
   # restore", never as a reason to fail the install.
   local merge_rc=0
-  python3 -c 'import json,sys; s=json.load(open(sys.argv[1])); t=json.load(open(sys.argv[2])); (sys.exit(2) if ("spinnerVerbs" in s or "spinnerTipsOverride" in s) else None); s["spinnerVerbs"]=t["spinnerVerbs"]; s["spinnerTipsOverride"]=t["spinnerTipsOverride"]; f=open(sys.argv[1],"w"); json.dump(s,f,indent=2); f.write("\n"); f.close()' "${settings}" "./spinner-settings.json.template" || merge_rc=$?
+  python3 -c 'import json,sys; s=json.load(open(sys.argv[1])); t=json.load(open(sys.argv[2])); s["spinnerVerbs"]=t["spinnerVerbs"]; s["spinnerTipsOverride"]=t["spinnerTipsOverride"]; f=open(sys.argv[1],"w"); json.dump(s,f,indent=2); f.write("\n"); f.close()' "${settings}" "./spinner-settings.json.template" || merge_rc=$?
 
-  case "${merge_rc}" in
-    0)
-      echo "  Backed up your existing settings to ${backup}"
-      echo "  Added Friday's spinner words and tips to ${settings}"
-      ;;
-    2)
-      rm -f "${backup}"
-      echo "  ${settings} already has spinner settings. Left it untouched."
-      echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
-      ;;
-    *)
-      rm -f "${backup}"
-      echo "  Could not merge spinner settings into ${settings}; left it untouched."
-      echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
-      ;;
-  esac
+  if [ "${merge_rc}" = "0" ]; then
+    echo "  Backed up your existing settings to ${backup}"
+    echo "  Added Friday's spinner words and tips to ${settings}"
+  else
+    rm -f "${backup}"
+    echo "  Could not merge spinner settings into ${settings}; left it untouched."
+    echo "  The template is saved alongside as ./spinner-settings.json.template to merge in yourself."
+  fi
 }
 
 install_full_pack() {
@@ -308,6 +334,8 @@ install_full_pack() {
   echo
   install_template
   activate_brain_file
+  echo
+  install_version
   echo
   install_spinner_settings_template
   activate_spinner_settings
