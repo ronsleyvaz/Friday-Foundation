@@ -16,6 +16,8 @@ import shutil
 import subprocess
 import tempfile
 import threading
+
+import pytest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -30,6 +32,66 @@ MK5_SETTINGS = Path(
     "/Users/ronsley/Projects/Friday-serve/workstreams/new/mk-v-full-build/"
     "code/.claude/settings.json"
 )
+
+# The 51 verbs, pinned as a literal. MK5_SETTINGS above is an absolute path into
+# a different repository on one operator's Mac, so every assertion that read it
+# passed locally and raised FileNotFoundError on CI. It broke both ubuntu and
+# macos runners on 51c13df. The pinned list is the contract; the cross-repo
+# comparison below still runs when that file happens to be reachable, and skips
+# when it is not.
+EXPECTED_VERBS = [
+    "Triaging",
+    "Delegating",
+    "Chief-of-staffing",
+    "Briefing",
+    "Routing",
+    "Filing",
+    "Shipping",
+    "Running point",
+    "Taking it off your plate",
+    "Clearing your plate",
+    "Doing the boring bit",
+    "Handling it",
+    "Amplifying",
+    "Reducing your cognitive load",
+    "Making your business successful",
+    "Making people capable",
+    "Getting your Friday back",
+    "Buying back an hour",
+    "Saving you a morning",
+    "Removing a decision",
+    "Killing a to-do",
+    "Deleting a meeting",
+    "Protecting your attention",
+    "Building the machine",
+    "Making it runnable",
+    "Compounding your leverage",
+    "Turning chaos into a checklist",
+    "Sussing",
+    "Nutting out",
+    "Wrangling",
+    "Cracking on",
+    "Having a crack",
+    "Squaring away",
+    "Chasing down",
+    "Rustling up",
+    "Fossicking",
+    "Reckoning",
+    "Chipping away",
+    "Getting stuck in",
+    "Knuckling down",
+    "Beavering",
+    "Grafting",
+    "Overthinking",
+    "Second-guessing",
+    "Consulting the C-suite",
+    "Asking the CFO",
+    "Verifying the premise",
+    "Falsifying my own theory",
+    "Not inventing anything",
+    "Reading the file first",
+    "Counting properly",
+]
 
 BASH = os.environ.get("FRIDAY_TEST_BASH", "bash")
 
@@ -126,8 +188,7 @@ def test_fresh_install_creates_settings_with_spinner_keys():
             data = json.loads(settings_path.read_text())
 
             assert data["spinnerVerbs"]["mode"] == "replace"
-            mk5 = json.loads(MK5_SETTINGS.read_text())
-            assert data["spinnerVerbs"]["verbs"] == mk5["spinnerVerbs"]["verbs"], (
+            assert data["spinnerVerbs"]["verbs"] == EXPECTED_VERBS, (
                 "verbs must be byte-identical to the shipped Mk5 list"
             )
             assert len(data["spinnerVerbs"]["verbs"]) == 51
@@ -328,9 +389,23 @@ def test_template_is_valid_json_with_correct_shape():
 
 def test_verbs_match_shipped_mk5_list_byte_for_byte():
     data = json.loads(TEMPLATE.read_text())
-    mk5 = json.loads(MK5_SETTINGS.read_text())
-    assert data["spinnerVerbs"]["verbs"] == mk5["spinnerVerbs"]["verbs"]
+    assert data["spinnerVerbs"]["verbs"] == EXPECTED_VERBS
     assert len(data["spinnerVerbs"]["verbs"]) == 51
+
+
+def test_pinned_verbs_still_match_the_mk5_file_when_reachable():
+    """Foundation and Mk5 stay in step, without CI depending on another repo.
+
+    Skips anywhere MK5_SETTINGS is absent, which is every machine except the
+    operator's. A skip here is not a pass for the contract: the pinned list is
+    asserted by the test above and by the fresh-install golden.
+    """
+    if not MK5_SETTINGS.is_file():
+        pytest.skip("Mk5 buyer settings not present on this machine")
+    mk5 = json.loads(MK5_SETTINGS.read_text())
+    assert mk5["spinnerVerbs"]["verbs"] == EXPECTED_VERBS, (
+        "Mk5 changed its verbs; update EXPECTED_VERBS and the template together"
+    )
 
 
 def test_tip_count_in_range():
