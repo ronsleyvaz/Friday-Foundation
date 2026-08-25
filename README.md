@@ -3,7 +3,7 @@
 [![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Build your own AI Chief of Staff inside Claude Code. 24 commands, a growth diagnostic, and a harness to extend it to your workflow.
+Build your own AI Chief of Staff inside Claude Code. 25 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
 Free to install. No separate Foundation account or backend. Claude Code supplies the AI and has its own account and network requirements. Foundation keeps its durable outputs as local files in your project.
 
@@ -82,6 +82,7 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/competitive-analysis` | Competitor teardown: comparison matrix plus a SWOT for each competitor | `friday/competitive-analysis.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook, pre-launch through post-launch | `friday/product-hunt-launch.md` |
+| `/friday-upgrade` | Upgrades your Foundation install to the current release | `friday/upgrade-log.md` |
 
 Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
@@ -109,6 +110,28 @@ Replace `amplify` with any command name to install just that one.
 
 ---
 
+## Upgrade an existing install
+
+Inside Claude Code, run:
+
+```
+/friday-upgrade
+```
+
+It compares your version against the current release, runs the installer for you, and writes what changed to `friday/upgrade-log.md`.
+
+If you installed before `/friday-upgrade` existed, upgrade once from the terminal instead. Run this from the same project directory you installed into:
+
+```
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
+```
+
+Re-running the installer is the upgrade. It replaces the command files in `~/.claude/commands/` with the current ones and prints the version it fetched. If you have edited a command, your copy is saved as `<name>.md.bak` before the new one lands. Your `CLAUDE.md` and your `friday/` folder are never touched, so anything new in `CLAUDE.md.template` is yours to merge by hand.
+
+New commands appear the next time you start Claude Code.
+
+---
+
 ## Build your own command
 
 Run `/new-capability <name>` in Claude Code. It scaffolds a command file with the right frontmatter and step structure.
@@ -126,7 +149,7 @@ For a full walkthrough, read the harness guide (fetched to `./harness/` when you
 
 ## The soft ladder
 
-**Friday Foundation (here):** free, open-source, 24 commands, bring your own Claude Code.
+**Friday Foundation (here):** free, open-source, 25 commands, bring your own Claude Code.
 
 **The Amplify book:** the full framework behind the growth diagnostic. Read it for the complete methodology. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

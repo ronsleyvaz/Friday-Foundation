@@ -1,6 +1,6 @@
 # Credits
 
-Twelve of Friday Foundation's 24 commands started as methodology from five
+Twelve of Friday Foundation's 25 commands started as methodology from five
 external, open-source projects. All five are MIT-licensed, confirmed live against
 the GitHub API on 2026-07-02. Nothing here was copied line for line. Each command
 was rewritten from the source project's methodology into Foundation's own command

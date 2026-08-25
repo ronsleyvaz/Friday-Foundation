@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 24 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), downloads the six-part harness guide to `./harness/`, writes Friday's own spinner words and tips into your project's `./.claude/settings.json`, and prints the version it just installed. The spinner settings step never touches your global Claude Code config: if the project already has a `settings.json`, the two new keys are merged in and the original is backed up first; if it already opts into its own spinner settings, nothing changes. The version comes from a `VERSION` file fetched alongside the brain file; if that fetch fails, the install still finishes and says the version is unknown rather than guessing.
+The installer puts all 25 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), downloads the six-part harness guide to `./harness/`, writes Friday's own spinner words and tips into your project's `./.claude/settings.json`, and prints the version it just installed. The spinner settings step never touches your global Claude Code config: if the project already has a `settings.json`, the two new keys are merged in and the original is backed up first; if it already opts into its own spinner settings, nothing changes. The version comes from a `VERSION` file fetched alongside the brain file; if that fetch fails, the install still finishes and says the version is unknown rather than guessing.
 
 ### Install a single command
 
@@ -63,6 +63,12 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 ```
 
 Replace `amplify` with any command name.
+
+### Upgrade an existing install
+
+Inside Claude Code, run `/friday-upgrade`. It reads your `VERSION` file, compares it against the current release, runs the installer for you once you say go, and writes what changed to `friday/upgrade-log.md`.
+
+If your install predates `/friday-upgrade`, upgrade once from the terminal by re-running the install line above from the same project directory. Re-running the installer is the upgrade path: command files are replaced with the current ones, an edited command is saved as `<name>.md.bak` first, and the version it fetched is printed at the end. `CLAUDE.md` and the `friday/` folder are never touched, so template improvements are yours to merge by hand. A new command shows up the next time you start Claude Code.
 
 ### First fifteen minutes
 
@@ -150,7 +156,7 @@ Never use the words on the banned list.
 
 ---
 
-## The 24 commands
+## The 25 commands
 
 ### Set up first
 
@@ -201,6 +207,12 @@ Recommended early, though optional. Every other command reads this profile if it
 |---|---|---|
 | `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
+
+### Keep it current
+
+| Command | What it does | Output |
+|---|---|---|
+| `/friday-upgrade` | Upgrades your Foundation install to the current release | `friday/upgrade-log.md` |
 
 ### Extend
 
@@ -263,7 +275,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Foundation includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, 24 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Foundation (here):** free, open-source, 25 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

@@ -30,6 +30,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- roadmap           -- installs just /roadmap
 #   curl -fsSL .../install.sh | bash -s -- customer-feedback -- installs just /customer-feedback
 #   curl -fsSL .../install.sh | bash -s -- risk-register     -- installs just /risk-register
+#   curl -fsSL .../install.sh | bash -s -- friday-upgrade    -- installs just /friday-upgrade
 #
 # The no-argument path installs the full command pack, CLAUDE.md.template,
 # and the harness/ guide to the current working directory.
@@ -78,6 +79,7 @@ PACK_COMMANDS=(
   "roadmap          roadmap.md          /roadmap"
   "customer-feedback customer-feedback.md /customer-feedback"
   "risk-register risk-register.md /risk-register"
+  "friday-upgrade  friday-upgrade.md  /friday-upgrade"
 )
 
 # Harness guide files fetched alongside the full pack.
@@ -409,7 +411,7 @@ install_single() {
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${capability}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register, friday-upgrade"
     exit 1
   fi
 }
