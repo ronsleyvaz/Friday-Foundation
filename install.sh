@@ -8,8 +8,8 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash                         -- clones the whole
 #                                                                repo into
 #                                                                ~/friday-shortcuts
-#                                                                and opens Claude
-#                                                                Code there
+#                                                                and prints the
+#                                                                command to open it
 #   curl -fsSL .../install.sh | bash -s -- decide            -- installs just /decide
 #   curl -fsSL .../install.sh | bash -s -- brief             -- installs just /brief
 #   curl -fsSL .../install.sh | bash -s -- voice-installer   -- installs just /voice-installer
@@ -41,7 +41,7 @@ set -euo pipefail
 # gives you a personalised CLAUDE.md brain file, wires up the status line and
 # spinner settings, installs commands into ~/friday-shortcuts/.claude/commands/
 # so they only work when Claude Code is opened from inside that folder, and
-# opens Claude Code there. Re-running it on an existing install updates
+# prints the command to open Claude Code there. Re-running it on an existing install updates
 # Foundation's own files from the release branch in place, leaving your
 # CLAUDE.md and friday/ folder untouched.
 # Pass a capability name to install a single command file into the current
@@ -473,32 +473,21 @@ sync_commands_to_folder() {
 }
 
 open_claude_in_folder() {
-  # Auto-opens Claude Code inside INSTALL_PATH. The primary delivery path is
-  # a founder pasting the curl line straight into their Mac terminal, so
-  # curl | bash leaves this script's stdin attached to the download pipe --
-  # a bare `claude` here would have no keyboard. Reattach the terminal via
-  # /dev/tty and hand the session straight to Claude Code, already inside the
-  # folder. No controlling tty (e.g. run from an app-as-installer context)
-  # falls back to printing the one instruction to run by hand.
+  # Do NOT auto-launch Claude Code here. Exec-ing `claude </dev/tty` from a
+  # curl | bash context strands the founder: that first Claude Code session's
+  # folder-trust prompt cannot read the keyboard (arrows, Enter, Esc all dead),
+  # so they sit on a frozen screen and read Friday as broken. Launching Claude
+  # by hand in a clean terminal works every time. So print the one line to run
+  # instead of opening it for them. Same instruction on every path.
   echo
-  echo "Friday SHORTCUTS lives in: ${INSTALL_PATH}"
+  echo "Friday SHORTCUTS is installed at: ${INSTALL_PATH}"
   echo
-  if (exec 3</dev/tty) 2>/dev/null; then
-    echo "Press Enter to open Friday SHORTCUTS now (or Ctrl-C to open it later)."
-    read -r _ </dev/tty
-    cd "${INSTALL_PATH}" || {
-      echo "Could not enter ${INSTALL_PATH}"
-      exit 1
-    }
-    echo
-    echo "Opening Claude Code. Type /amplify to begin."
-    exec claude </dev/tty
-  else
-    echo "Open Claude Code from inside that folder:"
-    echo
-    echo "  cd ${INSTALL_PATH} && claude"
-    echo
-  fi
+  echo "To start, open it in Claude Code:"
+  echo
+  echo "  cd ${INSTALL_PATH} && claude"
+  echo
+  echo "Then type /amplify to begin."
+  echo
 }
 
 install_full_pack() {

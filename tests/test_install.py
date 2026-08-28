@@ -326,24 +326,35 @@ def test_full_pack_no_tty_prints_cd_and_claude_instruction(tmp_path):
     assert f"cd {shortcuts} && claude" in result.stdout
 
 
-def test_tty_guard_uses_exec_open():
-    """The /dev/tty guard must use exec open, not -r stat (matches the paid
-    installer's pattern, copied deliberately)."""
+def test_installer_never_auto_opens_claude():
+    """Hotfix v1.2.1: the installer must NOT launch Claude Code itself.
+    Exec-ing `claude </dev/tty` from a curl | bash context strands the founder
+    on a folder-trust prompt that cannot read the keyboard (arrows, Enter, Esc
+    all dead). The installer prints the command for the founder to run in a
+    clean terminal instead. Source-level check (no pty harness in this suite)."""
     source = INSTALL_SH.read_text()
-    assert "(exec 3</dev/tty)" in source
-    assert "[ -r /dev/tty ]" not in source
+    assert "exec claude" not in source, (
+        "installer must not exec claude; it strands the first-run trust prompt"
+    )
+    assert "Press Enter to open" not in source, (
+        "installer must not prompt to auto-open; it prints the run instruction"
+    )
 
 
-def test_no_tty_branch_does_not_exec_claude():
-    """The no-tty else branch must not exec claude -- only the interactive
-    branch does. Source-level check (no pty harness in this repo's test
-    suite), matching the precedent for the paid installer's identical pattern."""
-    source = INSTALL_SH.read_text()
-    exec_pos = source.rfind("exec claude </dev/tty")
-    else_pos = source.find('echo "Open Claude Code from inside that folder:"')
-    assert exec_pos != -1, "exec claude </dev/tty must exist for the interactive path"
-    assert else_pos != -1, "the no-tty fallback message must exist"
-    assert else_pos > exec_pos, "the no-tty branch must be the later (else) branch"
+def test_full_pack_prints_run_instruction_on_every_path(tmp_path):
+    """Both the tty and no-tty paths end the same way: print the cd+claude line
+    and the /amplify pointer, and never claim to have opened Claude Code."""
+    mirror = build_git_mirror(tmp_path / "mirror")
+    tmp_home = tmp_path / "home"
+    shortcuts = tmp_path / "friday-shortcuts"
+
+    result = run_full_pack(tmp_home, mirror, shortcuts)
+    assert result.returncode == 0, f"install failed:\n{result.stdout}\n{result.stderr}"
+    assert f"cd {shortcuts} && claude" in result.stdout
+    assert "/amplify" in result.stdout
+    assert "Opening Claude Code" not in result.stdout, (
+        "installer must not claim it opened Claude Code"
+    )
 
 
 def test_full_pack_upgrade_preserves_personalisation_and_updates_foundation(tmp_path):

@@ -13,7 +13,7 @@ Free to install. No separate Foundation account or backend. Claude Code supplies
 
 ## Install in one line
 
-Run this from anywhere. It clones the whole project into one folder, `~/friday-shortcuts`, and opens Claude Code there:
+Run this from anywhere. It clones the whole project into one folder, `~/friday-shortcuts`, and prints the command to open Claude Code there:
 
 ```
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
@@ -25,13 +25,13 @@ You need Claude Code, `git`, and `curl` installed first. Get Claude Code at http
 installer is plain `bash`. On Windows, run it inside WSL2 rather than
 PowerShell.
 
-The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, and opens Claude Code inside `~/friday-shortcuts` for you.
+The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`.
 
 ---
 
 ## Start here
 
-Claude Code opens inside `~/friday-shortcuts` automatically. You have two good first moves.
+Open Claude Code inside `~/friday-shortcuts` by running `cd ~/friday-shortcuts && claude` (the installer prints this line for you). Then you have two good first moves.
 
 Your fastest win, no setup required:
 
