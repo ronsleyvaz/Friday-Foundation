@@ -56,6 +56,13 @@ def run_install_custom_path(tmp_home: Path, cwd: Path, tool_names, capability: s
     bin_dir = tmp_home / "bin"
     bin_dir.mkdir(parents=True, exist_ok=True)
     for name in tool_names:
+        if name == "claude":
+            # `claude` is not installed on the CI runners, and the prerequisite
+            # gate tests only need it to EXIST (require_tool checks presence),
+            # never to run. Stub it so this helper is host-independent instead
+            # of asserting a real Claude Code binary on every test machine.
+            make_fake_claude(bin_dir)
+            continue
         src = shutil.which(name)
         assert src, f"host is missing required tool for this test: {name}"
         (bin_dir / name).symlink_to(src)
