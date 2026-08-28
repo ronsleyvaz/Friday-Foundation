@@ -8,9 +8,9 @@ Each capability is a slash command: a markdown file that tells Claude Code exact
 
 ## The three moving parts
 
-**1. The commands (in `~/.claude/commands/`)**
+**1. The commands (in `~/friday-shortcuts/.claude/commands/`)**
 
-These are the slash commands: `/voice-installer`, `/brief`, `/decide`, and the rest. Each one is a markdown file with a set of instructions Claude follows when you run it. They live in your local Claude Code config, not in this repo.
+These are the slash commands: `/voice-installer`, `/brief`, `/decide`, and the rest. Each one is a markdown file with a set of instructions Claude follows when you run it, and Claude Code only sees them when you open a session inside `~/friday-shortcuts`. They live in your local Claude Code config, not in this repo.
 
 **2. The brain file (CLAUDE.md)**
 

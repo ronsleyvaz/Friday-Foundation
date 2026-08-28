@@ -50,7 +50,7 @@ Then stop. Do not write a log entry for a no-op.
 
 > You are on `<LOCAL>`. The current release is `<LATEST>`.
 >
-> Upgrading re-runs the official installer from this directory. It replaces the command files in `~/.claude/commands/` with the current ones. If you have edited any of them, your version is saved next to it as `<name>.md.bak` before it is replaced. Your `CLAUDE.md` is never touched. Your `friday/` folder is never touched.
+> Upgrading re-runs the official installer. It updates Foundation's own files in `~/friday-shortcuts` to the current release in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are left untouched, byte for byte. The commands in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones; if you had edited any, your version is saved next to it as `<name>.md.bak`.
 >
 > Want me to run it?
 
@@ -61,27 +61,29 @@ Wait for a clear yes. If they say no, stop.
 Before the upgrade, capture the current command files so you can name what changed afterwards:
 
 ```bash
-ls -1 ~/.claude/commands/*.md 2>/dev/null | xargs -n1 basename
+ls -1 ./.claude/commands/*.md 2>/dev/null | xargs -n1 basename
 ```
 
 Keep that list as `BEFORE`.
 
 ## Step 6: Run the installer
 
-Run the official install line from the project directory:
+Run the official install line, from inside `~/friday-shortcuts`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
-Read its output rather than assuming it worked. The installer reports every file it installed, every file it backed up, the version it fetched, and any download that failed. If it reports failures, say so plainly and name the files. A partial upgrade is a real outcome, not something to smooth over.
+Read its output rather than assuming it worked. Because this folder is already a Friday Foundation install, the installer updates it in place: your `CLAUDE.md` and `friday/` folder are left untouched, and Foundation's own files (commands, harness, `VERSION`) move to the new release. It reports the version it fetched and any command that failed to sync. If it reports failures, say so plainly and name the files. A partial upgrade is a real outcome, not something to smooth over.
+
+If the installer instead reports that this folder was not a valid git clone and it backed the whole thing up before cloning fresh, that is the one case where your `CLAUDE.md` and `friday/` folder end up in the timestamped backup path it names. Tell the founder plainly and offer to copy them back.
 
 ## Step 7: Work out what changed
 
 List the command files again:
 
 ```bash
-ls -1 ~/.claude/commands/*.md 2>/dev/null | xargs -n1 basename
+ls -1 ./.claude/commands/*.md 2>/dev/null | xargs -n1 basename
 ```
 
 Compare against `BEFORE`. Anything in the new list and not in `BEFORE` is a new command you now have.
@@ -89,18 +91,12 @@ Compare against `BEFORE`. Anything in the new list and not in `BEFORE` is a new 
 Then look for backups the installer just made:
 
 ```bash
-find ~/.claude/commands -name "*.md.bak" -newermt "-10 minutes" 2>/dev/null
+find ./.claude/commands -name "*.md.bak" -newermt "-10 minutes" 2>/dev/null
 ```
 
 Each one is a command you had edited. Your edits are in the `.bak` file and the current release is in the live file. Tell the founder which ones, and that reconciling them is their call.
 
-Finally, check the brain file. The installer leaves `CLAUDE.md` alone by design, so a template improvement never lands on its own:
-
-```bash
-diff ./CLAUDE.md ./CLAUDE.md.template 2>/dev/null | head -40
-```
-
-If the two have drifted, say so and offer to walk the differences with them. Do not edit `CLAUDE.md` without being asked.
+`CLAUDE.md` needs no check here: the upgrade path preserves it in place, so unless Step 6 reported the non-git-clone fallback, it is exactly what it was before you ran this.
 
 ## Step 8: Write the upgrade log
 
@@ -117,7 +113,7 @@ If the file does not exist, create it with this structure:
 
 **Your edited commands, now backed up:** <names of .bak files, or "none">
 
-**Brain file:** <"unchanged, matches the template" or "yours has drifted from the template">
+**Brain file:** <"preserved in place, untouched" or, only if Step 6 reported the non-git-clone fallback, "your personalised CLAUDE.md is in the backup folder, not copied back yet">
 
 **Failures:** <anything the installer could not fetch, or "none">
 ```
@@ -132,7 +128,9 @@ Tell them plainly that slash commands are read when a session starts, so a brand
 
 ## What this does not do
 
-This command does not upgrade Claude Code itself, touch your global Claude Code config, change your `CLAUDE.md`, or alter anything in your `friday/` folder. It does not downgrade. If you need a specific older version, install it by hand from that tag on GitHub.
+This command does not upgrade Claude Code itself, and it does not touch your global Claude Code config. It does not downgrade. If you need a specific older version, install it by hand from that tag on GitHub.
+
+It updates Foundation's own files in `~/friday-shortcuts` in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are never touched, unless the installer had to fall back to a fresh clone because the folder was not a valid git clone -- it says so plainly when that happens.
 
 ## What this builds toward
 

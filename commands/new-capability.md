@@ -158,7 +158,7 @@ After writing the file, print:
 >
 > `docs/skill-writing-playbook.md` has the five failure modes worth checking your new command against before you consider it done.
 >
-> When you are ready to test it, copy it to `~/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session.
+> When you are ready to test it, copy it to `~/friday-shortcuts/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session.
 
 Then add a note:
 

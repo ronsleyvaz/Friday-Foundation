@@ -74,9 +74,11 @@ Validate both Bash scripts without executing them:
 bash -n install.sh scripts/seed-good-first-issues.sh
 ```
 
-Do not run `install.sh` during routine development. It writes outside the
-worktree to `~/.claude/commands/` and writes installer assets to the current
-directory. Installer integration tests use temporary directories instead.
+Do not run `install.sh` during routine development. The no-argument path
+writes outside the worktree to `~/friday-shortcuts`; the single-capability
+path (`install.sh -- <name>`) writes to `~/.claude/commands/` instead. Both
+also write installer assets to the current directory. Installer integration
+tests use temporary directories instead.
 
 Do not run `scripts/seed-good-first-issues.sh` unless a maintainer explicitly
 requests it. It creates GitHub labels and issues.

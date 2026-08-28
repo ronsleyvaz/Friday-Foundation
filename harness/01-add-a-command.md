@@ -1,6 +1,6 @@
 # 01 - Add a Command
 
-A command is a markdown file in `~/.claude/commands/`. The filename becomes the command name -- `hello.md` runs as `/hello`. Claude Code reads the body to know what to do when you run it, and shows the frontmatter `description` in the command picker.
+A command is a markdown file in `~/friday-shortcuts/.claude/commands/`. The filename becomes the command name -- `hello.md` runs as `/hello`. Claude Code reads the body to know what to do when you run it, and shows the frontmatter `description` in the command picker.
 
 You can write one yourself in under ten minutes. Here is how.
 
@@ -37,7 +37,7 @@ This is the instructions Claude follows when you run the command. Write it in pl
 
 ## A minimal working command
 
-Create a file called `hello.md` in `~/.claude/commands/`:
+Create a file called `hello.md` in `~/friday-shortcuts/.claude/commands/`:
 
 ```
 ---
@@ -81,7 +81,7 @@ Save the file. In Claude Code, type `/hello`. It runs.
 
 ## Installing your command
 
-Once the file is in `~/.claude/commands/`, it is available immediately in any Claude Code session.
+Once the file is in `~/friday-shortcuts/.claude/commands/`, it is available immediately in any Claude Code session opened from inside that folder.
 
 To share it: open a pull request to this repo. See `CONTRIBUTING.md` for the quality bar.
 

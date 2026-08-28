@@ -185,3 +185,47 @@ def test_first_command_effort_is_honest():
     assert "ship your first command in about ten minutes" not in readme, (
         "README.md must not promise a shipped command in about ten minutes"
     )
+
+
+# --- AC6: folder-scoped full-pack install, accurately documented -----------
+
+# The doc surface a founder actually reads for install/upgrade behaviour:
+# README, the manual, and every harness guide. The single-capability path
+# (`install.sh -- <name>`) genuinely still writes to the global
+# ~/.claude/commands/ (see install.sh's DEST / install_one), but none of
+# these docs describe that path's destination, so the substring stays a
+# clean signal for the stale full-pack claim.
+DOC_SURFACE = [README, MANUAL] + sorted((REPO_ROOT / "harness").glob("*.md"))
+
+
+def test_docs_do_not_claim_global_command_sync():
+    """No shipped doc may claim Foundation's commands sync into the global
+    ~/.claude/commands/, or that they "work from any project" / "work
+    everywhere". The full-pack install is folder-scoped into
+    ~/friday-shortcuts/.claude/commands/ (install.sh's
+    sync_commands_to_folder), and only works when Claude Code is opened from
+    inside that folder."""
+    offenders = []
+    for path in DOC_SURFACE:
+        text = path.read_text(encoding="utf-8")
+        lower = text.lower()
+        if "~/.claude/commands" in text or "any project" in lower or "work everywhere" in lower:
+            offenders.append(path.relative_to(REPO_ROOT).as_posix())
+    assert not offenders, (
+        "stale global-install claim (~/.claude/commands, 'any project', or "
+        "'work everywhere') found in: " + ", ".join(sorted(offenders))
+    )
+
+
+def test_docs_state_folder_scoped_commands_and_upgrade_preserves_personalisation():
+    """README and the manual both name the real folder-scoped commands
+    destination and the real upgrade behaviour: CLAUDE.md and friday/
+    survive an upgrade untouched, not the old back-up-and-wipe story."""
+    for path in (README, MANUAL):
+        text = path.read_text(encoding="utf-8")
+        assert "friday-shortcuts/.claude/commands" in text, (
+            f"{path.name} must name the real folder-scoped commands destination"
+        )
+        assert "untouched" in text.lower(), (
+            f"{path.name} must state CLAUDE.md and friday/ survive an upgrade untouched"
+        )

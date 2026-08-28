@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer puts all 25 commands into `~/.claude/commands/`, creates a `CLAUDE.md` brain file in your current directory from `CLAUDE.md.template` (any existing one is left untouched), downloads the six-part harness guide to `./harness/`, writes Friday's own spinner words and tips into your project's `./.claude/settings.json`, and prints the version it just installed. The spinner settings step never touches your global Claude Code config: if the project already has a `settings.json`, the two new keys are merged in and the original is backed up first; if it already opts into its own spinner settings, nothing changes. The version comes from a `VERSION` file fetched alongside the brain file; if that fetch fails, the install still finishes and says the version is unknown rather than guessing.
+The installer clones the whole Friday Foundation repository into one folder, `~/friday-shortcuts` (backing up an existing non-empty folder there to a timestamped copy rather than overwriting it), creates a `CLAUDE.md` brain file from `CLAUDE.md.template`, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, writes a two-row status line and Friday's own spinner words and tips into `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, and opens Claude Code inside `~/friday-shortcuts` for you. The status line and spinner settings never touch your global Claude Code config, and merge into an existing `settings.json` rather than overwriting it (backed up first). The version comes from the `VERSION` file the clone ships; if it is missing, the install still finishes and says the version is unknown rather than guessing.
 
 ### Install a single command
 
@@ -68,11 +68,11 @@ Replace `amplify` with any command name.
 
 Inside Claude Code, run `/friday-upgrade`. It reads your `VERSION` file, compares it against the current release, runs the installer for you once you say go, and writes what changed to `friday/upgrade-log.md`.
 
-If your install predates `/friday-upgrade`, upgrade once from the terminal by re-running the install line above from the same project directory. Re-running the installer is the upgrade path: command files are replaced with the current ones, an edited command is saved as `<name>.md.bak` first, and the version it fetched is printed at the end. `CLAUDE.md` and the `friday/` folder are never touched, so template improvements are yours to merge by hand. A new command shows up the next time you start Claude Code.
+If your install predates `/friday-upgrade`, upgrade once from the terminal by re-running the install line above. Because `~/friday-shortcuts` is already a Friday Foundation git clone, re-running the installer updates Foundation's own files in place: your `friday/` output and your personalised `CLAUDE.md` are left untouched, byte for byte. Command files in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones, an edited command is saved as `<name>.md.bak` first, and the version it fetched is printed at the end. (A hand-made or corrupted `~/friday-shortcuts` that is not a real git clone instead gets backed up to a timestamped copy and cloned fresh, and the installer says so plainly.) A new command shows up the next time you start Claude Code.
 
 ### First fifteen minutes
 
-Open Claude Code in your project directory.
+Claude Code opens inside `~/friday-shortcuts` automatically once the install finishes.
 
 **One. Run the growth diagnostic (your fastest win, no setup).**
 
@@ -106,11 +106,11 @@ You are running.
 
 Foundation is a set of commands built on top of Claude Code. There is no background process. Nothing runs while you are not in a session.
 
-Each capability is a markdown file in `~/.claude/commands/`. When you run a command, Claude Code reads that file and follows the steps inside it. You see every step. You own every file it creates.
+Each capability is a markdown file, installed into `~/friday-shortcuts/.claude/commands/` and read only when Claude Code is opened from inside that folder. When you run a command, Claude Code reads that file and follows the steps inside it. You see every step. You own every file it creates.
 
 ### The friday/ folder
 
-Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
+Workflow commands write to a `friday/` folder inside `~/friday-shortcuts`. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 | File | Created by | What it holds |
 |---|---|---|
@@ -143,7 +143,7 @@ Custom commands you build will add their own files here.
 
 ### The brain file
 
-`CLAUDE.md.template` lands in your project directory during install, and the installer copies it to `CLAUDE.md` for you (unless you already have one). Open `CLAUDE.md`. Replace every `[bracket]` with your own content. Claude Code reads `CLAUDE.md` (not the template) at the start of every session. It holds your identity, your voice pointer, and your decision rules.
+`CLAUDE.md.template` lands in `~/friday-shortcuts` as part of the clone, and the installer copies it to `CLAUDE.md` for you (unless you already have one). Open `CLAUDE.md`. Replace every `[bracket]` with your own content. Claude Code reads `CLAUDE.md` (not the template) at the start of every session. It holds your identity, your voice pointer, and your decision rules.
 
 Once `/voice-installer` has run, wire your voice profile into `CLAUDE.md`:
 
@@ -242,11 +242,11 @@ The built-in commands cover the daily fundamentals. Your workflow will have recu
 
 ### Scaffold a new command
 
-Run `/new-capability` in Claude Code. It asks for a name, a one-line purpose, and an output file. It creates `commands/<name>.md` with the correct frontmatter and step structure. Fill in your logic. Copy it to `~/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session to test it.
+Run `/new-capability` in Claude Code. It asks for a name, a one-line purpose, and an output file. It creates `commands/<name>.md` with the correct frontmatter and step structure. Fill in your logic. Copy it to `~/friday-shortcuts/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session to test it.
 
 ### The harness guide
 
-The installer fetches six docs to `./harness/`. Read them in order when you are ready to extend.
+The clone ships six docs in `~/friday-shortcuts/harness/`. Read them in order when you are ready to extend.
 
 | Doc | What it covers |
 |---|---|
@@ -291,20 +291,20 @@ Foundation gives you the shape. The paid product is Friday running while you sle
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| A command does not appear in Claude Code | Not installed to `~/.claude/commands/` | Run the installer again, or copy the file manually |
+| A command does not appear in Claude Code | Not installed to `~/friday-shortcuts/.claude/commands/` | Run the installer again, or copy the file manually |
 | Output is not in your voice | `friday/voice.md` is missing | Run `/voice-installer` first |
 | `/brief` asks for nine decisions every time | `friday/nine-decisions.md` does not exist | Run `/brief` once to create it, or write the file manually |
 | A command writes nothing to disk | Write permission error | Check that you can create files in the current directory |
 | `/amplify` results feel off | Scores were optimistic | Re-run with honest scores. The diagnostic is only as useful as the input |
-| A custom command is not running | File is in `commands/` but not in `~/.claude/commands/` | Run: `cp commands/<name>.md ~/.claude/commands/<name>.md` |
+| A custom command is not running | File is in `commands/` but not in `~/friday-shortcuts/.claude/commands/` | Run: `cp commands/<name>.md ~/friday-shortcuts/.claude/commands/<name>.md` |
 | Not sure what to run next | New to the setup | Start with `/voice-installer`, then `/brief` |
 
 ---
 
 ## Going deeper
 
-- **The harness guide (six docs):** `./harness/` in your project directory after install
-- **Any command in detail:** open `~/.claude/commands/<name>.md`
+- **The harness guide (six docs):** `~/friday-shortcuts/harness/` after install
+- **Any command in detail:** open `~/friday-shortcuts/.claude/commands/<name>.md`
 - **In a Claude Code session:** type the command name and ask Claude what it does
 
 ---

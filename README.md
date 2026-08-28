@@ -13,26 +13,25 @@ Free to install. No separate Foundation account or backend. Claude Code supplies
 
 ## Install in one line
 
-First, `cd` into your project directory. The commands install globally, but your `CLAUDE.md` brain file and the harness guide land wherever you run this:
+Run this from anywhere. It clones the whole project into one folder, `~/friday-shortcuts`, and opens Claude Code there:
 
 ```
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
-You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
+You need Claude Code, `git`, and `curl` installed first. Get Claude Code at https://docs.anthropic.com/claude-code
 
 **What it runs on.** macOS, Ubuntu Linux, and Windows through WSL2. The
-installer is plain `bash` and copies command files into your home directory, so
-anything with `bash` and `curl` will do. On Windows, run it inside WSL2 rather
-than PowerShell.
+installer is plain `bash`. On Windows, run it inside WSL2 rather than
+PowerShell.
 
-The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, gives your project's `./.claude/settings.json` Friday's own spinner words and tips (merged in if the file already exists, never touching your global config), prints the version it just installed, and tells you what to do next.
+The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, and opens Claude Code inside `~/friday-shortcuts` for you.
 
 ---
 
 ## Start here
 
-Open Claude Code in your project directory. You have two good first moves.
+Claude Code opens inside `~/friday-shortcuts` automatically. You have two good first moves.
 
 Your fastest win, no setup required:
 
@@ -84,7 +83,7 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/product-hunt-launch` | Product Hunt specific launch runbook, pre-launch through post-launch | `friday/product-hunt-launch.md` |
 | `/friday-upgrade` | Upgrades your Foundation install to the current release | `friday/upgrade-log.md` |
 
-Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
+Workflow commands write to a `friday/` folder inside `~/friday-shortcuts`. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 ---
 
@@ -120,13 +119,13 @@ Inside Claude Code, run:
 
 It compares your version against the current release, runs the installer for you, and writes what changed to `friday/upgrade-log.md`.
 
-If you installed before `/friday-upgrade` existed, upgrade once from the terminal instead. Run this from the same project directory you installed into:
+If you installed before `/friday-upgrade` existed, upgrade once from the terminal instead:
 
 ```
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
-Re-running the installer is the upgrade. It replaces the command files in `~/.claude/commands/` with the current ones and prints the version it fetched. If you have edited a command, your copy is saved as `<name>.md.bak` before the new one lands. Your `CLAUDE.md` and your `friday/` folder are never touched, so anything new in `CLAUDE.md.template` is yours to merge by hand.
+Re-running the installer is the upgrade. Because `~/friday-shortcuts` is already a Friday Foundation git clone, it updates Foundation's own files in place: your personalised `CLAUDE.md` and your whole `friday/` output folder are left untouched, byte for byte. The commands in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones; if you had edited any, your version is saved next to it as `<name>.md.bak`. (If that folder is not a valid git clone, for example a hand-made one, the installer falls back to backing it up to a timestamped copy and cloning fresh instead, and says so plainly.)
 
 New commands appear the next time you start Claude Code.
 
@@ -136,7 +135,7 @@ New commands appear the next time you start Claude Code.
 
 Run `/new-capability <name>` in Claude Code. It scaffolds a command file with the right frontmatter and step structure.
 
-For a full walkthrough, read the harness guide (fetched to `./harness/` when you install):
+For a full walkthrough, read the harness guide, in `~/friday-shortcuts/harness/`:
 
 - `harness/00-how-friday-works.md` -- the mental model
 - `harness/01-add-a-command.md` -- write your first custom command
