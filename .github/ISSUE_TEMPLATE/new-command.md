@@ -1,6 +1,6 @@
 ---
 name: New command proposal
-about: Propose a new slash command for the Foundation pack
+about: Propose a new slash command for the Shortcuts pack
 title: "[COMMAND] "
 labels: enhancement, command
 assignees: ''

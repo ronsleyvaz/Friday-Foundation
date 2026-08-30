@@ -27,7 +27,7 @@ description: One line on what this command does. Claude Code shows this in the c
 ---
 ```
 
-Give the file and the `name` field the same value -- the filename is what you actually type after `/`, and Foundation keeps `name` matching it so its tests can find the command.
+Give the file and the `name` field the same value -- the filename is what you actually type after `/`, and Shortcuts keeps `name` matching it so its tests can find the command.
 
 **Body** (everything after the frontmatter):
 

@@ -56,7 +56,7 @@ You can run them in any order, but the voice profile is the foundation.
 
 Friday does not connect to your inbox, calendar, or CRM. It does not run while you sleep. It does not pull live data.
 
-That is by design. The Foundation is the part you control, completely. The full connected stack is Friday at friday.amplifyais.com.
+That is by design. The Shortcuts is the part you control, completely. The full connected stack is Friday at friday.amplifyais.com.
 
 ---
 

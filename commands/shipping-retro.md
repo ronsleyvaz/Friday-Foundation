@@ -4,7 +4,7 @@ description: A weekly reflection built from your real git history. Reads recent 
 ---
 # /shipping-retro
 
-`/weeklyreview` covers your whole week. This command is narrower: it looks at what you actually shipped in code, using your real commit history as the anchor, then asks what worked and what carried a cost. It ships standalone rather than folding into `/weeklyreview`, because not every founder using Friday Foundation ships code every week, and this command should stay skippable for the weeks that don't apply.
+`/weeklyreview` covers your whole week. This command is narrower: it looks at what you actually shipped in code, using your real commit history as the anchor, then asks what worked and what carried a cost. It ships standalone rather than folding into `/weeklyreview`, because not every founder using Friday Shortcuts ships code every week, and this command should stay skippable for the weeks that don't apply.
 
 You, Claude, run the whole flow below in order, using your own file tools. There is no module to import and nothing to install.
 

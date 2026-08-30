@@ -20,7 +20,7 @@ choose one.
 
 ## Project and Audience
 
-Friday Foundation is a free, local-first AI Chief of Staff configuration for
+Friday Shortcuts is a free, local-first AI Chief of Staff configuration for
 Claude Code. It serves founders, solo operators, and small teams who want
 guided help with decisions, planning, meetings, growth, launches, pricing, and
 operations while keeping control of their files and actions.
@@ -43,7 +43,7 @@ server, database, runtime package, or background worker.
 - `.github/`: CI, pull request template, and issue templates.
 - `install.sh`: full-pack and single-command installer.
 - `VERSION`: current release, `friday-foundation-vX.Y.Z`. Bump on every release tag; the installer fetches and prints it.
-- `CLAUDE.md.template`: template shipped to Foundation users, not repo guidance.
+- `CLAUDE.md.template`: template shipped to Shortcuts users, not repo guidance.
 - `AGENTS.md`: shared coding-agent guidance.
 - `CLAUDE.md`: Claude Code entrypoint importing this file.
 - Root Markdown files: product, contribution, security, release, credits, and

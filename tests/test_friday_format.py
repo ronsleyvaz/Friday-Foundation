@@ -75,7 +75,7 @@ def test_template_carries_friday_format_end_to_end() -> None:
     """The regression anchor. Every rule present, second person, clean."""
     text = template_text()
     assert SECTION_HEADING in text, (
-        f"CLAUDE.md.template is missing {SECTION_HEADING!r}. Foundation ships "
+        f"CLAUDE.md.template is missing {SECTION_HEADING!r}. Shortcuts ships "
         "no reply-shape rule without it."
     )
 
@@ -148,7 +148,7 @@ def test_sentence_limits_are_stated_as_numbers(limit: str) -> None:
 
 def test_no_precedence_clause() -> None:
     """Friday OG and the paid tiers carry a clause saying Friday Format
-    outranks the output-style word budget. Foundation ships no output styles,
+    outranks the output-style word budget. Shortcuts ships no output styles,
     so that clause here would point at nothing."""
     section = friday_format_section().lower()
     assert "output style" not in section
@@ -183,7 +183,7 @@ def test_address_by_name_rule_is_present() -> None:
 
 def test_name_resolution_has_a_source_and_a_fallback() -> None:
     """A rule that says 'use their name' without saying where the name comes
-    from is a wish. Foundation resolves it from the template's own Identity
+    from is a wish. Shortcuts resolves it from the template's own Identity
     section, and says what to do when that is still a placeholder."""
     section = friday_format_section()
     assert "Identity section at the top of this file" in section

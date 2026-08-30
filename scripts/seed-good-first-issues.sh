@@ -2,7 +2,7 @@
 #
 # seed-good-first-issues.sh
 #
-# Posts a starter set of "good first issue" tickets to the Friday Foundation
+# Posts a starter set of "good first issue" tickets to the Friday Shortcuts
 # repo. Each one is a self-contained new command to build, sized for a first
 # contribution. Run it once to open the on-ramp for contributors.
 #
@@ -42,7 +42,7 @@ Build a new \`/$1\` command that $2
 
 ## Why it matters
 
-It is a common founder job that Foundation does not cover yet, and it fits the pack cleanly alongside the existing commands.
+It is a common founder job that Shortcuts does not cover yet, and it fits the pack cleanly alongside the existing commands.
 
 ## How to claim
 

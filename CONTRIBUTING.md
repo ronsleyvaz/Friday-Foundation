@@ -1,8 +1,8 @@
-# Contributing to Friday Foundation
+# Contributing to Friday Shortcuts
 
 Thank you for building here.
 
-Friday Foundation is an open-source founder harness built on top of Claude Code. Contributions are welcome. Here is what you need to know before you open a pull request.
+Friday Shortcuts is an open-source founder harness built on top of Claude Code. Contributions are welcome. Here is what you need to know before you open a pull request.
 
 ## Ship your first command
 
@@ -84,7 +84,7 @@ requests to `release`.
 
 ## Getting credit
 
-When your command is merged, add a line for yourself under Contributors in `CREDITS.md`. Foundation credits the people who build it. That is the honest version of open source.
+When your command is merged, add a line for yourself under Contributors in `CREDITS.md`. Shortcuts credits the people who build it. That is the honest version of open source.
 
 ## Licence
 

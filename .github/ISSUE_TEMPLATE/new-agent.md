@@ -1,6 +1,6 @@
 ---
 name: New agent proposal
-about: Propose a new specialist agent for the Foundation harness
+about: Propose a new specialist agent for the Shortcuts harness
 title: "[AGENT] "
 labels: enhancement, agent
 assignees: ''

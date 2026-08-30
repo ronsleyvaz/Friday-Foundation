@@ -7,7 +7,7 @@ Two independent paths:
   brain file, wires spinner + status line settings, installs commands into
   ~/friday-shortcuts/.claude/commands/ (folder-scoped, never a global sync),
   and opens Claude Code. Re-running it on an existing clone updates
-  Foundation's own tracked files in place, leaving CLAUDE.md and friday/
+  Shortcuts's own tracked files in place, leaving CLAUDE.md and friday/
   untouched.
 - Single capability (`-- <name>`): unchanged, downloads one command file over
   HTTP into the current directory. Covered against a local HTTP server, same
@@ -132,7 +132,7 @@ def build_git_mirror(dest: Path, branch: str = "release", omit=(), extra_files=N
             path.write_text(content)
     subprocess.run(["git", "init", "-q", "-b", branch, str(dest)], check=True)
     subprocess.run(["git", "-C", str(dest), "config", "user.email", "test@example.com"], check=True)
-    subprocess.run(["git", "-C", str(dest), "config", "user.name", "Friday Foundation Tests"], check=True)
+    subprocess.run(["git", "-C", str(dest), "config", "user.name", "Friday Shortcuts Tests"], check=True)
     subprocess.run(["git", "-C", str(dest), "add", "-A"], check=True)
     subprocess.run(["git", "-C", str(dest), "commit", "-q", "-m", "snapshot"], check=True)
     return dest
@@ -358,9 +358,9 @@ def test_full_pack_prints_run_instruction_on_every_path(tmp_path):
 
 
 def test_full_pack_upgrade_preserves_personalisation_and_updates_foundation(tmp_path):
-    """A re-run over an existing Friday Foundation git clone updates in
+    """A re-run over an existing Friday Shortcuts git clone updates in
     place, not backup-then-reclone. The founder's personalised CLAUDE.md and
-    their whole friday/ folder survive byte for byte, while Foundation's own
+    their whole friday/ folder survive byte for byte, while Shortcuts's own
     tracked files (VERSION, a command) genuinely move to the new release."""
     mirror = build_git_mirror(tmp_path / "mirror")
     tmp_home = tmp_path / "home"
@@ -397,7 +397,7 @@ def test_full_pack_upgrade_preserves_personalisation_and_updates_foundation(tmp_
         "the founder's friday/ output must survive an upgrade byte for byte"
     )
     assert "friday-foundation-v9.9.9" in (shortcuts / "VERSION").read_text(), (
-        "Foundation's own tracked VERSION must actually update to the new release"
+        "Shortcuts's own tracked VERSION must actually update to the new release"
     )
     assert "v9.9.9 marker" in (shortcuts / ".claude" / "commands" / "decide.md").read_text(), (
         "an updated command file must reach the folder-scoped .claude/commands/ too"
@@ -406,7 +406,7 @@ def test_full_pack_upgrade_preserves_personalisation_and_updates_foundation(tmp_
 
 def test_full_pack_reinstall_over_non_git_folder_falls_back_to_backup_and_reclone(tmp_path):
     """A hand-made or corrupted ~/friday-shortcuts (no .git) is not a
-    Friday Foundation git clone, so the installer falls back to the old
+    Friday Shortcuts git clone, so the installer falls back to the old
     backup-then-clone-fresh path rather than failing or updating garbage."""
     mirror = build_git_mirror(tmp_path / "mirror")
     tmp_home = tmp_path / "home"
@@ -422,7 +422,7 @@ def test_full_pack_reinstall_over_non_git_folder_falls_back_to_backup_and_reclon
     assert backups, "a non-git-clone folder must be backed up, not silently discarded"
     assert (backups[-1] / "hand-made.txt").read_text() == "not a git clone\n"
     assert (shortcuts / ".git").is_dir(), "the fallback install must be a real git clone"
-    assert "not a Friday Foundation git clone" in result.stdout
+    assert "not a Friday Shortcuts git clone" in result.stdout
 
 
 def test_full_pack_clone_failure_is_honest(tmp_path):

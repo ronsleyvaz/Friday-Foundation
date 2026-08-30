@@ -4,7 +4,7 @@
 # Row 1:  Friday SHORTCUTS · chief-of-staff  |  <git branch>  |  <model>  |  <effort> effort
 # Row 2:  ctx:[bar] <pct> <used>/<max>  ·  5h:<pct>(<reset>)  ·  7d:<pct>(<reset>)
 #
-# This is a standalone fork for Friday Foundation buyers. It has zero
+# This is a standalone fork for Friday Shortcuts buyers. It has zero
 # dependency on the Friday operator repo: no memory-palace reads, no sprint
 # tag, no phase-file read, no founder gate. It runs from inside
 # ~/friday-shortcuts with nothing but bash, git, and python3.

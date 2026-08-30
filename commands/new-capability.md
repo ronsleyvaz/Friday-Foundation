@@ -107,7 +107,7 @@ Use this content:
 ```
 # Skill-Writing Playbook
 
-Notes for writing your own Friday Foundation commands, so they stay useful instead of rotting into an unreliable mess. Every command you scaffold with `/new-capability` should be checked against the five failure modes below before you consider it done.
+Notes for writing your own Friday Shortcuts commands, so they stay useful instead of rotting into an unreliable mess. Every command you scaffold with `/new-capability` should be checked against the five failure modes below before you consider it done.
 
 ## The five failure modes
 

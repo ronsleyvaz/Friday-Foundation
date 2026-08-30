@@ -199,7 +199,7 @@ DOC_SURFACE = [README, MANUAL] + sorted((REPO_ROOT / "harness").glob("*.md"))
 
 
 def test_docs_do_not_claim_global_command_sync():
-    """No shipped doc may claim Foundation's commands sync into the global
+    """No shipped doc may claim Shortcuts's commands sync into the global
     ~/.claude/commands/, or that they "work from any project" / "work
     everywhere". The full-pack install is folder-scoped into
     ~/friday-shortcuts/.claude/commands/ (install.sh's

@@ -1,9 +1,9 @@
 # Credits
 
-Twelve of Friday Foundation's 25 commands started as methodology from five
+Twelve of Friday Shortcuts's 25 commands started as methodology from five
 external, open-source projects. All five are MIT-licensed, confirmed live against
 the GitHub API on 2026-07-02. Nothing here was copied line for line. Each command
-was rewritten from the source project's methodology into Foundation's own command
+was rewritten from the source project's methodology into Shortcuts's own command
 format, template, and voice, then checked clean-room: no dependency on the source
 project's code, state, telemetry, or infrastructure.
 
@@ -65,7 +65,7 @@ merged, add a line for yourself here.
 
 ## Why this file exists
 
-Friday Foundation exists to close the gap between founders stuck on chat and
+Friday Shortcuts exists to close the gap between founders stuck on chat and
 founders whose AI executes real work. These five projects did real work building
 methodology worth porting. Crediting them here is the honest version of that,
 not a legal requirement under MIT, just the right thing to do when you build on

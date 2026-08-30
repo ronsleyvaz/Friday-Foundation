@@ -2,7 +2,7 @@
 
 ## Scope
 
-Friday Foundation is a set of Claude Code slash commands and a bash installer. It:
+Friday Shortcuts is a set of Claude Code slash commands and a bash installer. It:
 
 - Does not collect data.
 - Does not make network requests at runtime (only during install.sh).

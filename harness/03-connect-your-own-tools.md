@@ -1,6 +1,6 @@
 # 03 - Connect Your Own Tools
 
-Friday Foundation ships with no external connections. That is intentional. You own the stack and you add connections yourself.
+Friday Shortcuts ships with no external connections. That is intentional. You own the stack and you add connections yourself.
 
 This guide explains the patterns for wiring your own tools.
 

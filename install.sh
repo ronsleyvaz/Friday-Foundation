@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Friday Foundation: capability installer.
+# Friday Shortcuts: capability installer.
 # No account, no paid install, nothing phones home.
 #
 # Usage:
@@ -36,13 +36,13 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- risk-register     -- installs just /risk-register
 #   curl -fsSL .../install.sh | bash -s -- friday-upgrade    -- installs just /friday-upgrade
 #
-# The no-argument path clones the whole Friday Foundation repo into
+# The no-argument path clones the whole Friday Shortcuts repo into
 # ~/friday-shortcuts (a fixed path, independent of where you run this from),
 # gives you a personalised CLAUDE.md brain file, wires up the status line and
 # spinner settings, installs commands into ~/friday-shortcuts/.claude/commands/
 # so they only work when Claude Code is opened from inside that folder, and
 # prints the command to open Claude Code there. Re-running it on an existing install updates
-# Foundation's own files from the release branch in place, leaving your
+# Shortcuts's own files from the release branch in place, leaving your
 # CLAUDE.md and friday/ folder untouched.
 # Pass a capability name to install a single command file into the current
 # directory instead (unrelated to the ~/friday-shortcuts folder).
@@ -206,7 +206,7 @@ activate_brain_file() {
 
 personalize_brain_files() {
   # The clone ships this repo's OWN CLAUDE.md and AGENTS.md: contributor
-  # guides for someone hacking on Friday Foundation itself (run pytest, claim
+  # guides for someone hacking on Friday Shortcuts itself (run pytest, claim
   # a GitHub issue, never touch secrets). Move them aside before
   # activate_brain_file runs, so Claude Code loads a buyer's own context the
   # moment it opens this folder, not this repo's dev rules. Best-effort: a
@@ -375,7 +375,7 @@ is_valid_git_clone() {
 }
 
 backup_existing_install_path() {
-  # A non-empty ~/friday-shortcuts that is NOT a Friday Foundation git clone
+  # A non-empty ~/friday-shortcuts that is NOT a Friday Shortcuts git clone
   # (see is_valid_git_clone) is renamed aside with an epoch-seconds suffix
   # (unique even across same-day re-installs), never clobbered. Mirrors the
   # paid installer's --force rename pattern. A valid existing clone instead
@@ -392,7 +392,7 @@ backup_existing_install_path() {
 }
 
 clone_foundation_repo() {
-  echo "Cloning Friday Foundation into ${INSTALL_PATH}"
+  echo "Cloning Friday Shortcuts into ${INSTALL_PATH}"
   if ! git clone --quiet --depth 1 --branch "${CLONE_BRANCH}" "${CLONE_URL}" "${INSTALL_PATH}"; then
     echo "  Failed to clone ${CLONE_URL} (branch ${CLONE_BRANCH})."
     echo "  Check your network connection and re-run the same install line."
@@ -404,7 +404,7 @@ clone_foundation_repo() {
 }
 
 update_foundation_repo() {
-  # INSTALL_PATH is already a Friday Foundation git clone from a prior
+  # INSTALL_PATH is already a Friday Shortcuts git clone from a prior
   # install (is_valid_git_clone passed). Fast-forward its TRACKED files to
   # the current release tip with nothing but a fetch + a hard reset, so
   # untracked content -- the founder's friday/ output, CLAUDE.md.repo-guide,
@@ -491,12 +491,12 @@ open_claude_in_folder() {
 }
 
 install_full_pack() {
-  echo "Friday SHORTCUTS: installing Friday Foundation"
+  echo "Friday SHORTCUTS: installing the full pack"
   echo
 
   # A pre-existing valid clone is updated in place (CLAUDE.md and friday/
   # survive); anything else at that path (first install, or a folder that
-  # is not a Friday Foundation git clone) goes through the backup-then-clone
+  # is not a Friday Shortcuts git clone) goes through the backup-then-clone
   # path unchanged.
   local claude_md_backup=""
   if [ -d "${INSTALL_PATH}" ] && is_valid_git_clone "${INSTALL_PATH}"; then
@@ -513,7 +513,7 @@ install_full_pack() {
     }
   else
     if [ -d "${INSTALL_PATH}" ]; then
-      echo "Found an existing ${INSTALL_PATH} that is not a Friday Foundation git clone."
+      echo "Found an existing ${INSTALL_PATH} that is not a Friday Shortcuts git clone."
       echo "Backing it up and installing fresh instead."
     fi
     backup_existing_install_path || exit 1
@@ -585,7 +585,7 @@ install_single() {
     slash=$(echo "${entry}" | awk '{print $3}')
     if [ "${slug}" = "${capability}" ]; then
       matched="yes"
-      echo "Friday Foundation: installing ${slug}"
+      echo "Friday Shortcuts: installing ${slug}"
       echo
       if install_one "${file}"; then
         echo

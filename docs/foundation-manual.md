@@ -1,20 +1,20 @@
 <!-- audience: buyer -->
-# Friday Foundation: Build Your Own AI Chief of Staff
+# Friday Shortcuts: Build Your Own AI Chief of Staff
 
 **Free. Open-source. Runs on your machine, with your keys.**
 
 **Runs on macOS, Ubuntu Linux, and Windows through WSL2.** On Windows, run the
 install line inside WSL2 rather than PowerShell.
 
-Foundation is the skeleton. Install it, run the commands, and your AI starts writing in your voice, filtering your priorities through your nine business decisions, and diagnosing where to push next.
+Shortcuts is the skeleton. Install it, run the commands, and your AI starts writing in your voice, filtering your priorities through your nine business decisions, and diagnosing where to push next.
 
-There are no specialists running in the background. No overnight queue. No connected inbox. Those live in the paid stack. Foundation is what you build yourself, step by step, with full visibility into every command you run.
+There are no specialists running in the background. No overnight queue. No connected inbox. Those live in the paid stack. Shortcuts is what you build yourself, step by step, with full visibility into every command you run.
 
-Three rules sit under everything Foundation does:
+Three rules sit under everything Shortcuts does:
 
-1. **Foundation drafts. You decide. Nothing sends itself.** Every command writes a file to your project directory. No external connections fire unless you wire them yourself.
-2. **Foundation uses what you give it.** The voice profile reads your actual writing. The brief works from priorities you paste in. The growth diagnostic scores what you tell it. No fabricated data.
-3. **If a file does not exist yet, Foundation tells you which command creates it.** Clear sequencing. No silent failures.
+1. **Shortcuts drafts. You decide. Nothing sends itself.** Every command writes a file to your project directory. No external connections fire unless you wire them yourself.
+2. **Shortcuts uses what you give it.** The voice profile reads your actual writing. The brief works from priorities you paste in. The growth diagnostic scores what you tell it. No fabricated data.
+3. **If a file does not exist yet, Shortcuts tells you which command creates it.** Clear sequencing. No silent failures.
 
 ---
 
@@ -31,7 +31,7 @@ Find your state below. There is a move for each.
 | **Something is off** | A command is not writing where you expect | Check the Troubleshooting section below |
 
 ### Brand new
-Install Foundation in one line and start with `/voice-installer`. That command interviews you, reads two or three files you have written, and builds your voice profile. Every other command reads from that profile. Without it, every command writes in generic AI copy.
+Install Shortcuts in one line and start with `/voice-installer`. That command interviews you, reads two or three files you have written, and builds your voice profile. Every other command reads from that profile. Without it, every command writes in generic AI copy.
 
 ### Voice set up, nothing else running
 Run `/brief`. The first run walks you through naming your nine decisions: the recurring forks your business turns on. Hire or contract. Build or buy. Which channel gets this week's content. Once they are named, every brief filters your open items through them and names one thing to start with.
@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer clones the whole Friday Foundation repository into one folder, `~/friday-shortcuts` (backing up an existing non-empty folder there to a timestamped copy rather than overwriting it), creates a `CLAUDE.md` brain file from `CLAUDE.md.template`, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, writes a two-row status line and Friday's own spinner words and tips into `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`. The status line and spinner settings never touch your global Claude Code config, and merge into an existing `settings.json` rather than overwriting it (backed up first). The version comes from the `VERSION` file the clone ships; if it is missing, the install still finishes and says the version is unknown rather than guessing.
+The installer clones the whole Friday Shortcuts repository into one folder, `~/friday-shortcuts` (backing up an existing non-empty folder there to a timestamped copy rather than overwriting it), creates a `CLAUDE.md` brain file from `CLAUDE.md.template`, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, writes a two-row status line and Friday's own spinner words and tips into `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`. The status line and spinner settings never touch your global Claude Code config, and merge into an existing `settings.json` rather than overwriting it (backed up first). The version comes from the `VERSION` file the clone ships; if it is missing, the install still finishes and says the version is unknown rather than guessing.
 
 ### Install a single command
 
@@ -68,7 +68,7 @@ Replace `amplify` with any command name.
 
 Inside Claude Code, run `/friday-upgrade`. It reads your `VERSION` file, compares it against the current release, runs the installer for you once you say go, and writes what changed to `friday/upgrade-log.md`.
 
-If your install predates `/friday-upgrade`, upgrade once from the terminal by re-running the install line above. Because `~/friday-shortcuts` is already a Friday Foundation git clone, re-running the installer updates Foundation's own files in place: your `friday/` output and your personalised `CLAUDE.md` are left untouched, byte for byte. Command files in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones, an edited command is saved as `<name>.md.bak` first, and the version it fetched is printed at the end. (A hand-made or corrupted `~/friday-shortcuts` that is not a real git clone instead gets backed up to a timestamped copy and cloned fresh, and the installer says so plainly.) A new command shows up the next time you start Claude Code.
+If your install predates `/friday-upgrade`, upgrade once from the terminal by re-running the install line above. Because `~/friday-shortcuts` is already a Friday Shortcuts git clone, re-running the installer updates Shortcuts's own files in place: your `friday/` output and your personalised `CLAUDE.md` are left untouched, byte for byte. Command files in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones, an edited command is saved as `<name>.md.bak` first, and the version it fetched is printed at the end. (A hand-made or corrupted `~/friday-shortcuts` that is not a real git clone instead gets backed up to a timestamped copy and cloned fresh, and the installer says so plainly.) A new command shows up the next time you start Claude Code.
 
 ### First fifteen minutes
 
@@ -102,9 +102,9 @@ You are running.
 
 ---
 
-## How Foundation works
+## How Shortcuts works
 
-Foundation is a set of commands built on top of Claude Code. There is no background process. Nothing runs while you are not in a session.
+Shortcuts is a set of commands built on top of Claude Code. There is no background process. Nothing runs while you are not in a session.
 
 Each capability is a markdown file, installed into `~/friday-shortcuts/.claude/commands/` and read only when Claude Code is opened from inside that folder. When you run a command, Claude Code reads that file and follows the steps inside it. You see every step. You own every file it creates.
 
@@ -212,7 +212,7 @@ Recommended early, though optional. Every other command reads this profile if it
 
 | Command | What it does | Output |
 |---|---|---|
-| `/friday-upgrade` | Upgrades your Foundation install to the current release | `friday/upgrade-log.md` |
+| `/friday-upgrade` | Upgrades your Shortcuts install to the current release | `friday/upgrade-log.md` |
 
 ### Extend
 
@@ -259,7 +259,7 @@ The clone ships six docs in `~/friday-shortcuts/harness/`. Read them in order wh
 
 ### Connecting your tools
 
-Foundation ships with no external connections. That is intentional. You wire what you need.
+Shortcuts ships with no external connections. That is intentional. You wire what you need.
 
 Three patterns work well:
 
@@ -273,9 +273,9 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ---
 
-## What Foundation includes, and what comes next
+## What Shortcuts includes, and what comes next
 
-**Friday Foundation (here):** free, open-source, 25 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Shortcuts (here):** free, open-source, 25 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
@@ -283,7 +283,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 **Friday Mk V (fans):** the full Friday, with the intelligence layer included. friday.amplifyais.com
 
-Foundation gives you the shape. The paid product is Friday running while you sleep.
+Shortcuts gives you the shape. The paid product is Friday running while you sleep.
 
 ---
 

@@ -1,10 +1,10 @@
 ---
 name: friday-upgrade
-description: Checks whether a newer Friday Foundation release exists, upgrades your install, and tells you exactly what changed on disk. Writes friday/upgrade-log.md.
+description: Checks whether a newer Friday Shortcuts release exists, upgrades your install, and tells you exactly what changed on disk. Writes friday/upgrade-log.md.
 ---
 # /friday-upgrade
 
-Foundation ships new commands and fixes over time. Nothing on your machine phones home, so an install stays on whatever version it was on the day you ran it. This command closes that gap: it compares your version against the current release, runs the installer for you, and writes down what moved.
+Shortcuts ships new commands and fixes over time. Nothing on your machine phones home, so an install stays on whatever version it was on the day you ran it. This command closes that gap: it compares your version against the current release, runs the installer for you, and writes down what moved.
 
 You, Claude, run the whole flow below in order, using your own file and Bash tools. There is no module to import.
 
@@ -50,7 +50,7 @@ Then stop. Do not write a log entry for a no-op.
 
 > You are on `<LOCAL>`. The current release is `<LATEST>`.
 >
-> Upgrading re-runs the official installer. It updates Foundation's own files in `~/friday-shortcuts` to the current release in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are left untouched, byte for byte. The commands in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones; if you had edited any, your version is saved next to it as `<name>.md.bak`.
+> Upgrading re-runs the official installer. It updates Shortcuts's own files in `~/friday-shortcuts` to the current release in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are left untouched, byte for byte. The commands in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones; if you had edited any, your version is saved next to it as `<name>.md.bak`.
 >
 > Want me to run it?
 
@@ -74,7 +74,7 @@ Run the official install line, from inside `~/friday-shortcuts`:
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
-Read its output rather than assuming it worked. Because this folder is already a Friday Foundation install, the installer updates it in place: your `CLAUDE.md` and `friday/` folder are left untouched, and Foundation's own files (commands, harness, `VERSION`) move to the new release. It reports the version it fetched and any command that failed to sync. If it reports failures, say so plainly and name the files. A partial upgrade is a real outcome, not something to smooth over.
+Read its output rather than assuming it worked. Because this folder is already a Friday Shortcuts install, the installer updates it in place: your `CLAUDE.md` and `friday/` folder are left untouched, and Shortcuts's own files (commands, harness, `VERSION`) move to the new release. It reports the version it fetched and any command that failed to sync. If it reports failures, say so plainly and name the files. A partial upgrade is a real outcome, not something to smooth over.
 
 If the installer instead reports that this folder was not a valid git clone and it backed the whole thing up before cloning fresh, that is the one case where your `CLAUDE.md` and `friday/` folder end up in the timestamped backup path it names. Tell the founder plainly and offer to copy them back.
 
@@ -130,7 +130,7 @@ Tell them plainly that slash commands are read when a session starts, so a brand
 
 This command does not upgrade Claude Code itself, and it does not touch your global Claude Code config. It does not downgrade. If you need a specific older version, install it by hand from that tag on GitHub.
 
-It updates Foundation's own files in `~/friday-shortcuts` in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are never touched, unless the installer had to fall back to a fresh clone because the folder was not a valid git clone -- it says so plainly when that happens.
+It updates Shortcuts's own files in `~/friday-shortcuts` in place. Your personalised `CLAUDE.md` and your whole `friday/` output folder are never touched, unless the installer had to fall back to a fresh clone because the folder was not a valid git clone -- it says so plainly when that happens.
 
 ## What this builds toward
 

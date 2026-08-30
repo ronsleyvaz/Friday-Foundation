@@ -332,7 +332,7 @@ def test_verbs_match_shipped_mk5_list_byte_for_byte():
 
 
 def test_pinned_verbs_still_match_the_mk5_file_when_reachable():
-    """Foundation and Mk5 stay in step, without CI depending on another repo.
+    """Shortcuts and Mk5 stay in step, without CI depending on another repo.
 
     Skips anywhere MK5_SETTINGS is absent, which is every machine except the
     operator's. A skip here is not a pass for the contract: the pinned list is
@@ -364,7 +364,7 @@ def test_every_tip_names_a_shipped_command():
         match = command_pattern.search(tip)
         if not match or match.group(1) not in shipped:
             offenders.append(tip)
-    assert not offenders, f"tips naming a command Foundation does not ship: {offenders}"
+    assert not offenders, f"tips naming a command Shortcuts does not ship: {offenders}"
 
 
 def test_negative_case_unshipped_command_would_fail_membership_check():
