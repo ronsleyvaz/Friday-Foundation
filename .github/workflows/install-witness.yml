@@ -1,0 +1,85 @@
+name: Install Witness
+
+# Every Friday 08:00 Asia/Calcutta (UTC+5:30), GitHub runs the README's buyer
+# install command verbatim on a fresh ubuntu-latest and a fresh macos-latest
+# machine, asserts what the installer promises, and fails on the exact step a
+# buyer would hit. No actions/checkout on purpose: the witness is a stranger's
+# machine, the installer fetches everything itself from the release branch.
+on:
+  schedule:
+    # Friday 08:00 Asia/Calcutta = Friday 02:30 UTC.
+    - cron: "30 2 * * 5"
+  workflow_dispatch:
+
+jobs:
+  witness:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: "You need Claude Code, git, and curl installed first"
+        # README.md:22. GitHub-hosted runners ship a user-writable Node.js
+        # toolcache, so this installs without sudo. A buyer would have
+        # installed Claude Code before running the one-liner below, so this
+        # step does that for them and then checks all three prerequisites
+        # install.sh itself gates on (install.sh:118, the command -v list).
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          command -v git
+          command -v curl
+          command -v claude
+
+      - name: Install (the README's one-line install command)
+        run: |
+          START=$(date +%s)
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            # Homebrew bash 5 sits ahead of /bin/bash on the macOS runner
+            # PATH, but a buyer's own stock /bin/bash (3.2) is what
+            # install.sh actually runs under on a real Mac. Same pin as
+            # ci.yml's "Pin installer tests to stock bash on macOS" step.
+            curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | /bin/bash
+          else
+            curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
+          fi
+          END=$(date +%s)
+          echo "install took $((END - START)) seconds"
+
+      - name: "Assert: ~/friday-shortcuts is a git clone on branch release"
+        run: |
+          test -d ~/friday-shortcuts/.git
+          branch=$(git -C ~/friday-shortcuts rev-parse --abbrev-ref HEAD)
+          echo "clone branch: ${branch}"
+          test "${branch}" = "release"
+
+      - name: "Assert: CLAUDE.md exists in the clone"
+        run: test -f ~/friday-shortcuts/CLAUDE.md
+
+      - name: "Assert: .claude/commands is non-empty and matches the release branch's command list"
+        run: |
+          test -d ~/friday-shortcuts/.claude/commands
+          count=$(ls ~/friday-shortcuts/.claude/commands/*.md 2>/dev/null | wc -l | tr -d ' ')
+          test "${count}" -gt 0
+          diff <(cd ~/friday-shortcuts/commands && ls *.md | sort) <(cd ~/friday-shortcuts/.claude/commands && ls *.md | sort)
+
+      - name: "Assert: status line and spinner settings landed in .claude/settings.json"
+        run: |
+          python3 -c "import json, os; s = json.load(open(os.path.expanduser('~/friday-shortcuts/.claude/settings.json'))); assert s.get('statusLine', {}).get('type') == 'command', s; assert 'spinnerVerbs' in s, s; print('status line and spinner settings present')"
+
+      - name: Upgrade (re-running the installer is the upgrade, README.md:128)
+        run: |
+          BEFORE_SHA=$(shasum -a 256 ~/friday-shortcuts/CLAUDE.md | awk '{print $1}')
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | /bin/bash
+          else
+            curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
+          fi
+          AFTER_SHA=$(shasum -a 256 ~/friday-shortcuts/CLAUDE.md | awk '{print $1}')
+          echo "CLAUDE.md sha before: ${BEFORE_SHA} after: ${AFTER_SHA}"
+          test "${BEFORE_SHA}" = "${AFTER_SHA}"
+
+      - name: "Assert: the clone is still on branch release after the upgrade"
+        run: |
+          branch=$(git -C ~/friday-shortcuts rev-parse --abbrev-ref HEAD)
+          test "${branch}" = "release"
