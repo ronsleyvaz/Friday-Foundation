@@ -2,14 +2,14 @@
 
 ## Scope
 
-Friday Foundation is a set of Claude Code slash commands and a bash installer. It:
+Friday Shortcuts is a set of Claude Code slash commands and a bash installer. It:
 
-- Does not collect data.
-- Does not make network requests at runtime (only during install.sh).
-- Does not store credentials or API keys.
-- Does not connect to any external service.
+- Collects usage events: which command you ran (or `custom` if it is your own), whether the run's output file was written, your Shortcuts version, your operating system, your country, and a short hash of your Claude Code session ID so a command can be paired with its output file. Tied to your signup if you came through friday.amplifyais.com.
+- Makes one small network request per command run and per output file write, plus one at install time. All three go only to friday.amplifyais.com.
+- Stores no credentials or API keys.
+- Connects only to friday.amplifyais.com for usage reporting; every other network call is `install.sh` fetching from GitHub.
 
-Commands run locally inside Claude Code. All output is written to files on your own machine.
+Commands run locally inside Claude Code. All output is written to files on your own machine. See `friday/usage-sent.jsonl` for the exact record of every usage message this install has sent.
 
 ## What to report
 

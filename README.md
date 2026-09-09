@@ -1,38 +1,37 @@
-# Friday Foundation
+# Friday Shortcuts
 
 [![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Build your own AI Chief of Staff inside Claude Code. 24 commands, a growth diagnostic, and a harness to extend it to your workflow.
+Build your own AI Chief of Staff inside Claude Code. 25 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
-Free to install. No separate Foundation account or backend. Claude Code supplies the AI and has its own account and network requirements. Foundation keeps its durable outputs as local files in your project.
+Free to install. No separate Shortcuts account. Claude Code supplies the AI and has its own account and network requirements. Shortcuts keeps its durable outputs as local files in your project, and reports content-free usage back to us, explained below.
 
-![Installing Friday Foundation: one curl command, then running your first command inside Claude Code](docs/assets/install-demo.gif)
+![Installing Friday Shortcuts: one curl command, then running your first command inside Claude Code](docs/assets/install-demo.gif)
 
 ---
 
 ## Install in one line
 
-First, `cd` into your project directory. The commands install globally, but your `CLAUDE.md` brain file and the harness guide land wherever you run this:
+Run this from anywhere. It clones the whole project into one folder, `~/friday-shortcuts`, and prints the command to open Claude Code there:
 
 ```
 curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
 ```
 
-You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
+You need Claude Code, `git`, and `curl` installed first. Get Claude Code at https://docs.anthropic.com/claude-code
 
 **What it runs on.** macOS, Ubuntu Linux, and Windows through WSL2. The
-installer is plain `bash` and copies command files into your home directory, so
-anything with `bash` and `curl` will do. On Windows, run it inside WSL2 rather
-than PowerShell.
+installer is plain `bash`. On Windows, run it inside WSL2 rather than
+PowerShell.
 
-The installer drops the commands into `~/.claude/commands/`, creates a `CLAUDE.md` in your current directory from the template (any existing one is left untouched), fetches the harness guide, and tells you what to do next.
+The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`.
 
 ---
 
 ## Start here
 
-Open Claude Code in your project directory. You have two good first moves.
+Open Claude Code inside `~/friday-shortcuts` by running `cd ~/friday-shortcuts && claude` (the installer prints this line for you). Then you have two good first moves.
 
 Your fastest win, no setup required:
 
@@ -50,7 +49,7 @@ Optional, but it sharpens every other command:
 
 It reads your writing samples, builds a voice profile, and writes it to `friday/voice.md`. Every command that runs after reads that profile and writes in your voice instead of a generic AI voice. Skipping it is safe: commands fall back to a neutral, direct style until you run it.
 
-Want the full walkthrough first? The manual covers every command, the `friday/` folder, and how to extend Foundation: [`docs/foundation-manual.md`](docs/foundation-manual.md).
+Want the full walkthrough first? The manual covers every command, the `friday/` folder, and how to extend Shortcuts: [`docs/foundation-manual.md`](docs/foundation-manual.md).
 
 ---
 
@@ -82,8 +81,9 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/competitive-analysis` | Competitor teardown: comparison matrix plus a SWOT for each competitor | `friday/competitive-analysis.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook, pre-launch through post-launch | `friday/product-hunt-launch.md` |
+| `/friday-upgrade` | Upgrades your Shortcuts install to the current release | `friday/upgrade-log.md` |
 
-Workflow commands write to a `friday/` folder in your project directory. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
+Workflow commands write to a `friday/` folder inside `~/friday-shortcuts`. That folder is your config, growing over time. `/new-capability` is the developer-tool exception: it scaffolds `commands/<name>.md` and may create `docs/skill-writing-playbook.md` on its first run.
 
 ---
 
@@ -109,11 +109,41 @@ Replace `amplify` with any command name to install just that one.
 
 ---
 
+## What Shortcuts sends home
+
+Free means we see which of her commands you use and whether they worked. Never what you typed, never what she wrote. Need her fully private? That is Friday SUPPORT.
+
+Your install reports three small, content-free events: that you installed, which of the 25 commands you ran (a command you wrote yourself is reported as `custom`, never by name), and whether that command wrote its file. No prompt text, no file contents, no names, no paths ever leave your machine. Every message posted is also appended to `friday/usage-sent.jsonl` on your own machine, so you can check exactly what was sent rather than take our word for it.
+
+---
+
+## Upgrade an existing install
+
+Inside Claude Code, run:
+
+```
+/friday-upgrade
+```
+
+It compares your version against the current release, runs the installer for you, and writes what changed to `friday/upgrade-log.md`.
+
+If you installed before `/friday-upgrade` existed, upgrade once from the terminal instead:
+
+```
+curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/release/install.sh | bash
+```
+
+Re-running the installer is the upgrade. Because `~/friday-shortcuts` is already a Friday Shortcuts git clone, it updates Shortcuts's own files in place: your personalised `CLAUDE.md` and your whole `friday/` output folder are left untouched, byte for byte. The commands in `~/friday-shortcuts/.claude/commands/` are replaced with the current ones; if you had edited any, your version is saved next to it as `<name>.md.bak`. (If that folder is not a valid git clone, for example a hand-made one, the installer falls back to backing it up to a timestamped copy and cloning fresh instead, and says so plainly.)
+
+New commands appear the next time you start Claude Code.
+
+---
+
 ## Build your own command
 
 Run `/new-capability <name>` in Claude Code. It scaffolds a command file with the right frontmatter and step structure.
 
-For a full walkthrough, read the harness guide (fetched to `./harness/` when you install):
+For a full walkthrough, read the harness guide, in `~/friday-shortcuts/harness/`:
 
 - `harness/00-how-friday-works.md` -- the mental model
 - `harness/01-add-a-command.md` -- write your first custom command
@@ -126,13 +156,13 @@ For a full walkthrough, read the harness guide (fetched to `./harness/` when you
 
 ## The soft ladder
 
-**Friday Foundation (here):** free, open-source, 24 commands, bring your own Claude Code.
+**Friday Shortcuts (here):** free, open-source, 25 commands, bring your own Claude Code.
 
 **The Amplify book:** the full framework behind the growth diagnostic. Read it for the complete methodology. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 
 **Friday (paid):** nine specialists wired together, connected to your inbox, calendar, tasks, and transcript archive, running before you wake up. friday.amplifyais.com
 
-Foundation gives you the shape of Friday. The paid product is Friday running while you sleep.
+Shortcuts gives you the shape of Friday. The paid product is Friday running while you sleep.
 
 ---
 
@@ -152,7 +182,7 @@ New here? The best place to start is a [good first issue](https://github.com/ron
 
 You can scaffold your first command in about ten minutes, and polish it into something you would ship in an hour or two. `CONTRIBUTING.md` has the step by step, the quality bar, and how to get credit for what you add.
 
-If Foundation is useful to you, star the repo. It is the cheapest way to help more founders find it.
+If Shortcuts is useful to you, star the repo. It is the cheapest way to help more founders find it.
 
 ---
 

@@ -1,4 +1,4 @@
-# Releasing Friday Foundation
+# Releasing Friday Shortcuts
 
 `main` is the integration branch. Every merge lands here after CI passes.
 `release` is the distribution branch: the installer and the README's install

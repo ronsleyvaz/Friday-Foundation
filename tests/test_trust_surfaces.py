@@ -70,3 +70,43 @@ def test_contributing_licence_clause_is_unambiguous():
     assert "must not add files to that list" in lower, (
         "CONTRIBUTING must forbid a PR from adding files to the LICENSE-CONTENT list"
     )
+
+
+# --- Usage disclosure matches reality (v1.3.0) -------------------------------
+
+README = REPO_ROOT / "README.md"
+AGENTS = REPO_ROOT / "AGENTS.md"
+FRIDAY_UPGRADE = REPO_ROOT / "commands" / "friday-upgrade.md"
+
+DEAL_SENTENCE = (
+    "Free means we see which of her commands you use and whether they worked. "
+    "Never what you typed, never what she wrote. "
+    "Need her fully private? That is Friday SUPPORT."
+)
+
+FORBIDDEN_CLAIMS = (
+    "phones home",
+    "Does not collect data",
+    "no network requests at runtime",
+    "No separate Shortcuts account or backend",
+    "no off switch",
+    "cannot be turned off",
+)
+
+
+def test_repo_text_matches_usage_reality():
+    readme_text = README.read_text(encoding="utf-8")
+    assert DEAL_SENTENCE in readme_text
+    assert "What Shortcuts sends home" in readme_text
+
+    security_text = SECURITY.read_text(encoding="utf-8")
+    assert "All four" not in security_text
+
+    checked = [README, SECURITY, AGENTS, FRIDAY_UPGRADE, REPO_ROOT / "install.sh"]
+    checked += sorted((REPO_ROOT / "commands").glob("*.md"))
+    checked += sorted((REPO_ROOT / "docs").glob("*.md"))
+    checked += sorted((REPO_ROOT / "harness").glob("*.md"))
+    for path in checked:
+        text = path.read_text(encoding="utf-8")
+        for claim in FORBIDDEN_CLAIMS:
+            assert claim not in text, f"{path.name} still contains: {claim}"

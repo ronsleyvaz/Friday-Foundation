@@ -1,6 +1,6 @@
 # Show Your Friday
 
-A gallery for founders who have built something with Friday Foundation. Add your entry and open a pull request.
+A gallery for founders who have built something with Friday Shortcuts. Add your entry and open a pull request.
 
 ---
 

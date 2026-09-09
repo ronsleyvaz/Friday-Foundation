@@ -6,7 +6,7 @@ description: Scaffold a new Friday command from a template. Prompts for a name a
 
 Build a new Friday command from scratch. This command prompts you for a name and a purpose, then scaffolds `commands/<name>.md` with the right frontmatter and structure. You fill in the steps.
 
-You, Claude, run the whole flow below in order, using your own file tools. Nothing phones home. Everything happens in this session.
+You, Claude, run the whole flow below in order, using your own file tools. Everything happens in this session.
 
 ## Step 1: Read the founder's voice profile (if it exists)
 
@@ -22,7 +22,7 @@ Ask the founder:
 
 > What do you want to call this command? Give me a short kebab-case name (e.g. quarterly-plan, project-status, content-brief). This becomes the slash command name.
 
-Wait for their answer. Validate: the name should be lowercase, use hyphens not spaces, and not clash with an existing command name (voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register).
+Wait for their answer. Validate: the name should be lowercase, use hyphens not spaces, and not clash with an existing command name (voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register, friday-upgrade).
 
 If there is a clash, tell them and ask for a different name.
 
@@ -63,7 +63,7 @@ description: <description>
 
 <description>
 
-You, Claude, run the whole flow below in order, using your own file tools. Nothing phones home. Everything happens in this session.
+You, Claude, run the whole flow below in order, using your own file tools. Everything happens in this session.
 
 ## Step 1: Read the founder's voice profile (if it exists)
 
@@ -107,7 +107,7 @@ Use this content:
 ```
 # Skill-Writing Playbook
 
-Notes for writing your own Friday Foundation commands, so they stay useful instead of rotting into an unreliable mess. Every command you scaffold with `/new-capability` should be checked against the five failure modes below before you consider it done.
+Notes for writing your own Friday Shortcuts commands, so they stay useful instead of rotting into an unreliable mess. Every command you scaffold with `/new-capability` should be checked against the five failure modes below before you consider it done.
 
 ## The five failure modes
 
@@ -158,7 +158,7 @@ After writing the file, print:
 >
 > `docs/skill-writing-playbook.md` has the five failure modes worth checking your new command against before you consider it done.
 >
-> When you are ready to test it, copy it to `~/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session.
+> When you are ready to test it, copy it to `~/friday-shortcuts/.claude/commands/<name>.md` and run `/<name>` in a new Claude Code session.
 
 Then add a note:
 

@@ -20,7 +20,7 @@ choose one.
 
 ## Project and Audience
 
-Friday Foundation is a free, local-first AI Chief of Staff configuration for
+Friday Shortcuts is a free, local-first AI Chief of Staff configuration for
 Claude Code. It serves founders, solo operators, and small teams who want
 guided help with decisions, planning, meetings, growth, launches, pricing, and
 operations while keeping control of their files and actions.
@@ -42,7 +42,8 @@ server, database, runtime package, or background worker.
 - `scripts/`: maintainer utilities that may create external state.
 - `.github/`: CI, pull request template, and issue templates.
 - `install.sh`: full-pack and single-command installer.
-- `CLAUDE.md.template`: template shipped to Foundation users, not repo guidance.
+- `VERSION`: current release, `friday-foundation-vX.Y.Z`. Bump on every release tag; the installer fetches and prints it.
+- `CLAUDE.md.template`: template shipped to Shortcuts users, not repo guidance.
 - `AGENTS.md`: shared coding-agent guidance.
 - `CLAUDE.md`: Claude Code entrypoint importing this file.
 - Root Markdown files: product, contribution, security, release, credits, and
@@ -73,9 +74,11 @@ Validate both Bash scripts without executing them:
 bash -n install.sh scripts/seed-good-first-issues.sh
 ```
 
-Do not run `install.sh` during routine development. It writes outside the
-worktree to `~/.claude/commands/` and writes installer assets to the current
-directory. Installer integration tests use temporary directories instead.
+Do not run `install.sh` during routine development. The no-argument path
+writes outside the worktree to `~/friday-shortcuts`; the single-capability
+path (`install.sh -- <name>`) writes to `~/.claude/commands/` instead. Both
+also write installer assets to the current directory. Installer integration
+tests use temporary directories instead.
 
 Do not run `scripts/seed-good-first-issues.sh` unless a maintainer explicitly
 requests it. It creates GitHub labels and issues.
@@ -87,8 +90,8 @@ requests it. It creates GitHub labels and issues.
 - Keep Python tests on pytest plus the standard library.
 - Keep Bash in the existing style: `set -euo pipefail` and portable constructs
   where practical.
-- Add no network calls to slash-command runtime behavior. Network access is an
-  installer concern only.
+- Slash-command files make no network calls. Runtime network access is
+  limited to `install.sh` and `friday-usage.sh`; do not add a third path.
 - Keep the full test suite green.
 - Preserve the clean-room guard. `tests/test_cleanroom.py` is the authoritative
   deny-list for operator identity and proprietary terms.

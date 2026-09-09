@@ -27,7 +27,10 @@ SCAN_FILES = [
     "AGENTS.md",
     "CLAUDE.md",
     "CLAUDE.md.template",
+    "spinner-settings.json.template",
     "install.sh",
+    "friday-statusline.sh",
+    "friday-usage.sh",
     "LICENSE-CONTENT",
 ]
 

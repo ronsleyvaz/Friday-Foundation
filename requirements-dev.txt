@@ -2,3 +2,4 @@
 # The shipped command pack has zero runtime dependencies; this is dev-only.
 # CI installs from this file, so the pytest pin lives here and nowhere else.
 pytest==9.0.3
+PyYAML==6.0.3
