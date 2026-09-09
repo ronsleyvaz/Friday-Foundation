@@ -127,13 +127,19 @@ A command must:
 
 When adding or renaming a command:
 
-1. Register it in the `PACK_COMMANDS` array in `install.sh`. This is the one
-   manual wiring step.
-2. Run `python3 -m pytest tests/test_catalog_parity.py`. It fails until the
+1. Register it in the `PACK_COMMANDS` array in `install.sh`.
+2. Add the name to `COMMANDS` in `friday-usage.sh`, and a folder form in
+   `classify_output` if the command writes into a folder of its own (as
+   `sops`, `teaching` and `delegation` do). `tests/test_usage_reporter.py`
+   fails until you do. Tell the maintainer in the PR: the usage receiver on
+   friday.amplifyais.com and the Monday recap carry the same lists and must be
+   deployed before `release` advances, or every run of the new command posts
+   a 400 the founder never sees.
+3. Run `python3 -m pytest tests/test_catalog_parity.py`. It fails until the
    README table, the manual table, the installer usage and completion output,
    the single-command Available list, `new-capability.md`'s reserved-name list,
    and the command-count claims all match the command directory.
-3. Add or update a test in `tests/` for the command's frontmatter and structure.
+4. Add or update a test in `tests/` for the command's frontmatter and structure.
 
 ## Licence Rules
 

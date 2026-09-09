@@ -17,6 +17,16 @@ That is the whole promote step. It is a fast-forward push, so it only
 succeeds if `release` has no commits `main` does not already have, which is
 always true since `release` only ever advances by this command.
 
+## Before you run it, if the batch adds a command
+
+The usage receiver on friday.amplifyais.com accepts only the command names
+and output folder forms it already knows. When a merged pull request adds a
+command name or a new folder form, deploy that allowlist (and the Monday
+recap pairing) on the site and check it on the real domain first, then bump
+`VERSION`, then promote. Promote first and every run of the new command from
+a fresh install is a 400 the founder never sees, and `/friday-upgrade` tells
+existing installs there is nothing to upgrade.
+
 ## When to run it
 
 Run it after a batch of merged pull requests has been reviewed on `main` and

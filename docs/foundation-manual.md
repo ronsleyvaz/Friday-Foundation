@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/ronsleyvaz/Friday-Foundation/releas
 
 You need Claude Code installed first. Get it at https://docs.anthropic.com/claude-code
 
-The installer clones the whole Friday Shortcuts repository into one folder, `~/friday-shortcuts` (backing up an existing non-empty folder there to a timestamped copy rather than overwriting it), creates a `CLAUDE.md` brain file from `CLAUDE.md.template`, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, writes a two-row status line and Friday's own spinner words and tips into `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`. The status line and spinner settings never touch your global Claude Code config, and merge into an existing `settings.json` rather than overwriting it (backed up first). The version comes from the `VERSION` file the clone ships; if it is missing, the install still finishes and says the version is unknown rather than guessing.
+The installer clones the whole Friday Shortcuts repository into one folder, `~/friday-shortcuts` (backing up an existing non-empty folder there to a timestamped copy rather than overwriting it), creates a `CLAUDE.md` brain file from `CLAUDE.md.template`, installs all 26 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, writes a two-row status line and Friday's own spinner words and tips into `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`. The status line and spinner settings never touch your global Claude Code config, and merge into an existing `settings.json` rather than overwriting it (backed up first). The version comes from the `VERSION` file the clone ships; if it is missing, the install still finishes and says the version is unknown rather than guessing.
 
 ### Install a single command
 
@@ -129,6 +129,7 @@ Workflow commands write to a `friday/` folder inside `~/friday-shortcuts`. That 
 | `friday/customer-feedback.md` | `/customer-feedback` | Customer feedback themes, evidence, questions, and actions |
 | `friday/risk-register.md` | `/risk-register` | Plan risks with probability, impact, trigger, mitigation, contingency, owner |
 | `friday/teaching/<topic>.md` | `/teach-team` | Onboarding plans for team members or contractors |
+| `friday/delegation/<task>.md` | `/delegation-brief` | Handoff briefs with the owner, outcome, constraints, checkpoints, and definition of done |
 | `friday/validation.md` | `/validate-idea` | A 7-dimension idea validation and verdict |
 | `friday/roadmap.md` | `/roadmap` | A sequenced 90-day roadmap and first-week action |
 | `friday/gtm-plan.md` | `/go-to-market` | Your phased launch plan |
@@ -156,7 +157,7 @@ Never use the words on the banned list.
 
 ---
 
-## The 25 commands
+## The 26 commands
 
 ### Set up first
 
@@ -207,6 +208,7 @@ Recommended early, though optional. Every other command reads this profile if it
 |---|---|---|
 | `/teach-team` | Scaffolds an onboarding plan for a team member or contractor | `friday/teaching/<topic>.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
+| `/delegation-brief` | Turns a task into a clear handoff with an outcome, context, constraints, owner, checkpoints, and definition of done | `friday/delegation/<task>.md` |
 
 ### Keep it current
 
@@ -275,7 +277,7 @@ Never put API keys in command or agent files. They are tracked by git.
 
 ## What Shortcuts includes, and what comes next
 
-**Friday Shortcuts (here):** free, open-source, 25 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
+**Friday Shortcuts (here):** free, open-source, 26 commands. Bring your own Claude Code and your own API keys. Build from the skeleton up.
 
 **The Amplify book:** the full methodology behind `/amplify`. All six Pyramid steps, the SymbioEthical framework, and case studies from founders who ran it. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

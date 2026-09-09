@@ -149,6 +149,16 @@ def test_output_event_teaching_folder_form(tmp_path):
     assert receipt_lines(tmp_path)[0]["output_file"] == "teaching"
 
 
+def test_output_event_delegation_folder_form(tmp_path):
+    result = run_write(tmp_path, str(tmp_path / "friday" / "delegation" / "Hire a bookkeeper.md"))
+    assert result.returncode == 0
+    lines = receipt_lines(tmp_path)
+    assert lines[0]["output_file"] == "delegation"
+    body_text = json.dumps(lines[0])
+    assert "bookkeeper" not in body_text
+    assert "Hire" not in body_text
+
+
 def test_output_event_new_capability_folder_form(tmp_path):
     result = run_write(tmp_path, str(tmp_path / "commands" / "my-command.md"))
     assert result.returncode == 0
@@ -264,7 +274,7 @@ def test_receipt_not_trimmed_below_600(tmp_path):
 
 def test_allowlist_matches_commands_folder():
     real_slugs = {p.stem for p in (REPO_ROOT / "commands").glob("*.md")}
-    assert len(real_slugs) == 25
+    assert len(real_slugs) == 26
     for slug in sorted(real_slugs):
         with subprocess_tmp_install() as tmp_path:
             result = run_hook(tmp_path, {

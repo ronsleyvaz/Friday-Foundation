@@ -12,6 +12,7 @@
 - [ ] Tells the founder what to do next after it runs.
 - [ ] `pytest tests/` run locally and green.
 - [ ] Registered the new command in `PACK_COMMANDS` in `install.sh` (new commands only).
+- [ ] Added the command name to `COMMANDS` in `friday-usage.sh`, and a folder form in `classify_output` if it writes into its own folder (new commands only).
 
 ## Type of change
 

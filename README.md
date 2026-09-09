@@ -3,7 +3,7 @@
 [![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Build your own AI Chief of Staff inside Claude Code. 25 commands, a growth diagnostic, and a harness to extend it to your workflow.
+Build your own AI Chief of Staff inside Claude Code. 26 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
 Free to install. No separate Shortcuts account. Claude Code supplies the AI and has its own account and network requirements. Shortcuts keeps its durable outputs as local files in your project, and reports content-free usage back to us, explained below.
 
@@ -25,7 +25,7 @@ You need Claude Code, `git`, and `curl` installed first. Get Claude Code at http
 installer is plain `bash`. On Windows, run it inside WSL2 rather than
 PowerShell.
 
-The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 25 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`.
+The installer clones this whole repository into `~/friday-shortcuts` (backing up an existing non-empty folder there rather than overwriting it), creates a personal `CLAUDE.md` brain file for you from the template, installs all 26 commands into `~/friday-shortcuts/.claude/commands/` so they work when Claude Code is opened from inside that folder, wires up a two-row status line and Friday's own spinner words in `~/friday-shortcuts/.claude/settings.json`, prints the version it just installed, then prints the one command for you to run to open Claude Code inside `~/friday-shortcuts`.
 
 ---
 
@@ -80,6 +80,7 @@ Want the full walkthrough first? The manual covers every command, the `friday/` 
 | `/positioning` | Builds a clear positioning statement and next move | `friday/positioning.md` |
 | `/competitive-analysis` | Competitor teardown: comparison matrix plus a SWOT for each competitor | `friday/competitive-analysis.md` |
 | `/sop-builder` | Turns a repeatable process into a documented, followable SOP | `friday/sops/<process-name>.md` |
+| `/delegation-brief` | Turns a task into a clear handoff with an outcome, context, constraints, owner, checkpoints, and definition of done | `friday/delegation/<task>.md` |
 | `/product-hunt-launch` | Product Hunt specific launch runbook, pre-launch through post-launch | `friday/product-hunt-launch.md` |
 | `/friday-upgrade` | Upgrades your Shortcuts install to the current release | `friday/upgrade-log.md` |
 
@@ -113,7 +114,7 @@ Replace `amplify` with any command name to install just that one.
 
 Free means we see which of her commands you use and whether they worked. Never what you typed, never what she wrote. Need her fully private? That is Friday SUPPORT.
 
-Your install reports three small, content-free events: that you installed, which of the 25 commands you ran (a command you wrote yourself is reported as `custom`, never by name), and whether that command wrote its file. No prompt text, no file contents, no names, no paths ever leave your machine. Every message posted is also appended to `friday/usage-sent.jsonl` on your own machine, so you can check exactly what was sent rather than take our word for it.
+Your install reports three small, content-free events: that you installed, which of the 26 commands you ran (a command you wrote yourself is reported as `custom`, never by name), and whether that command wrote its file. No prompt text, no file contents, no names, no paths ever leave your machine. Every message posted is also appended to `friday/usage-sent.jsonl` on your own machine, so you can check exactly what was sent rather than take our word for it.
 
 ---
 
@@ -156,7 +157,7 @@ For a full walkthrough, read the harness guide, in `~/friday-shortcuts/harness/`
 
 ## The soft ladder
 
-**Friday Shortcuts (here):** free, open-source, 25 commands, bring your own Claude Code.
+**Friday Shortcuts (here):** free, open-source, 26 commands, bring your own Claude Code.
 
 **The Amplify book:** the full framework behind the growth diagnostic. Read it for the complete methodology. https://www.amazon.com/Amplify-Integrating-Intelligence-Humanity-Acceleration/dp/1998756831
 

@@ -35,6 +35,7 @@ set -euo pipefail
 #   curl -fsSL .../install.sh | bash -s -- customer-feedback -- installs just /customer-feedback
 #   curl -fsSL .../install.sh | bash -s -- risk-register     -- installs just /risk-register
 #   curl -fsSL .../install.sh | bash -s -- friday-upgrade    -- installs just /friday-upgrade
+#   curl -fsSL .../install.sh | bash -s -- delegation-brief  -- installs just /delegation-brief
 #
 # The no-argument path clones the whole Friday Shortcuts repo into
 # ~/friday-shortcuts (a fixed path, independent of where you run this from),
@@ -103,6 +104,7 @@ PACK_COMMANDS=(
   "customer-feedback customer-feedback.md /customer-feedback"
   "risk-register risk-register.md /risk-register"
   "friday-upgrade  friday-upgrade.md  /friday-upgrade"
+  "delegation-brief delegation-brief.md /delegation-brief"
 )
 
 # Download/sync failures are collected, never fatal mid-pack, and reported
@@ -703,7 +705,7 @@ install_single() {
 
   if [ -z "${matched}" ]; then
     echo "Unknown capability: ${capability}"
-    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register, friday-upgrade"
+    echo "Available: voice-installer, decide, brief, meetingprep, weeklyreview, amplify, new-capability, explore-idea, scope-decision, learnings, shipping-retro, teach-team, validate-idea, go-to-market, pricing-strategy, offer-creation, competitive-analysis, sop-builder, product-hunt-launch, changelog, positioning, roadmap, customer-feedback, risk-register, friday-upgrade, delegation-brief"
     exit 1
   fi
 }
