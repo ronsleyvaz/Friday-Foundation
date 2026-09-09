@@ -23,6 +23,10 @@ LABEL="good first issue"
 # regardless of the directory the script is invoked from.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+if [ ! -f "$REPO_ROOT/install.sh" ] || [ ! -d "$REPO_ROOT/commands" ]; then
+  echo "Cannot find the repo root from $SCRIPT_DIR; run as: bash scripts/seed-good-first-issues.sh" >&2
+  exit 1
+fi
 
 # Ensure the label exists. Ignore the error if it already does.
 gh label create "$LABEL" --repo "$REPO" --color "7057ff" \
@@ -35,8 +39,10 @@ check_command_exists() {
   if [ -f "$REPO_ROOT/commands/${cmd_name}.md" ]; then
     return 0
   fi
-  # Check if the command is listed in PACK_COMMANDS in install.sh
-  if grep -q "\"${cmd_name} " "$REPO_ROOT/install.sh" 2>/dev/null; then
+  # Check if the command is listed in PACK_COMMANDS in install.sh. Anchored
+  # to the manifest line shape so a usage comment or an unrelated string
+  # that merely starts with the name cannot match.
+  if grep -qE "^[[:space:]]*\"${cmd_name}[[:space:]]" "$REPO_ROOT/install.sh"; then
     return 0
   fi
   return 1
@@ -57,10 +63,19 @@ create_issue() {
 
   # Check both open AND closed issues to avoid recreating closed ones.
   # `gh issue list` defaults to --state open, so --state all is required
-  # for the dedup guard to actually see closed issues.
-  if gh issue list --repo "$REPO" --state all --search "\"$title\" in:title" \
-       --json title,state --jq '.[].title' 2>/dev/null | grep -Fxq "$title"; then
-    echo "SKIP (already exists): $title"
+  # for the dedup guard to actually see closed issues. Read the whole
+  # listing into a variable first: piping it straight into grep -q can exit
+  # early, kill gh with SIGPIPE and, under pipefail, read as "not found".
+  # A gh failure (auth, network, search rate limit) stops the run instead of
+  # falling through to gh issue create.
+  local existing
+  existing="$(gh issue list --repo "$REPO" --state all --limit 100 \
+       --search "\"$title\" in:title" --json title --jq '.[].title')" || {
+    echo "gh issue list failed for: $title" >&2
+    exit 1
+  }
+  if grep -Fxq -- "$title" <<<"$existing"; then
+    echo "SKIP (issue already exists, open or closed): $title"
     return 0
   fi
   gh issue create --repo "$REPO" --title "$title" --body "$body" --label "$LABEL" >/dev/null
@@ -88,6 +103,7 @@ Comment on this issue to claim it, and a maintainer will assign it to you. If it
 - [ ] Reads \`friday/voice.md\` if it exists and writes in the founder's voice
 - [ ] Writes its output to \`$3\`
 - [ ] Registered in \`PACK_COMMANDS\` in \`install.sh\` (keeps it installable; the catalog parity tests enforce the rest)
+- [ ] Added to \`COMMANDS\` in \`friday-usage.sh\`, plus a folder form in \`classify_output\` if it writes a folder (\`tests/test_usage_reporter.py\` fails until you do)
 - [ ] Tells the founder what to do next after it runs
 - [ ] A test in \`tests/\` that checks the frontmatter and structure
 - [ ] \`python3 -m pytest tests/\` is green
