@@ -7,7 +7,9 @@
 # contribution. Run it once to open the on-ramp for contributors.
 #
 # Requirements: the GitHub CLI (gh) authenticated against the repo.
-# Safe to re-run: it skips any issue whose exact title already exists open.
+# Safe to re-run: it skips any seed whose command already ships (a file in
+# commands/ or an entry in install.sh's PACK_COMMANDS) and any issue whose
+# exact title already exists, open or closed.
 #
 # Usage:
 #   bash scripts/seed-good-first-issues.sh
