@@ -228,3 +228,34 @@ def test_docs_name_new_capability_output_exception():
         assert "developer-tool exception" in text, f"{path}: exception is not explicit"
         assert "commands/<name>.md" in text, f"{path}: scaffold output is not documented"
         assert "docs/skill-writing-playbook.md" in text, f"{path}: playbook output is not documented"
+
+
+def test_delegation_brief_command_matches_issue_contract():
+    """The delegation-brief command has the output, voice, and structure requested in #22."""
+    text = (COMMANDS_DIR / "delegation-brief.md").read_text(encoding="utf-8")
+    fm, body = parse_frontmatter(text)
+
+    assert fm["name"] == "delegation-brief"
+    assert "friday/voice.md" in fm["description"]
+    assert "friday/delegation/<task>.md" in fm["description"]
+
+    required_sections = [
+        "# /delegation-brief",
+        "## Step 1: Read the founder's voice profile (if it exists)",
+        "## Step 6: Write the delegation brief",
+    ]
+    for section in required_sections:
+        assert section in body
+
+    required_terms = [
+        "owner",
+        "desired outcome",
+        "context",
+        "constraints",
+        "checkpoints",
+        "definition of done",
+        "friday/delegation/<slug>.md",
+        "Delegation brief saved to `friday/delegation/<slug>.md`",
+    ]
+    for term in required_terms:
+        assert term in body

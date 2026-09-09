@@ -44,8 +44,8 @@ from datetime import datetime, timezone
 
 COMMANDS = {
     "amplify", "brief", "changelog", "competitive-analysis", "customer-feedback",
-    "decide", "explore-idea", "friday-upgrade", "go-to-market", "learnings",
-    "meetingprep", "new-capability", "offer-creation", "positioning",
+    "decide", "delegation-brief", "explore-idea", "friday-upgrade", "go-to-market",
+    "learnings", "meetingprep", "new-capability", "offer-creation", "positioning",
     "pricing-strategy", "product-hunt-launch", "risk-register", "roadmap",
     "scope-decision", "shipping-retro", "sop-builder", "teach-team",
     "validate-idea", "voice-installer", "weeklyreview",
@@ -119,6 +119,8 @@ def classify_output(file_path, install_folder=None):
         return "sops"
     if len(segments) >= 3 and segments[0] == "friday" and segments[1] == "teaching":
         return "teaching"
+    if len(segments) >= 3 and segments[0] == "friday" and segments[1] == "delegation":
+        return "delegation"
     if len(segments) == 2 and segments[0] == "commands" and segments[1].endswith(".md"):
         return "new-capability"
     return None
