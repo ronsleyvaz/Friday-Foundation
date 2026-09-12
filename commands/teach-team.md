@@ -2,6 +2,8 @@
 name: teach-team
 description: Scaffold a teaching plan for onboarding a team member or contractor to a process. Asks what the learner already knows, what the goal is, and what the first checkpoint looks like, then writes a progressive lesson sequence. Writes friday/teaching/<topic>.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /teach-team
 
 You know how to do this. The problem is getting someone else to know it too, without re-explaining it from scratch every time you hire. This command turns what's in your head into a teaching plan you can hand to a new team member or contractor, broken into a sequence they can actually follow.

@@ -1,5 +1,5 @@
 <!-- Content licensed under LICENSE-CONTENT. See that file for terms. -->
-
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
 # Why the Amplify Diagnostic Exists
 
 Most founders who use AI tools hit the same wall. They generate more content, more emails, and more output -- but growth does not follow. The output is busier. The business is not bigger.

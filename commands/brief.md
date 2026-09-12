@@ -2,6 +2,8 @@
 name: brief
 description: Run a structured morning brief keyed to the nine recurring decisions your business turns on. First run sets up your nine decisions. Every run reads your priorities, filters them through those decisions, and writes friday/morning.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /brief
 
 Start your day with a brief that fits your business, not a generic to-do list. This command filters today's open items through the nine decisions your business actually turns on. It writes the brief in your voice and saves it to `friday/morning.md`.

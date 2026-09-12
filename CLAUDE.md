@@ -1,5 +1,5 @@
 @AGENTS.md
-
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
 # Claude Code Entry Point
 
 `AGENTS.md` is the canonical repository guide. Do not copy its project map,

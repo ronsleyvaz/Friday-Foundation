@@ -1,5 +1,5 @@
 <!-- Content licensed under LICENSE-CONTENT. See that file for terms. -->
-
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
 # 05 - The Amplify Logic
 
 The `/amplify` command implements the Amplify AI method: a diagnostic framework for founders who want to grow their business with AI without burning out or losing direction.

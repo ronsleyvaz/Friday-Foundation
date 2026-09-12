@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Why Your Morning Routine is Broken (and How Nine Decisions Fix It)
 
 Founders do not have a productivity problem. They have a prioritisation problem. Every morning starts with a full list and ends with the loudest items crossed off, not the most important ones. The urgent crowds out the consequential. The day that felt busy produced nothing that compounds.

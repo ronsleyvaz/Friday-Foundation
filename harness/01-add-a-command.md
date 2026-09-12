@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # 01 - Add a Command
 
 A command is a markdown file in `~/friday-shortcuts/.claude/commands/`. The filename becomes the command name -- `hello.md` runs as `/hello`. Claude Code reads the body to know what to do when you run it, and shows the frontmatter `description` in the command picker.

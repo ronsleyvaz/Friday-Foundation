@@ -2,6 +2,8 @@
 name: risk-register
 description: Turns a plan into a practical risk register with probability, impact, early trigger, mitigation, contingency, and owner for every risk. Writes friday/risk-register.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /risk-register
 
 Most risk lists are decoration. They name a worry, guess a severity, and get filed. This command produces a register you can act on: every risk carries an observable trigger and a named owner, so somebody knows what to watch for and what to do when it fires.

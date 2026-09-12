@@ -2,6 +2,8 @@
 name: amplify
 description: Run the Amplify growth diagnostic on your business. Scores your eight vital signs, detects your business stage, maps to your priority growth quadrant, runs the SymbioEthical check, and writes a prioritised 90-day plan to friday/growth.md. Based on the Amplify AI method.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 <!-- Content licensed under LICENSE-CONTENT. See that file for terms. -->
 # /amplify
 

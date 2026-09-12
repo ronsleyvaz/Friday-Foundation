@@ -2,6 +2,8 @@
 name: changelog
 description: Turn git history since the last release into a human-readable changelog a founder can share with customers. Writes friday/changelog.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /changelog
 
 Release notes should sound like a founder who understands what changed, not a raw commit dump. This command reads the git history since the last release, filters it into customer-facing meaning, and writes a changelog entry that can be shared with users, investors, or the team.

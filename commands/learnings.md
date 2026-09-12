@@ -2,6 +2,8 @@
 name: learnings
 description: Review, search, and prune what Friday has learned about your business. First run creates friday/learnings.md with a starter structure. Later runs let you review, search by keyword, and mark entries for removal. Plain markdown, no database.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /learnings
 
 Config that never gets reviewed rots. This command keeps `friday/learnings.md` honest: a plain log of patterns, preferences, and pitfalls you want Friday to remember about your business, that you can review, search, and prune whenever it's due for a clean-up.

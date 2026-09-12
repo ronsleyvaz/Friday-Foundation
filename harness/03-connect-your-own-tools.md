@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # 03 - Connect Your Own Tools
 
 Friday Shortcuts ships with no external connections. That is intentional. You own the stack and you add connections yourself.

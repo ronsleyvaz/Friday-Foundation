@@ -2,6 +2,8 @@
 name: customer-feedback
 description: Synthesize pasted customer feedback or sanitized local notes into recurring themes, supporting evidence, contradictions, unanswered questions, and prioritized actions. Writes friday/customer-feedback.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /customer-feedback
 
 Customer feedback gets noisy fast. This command turns scattered notes into a grounded synthesis: what people keep saying, what evidence supports it, what contradicts it, what is still unknown, and what to do next.

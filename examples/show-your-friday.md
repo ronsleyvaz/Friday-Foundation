@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Show Your Friday
 
 A gallery for founders who have built something with Friday Shortcuts. Add your entry and open a pull request.

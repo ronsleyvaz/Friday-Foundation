@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use.
+# Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0.
 set -euo pipefail
 
 # Friday Shortcuts: capability installer.

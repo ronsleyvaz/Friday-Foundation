@@ -2,6 +2,8 @@
 name: meetingprep
 description: Prepare for any meeting in five minutes. Ask for the person and purpose, produce a brief with context, the outcome you want, and three sharp questions. Writes to friday/meetings.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /meetingprep
 
 Walk into any meeting knowing exactly what you want from it. This command asks you for a name and what the meeting is about, then produces a sharp brief: what you know, the outcome you are after, and three questions worth asking. Written in your voice and saved to disk.

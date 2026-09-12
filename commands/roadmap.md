@@ -2,6 +2,8 @@
 name: roadmap
 description: Turn a goal into a sequenced ninety-day roadmap with milestones and the one thing to do first. Writes friday/roadmap.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /roadmap
 
 A goal without a timeline is just a wish. This command takes a goal and turns it into a sequenced ninety-day roadmap: what to do first, what to do in thirty days, what to do in sixty, and what lands in ninety. It identifies the one thing that must happen in the first seven days so momentum starts immediately.

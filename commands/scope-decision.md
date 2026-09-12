@@ -2,6 +2,8 @@
 name: scope-decision
 description: Challenge your plan's scope and force an Expansion, Selective-Expansion, Hold, or Reduction call. Reads friday/idea-exploration.md if present, standalone otherwise. Writes friday/scope-decision.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /scope-decision
 
 Ambition drifts quietly. A plan gets a little bigger every week without anyone deciding it should. This command forces an explicit call: are you going bigger, holding the line, or cutting down? No drifting, no defaults you didn't choose.

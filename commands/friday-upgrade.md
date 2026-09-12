@@ -2,6 +2,8 @@
 name: friday-upgrade
 description: Checks whether a newer Friday Shortcuts release exists, upgrades your install, and tells you exactly what changed on disk. Writes friday/upgrade-log.md.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /friday-upgrade
 
 Shortcuts ships new commands and fixes over time. This command closes that gap: it compares your version against the current release, runs the installer for you, and writes down what moved.

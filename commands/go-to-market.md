@@ -2,6 +2,8 @@
 name: go-to-market
 description: Build a phased launch plan, pre-launch, launch week, and 30/60/90 day growth, for a product or offer. References friday/growth.md from /amplify if present. Writes friday/gtm-plan.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /go-to-market
 
 A launch without a plan is a launch on vibes. This command builds a phased go-to-market plan: what to do before launch, what to do on launch day, and what to do in the 90 days after, specific to your product and your actual budget, not generic advice.

@@ -2,6 +2,8 @@
 name: offer-creation
 description: Walk the value-equation framework, dream outcome, perceived likelihood, time delay, effort and sacrifice, to find your offer's weakest lever and tighten it. Writes friday/offer.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /offer-creation
 
 Value = (dream outcome x likelihood of achieving it) / (time delay x effort required). Every offer lives or dies on those four levers. This command walks each one, finds the weakest, and pushes you toward a concrete fix instead of a vague sense that the offer "could be stronger."

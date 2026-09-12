@@ -2,6 +2,8 @@
 name: competitive-analysis
 description: Build a structured competitor teardown, comparison matrix plus SWOT per competitor, so you know where you actually stand. Writes friday/competitive-analysis.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /competitive-analysis
 
 Knowing your competitors exist isn't the same as knowing where you actually stand against them. This command builds a real comparison, feature and positioning matrix plus a SWOT per competitor, so you can find the gap that's actually open, not the one you assume is open.

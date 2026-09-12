@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Why Most Decisions Stay Open (and How to Close Them in Five Minutes)
 
 Founders do not fail at decisions because they lack information. They fail because they mistake thinking about a decision for making one. The decision stays open. The window closes. The default wins.

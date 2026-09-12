@@ -2,6 +2,8 @@
 name: delegation-brief
 description: Turn a task into a clear handoff with an outcome, context, constraints, owner, checkpoints, and definition of done. Asks for the owner, desired outcome, context, constraints, checkpoints, and definition of done, then writes friday/delegation/<task>.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /delegation-brief
 
 Founders delegate work all the time, but the person on the other side often gets the task without the context or the finish line needed to own the result. This command turns a task into a handoff that carries its outcome, context, constraints, owner, checkpoints, and definition of done, so whoever picks it up can run it without re-interviewing you.

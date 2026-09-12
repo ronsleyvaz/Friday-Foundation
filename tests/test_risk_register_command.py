@@ -24,7 +24,7 @@ def test_risk_register_command_frontmatter():
     assert fm["name"] == "risk-register"
     assert "friday/risk-register.md" in fm["description"]
     assert "friday/voice.md" in fm["description"]
-    assert body.startswith("# /risk-register")
+    assert "# /risk-register" in body
 
 
 def test_captures_all_seven_risk_fields():

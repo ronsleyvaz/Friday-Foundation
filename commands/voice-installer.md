@@ -2,6 +2,8 @@
 name: voice-installer
 description: Build your voice profile. Interviews you, reads your writing samples, writes friday/voice.md plus a voice block in CLAUDE.md, then rewrites a sample paragraph in your voice. Self-contained, no dependencies.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /voice-installer
 
 Build your voice profile in five minutes. This command interviews you, reads two or three pieces of your writing, and writes a real voice config to your machine. Every AI tool you use will start sounding like you instead of ChatGPT.

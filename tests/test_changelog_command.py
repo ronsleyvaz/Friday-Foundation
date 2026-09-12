@@ -18,7 +18,7 @@ def test_changelog_command_frontmatter():
     assert "friday/changelog.md" in fm["description"]
     assert "friday/voice.md" in fm["description"]
     assert "git history since the last release" in fm["description"]
-    assert body.startswith("# /changelog")
+    assert "# /changelog" in body
 
 
 def test_changelog_command_reads_git_history_since_release():

@@ -2,6 +2,8 @@
 name: sop-builder
 description: Turn a process you do repeatedly into a documented SOP you can hand off. Asks for the process name, walks step capture, writes friday/sops/<process-name>.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /sop-builder
 
 If a process only lives in your head, you're the bottleneck, and you can't take a day off without something breaking. This command turns a repeatable process into a documented SOP someone who's never done it before could actually follow.

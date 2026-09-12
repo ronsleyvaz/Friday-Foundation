@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Skill-Writing Playbook
 
 Notes for writing your own Friday Shortcuts commands, so they stay useful instead of rotting into an unreliable mess. Every command you scaffold with `/new-capability` should be checked against the five failure modes below before you consider it done.

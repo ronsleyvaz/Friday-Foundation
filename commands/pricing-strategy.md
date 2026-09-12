@@ -2,6 +2,8 @@
 name: pricing-strategy
 description: Walk value-based pricing logic and tier design, then produce a specific tier structure with real numbers. Writes friday/pricing.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /pricing-strategy
 
 Pricing shouldn't be a guess you made once and never revisited. This command walks you through picking a pricing model, designing tiers with real numbers, checking the unit economics, and a quick way to test whether customers agree with your number before you commit to it.

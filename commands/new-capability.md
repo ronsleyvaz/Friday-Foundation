@@ -2,6 +2,8 @@
 name: new-capability
 description: Scaffold a new Friday command from a template. Prompts for a name and description, writes commands/<name>.md with the correct frontmatter and step structure, ready for you to fill in.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /new-capability
 
 Build a new Friday command from scratch. This command prompts you for a name and a purpose, then scaffolds `commands/<name>.md` with the right frontmatter and structure. You fill in the steps.

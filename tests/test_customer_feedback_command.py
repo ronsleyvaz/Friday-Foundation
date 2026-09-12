@@ -18,7 +18,7 @@ def test_customer_feedback_command_frontmatter():
     assert "friday/customer-feedback.md" in fm["description"]
     assert "friday/voice.md" in fm["description"]
     assert "pasted customer feedback" in fm["description"]
-    assert body.startswith("# /customer-feedback")
+    assert "# /customer-feedback" in body
 
 
 def test_customer_feedback_accepts_paste_and_sanitized_files():

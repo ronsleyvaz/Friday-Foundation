@@ -2,6 +2,8 @@
 name: weeklyreview
 description: Run a structured weekly review. Walk through wins, misses, and what carries forward. Produces one clear priority for the week ahead. Writes to friday/review.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /weeklyreview
 
 A week without a review is a week that does not compound. This command walks you through your wins, misses, and carry-forwards, then names one priority for the week ahead. Writes in your voice. Saves to disk.

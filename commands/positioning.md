@@ -2,6 +2,8 @@
 name: positioning
 description: Build a clear positioning statement from category, target customer, key benefit, and difference from alternatives. Writes friday/positioning.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /positioning
 
 Positioning is the short answer to "why this, for whom, instead of what they already do?" This command turns scattered founder thinking into one clear line, then saves the thinking behind it so the next page, pitch, or offer has a spine.

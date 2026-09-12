@@ -2,6 +2,8 @@
 name: validate-idea
 description: Run a 7-dimensional validation pass on an idea and get a build, pivot, or kill verdict with reasoning. Reads friday/idea-exploration.md if present, or asks directly. Writes friday/validation.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /validate-idea
 
 `/explore-idea` pushes you toward specificity. This command scores what you've got. Five hard questions, a scorecard across seven dimensions, and a direct verdict: build it, pivot it, or kill it. The goal is a second opinion you can trust before you spend real time.

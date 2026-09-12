@@ -2,6 +2,8 @@
 name: shipping-retro
 description: A weekly reflection built from your real git history. Reads recent commits, asks what shipped, what hurt, and what carries forward. Writes friday/shipping-retro.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /shipping-retro
 
 `/weeklyreview` covers your whole week. This command is narrower: it looks at what you actually shipped in code, using your real commit history as the anchor, then asks what worked and what carried a cost. It ships standalone rather than folding into `/weeklyreview`, because not every founder using Friday Shortcuts ships code every week, and this command should stay skippable for the weeks that don't apply.

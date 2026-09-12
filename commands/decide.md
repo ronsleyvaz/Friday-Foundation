@@ -2,6 +2,8 @@
 name: decide
 description: Run the 1-3-1 decision protocol on any real decision. One problem statement, three options with trade-offs, one recommendation. Writes a durable decision record to friday/decisions.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /decide
 
 Make any decision in five minutes. Paste your decision plus two lines of context. This command runs the 1-3-1 protocol live: one problem, three options, one pick. The result is written in your voice and saved to disk so your decision record grows every time.

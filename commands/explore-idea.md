@@ -2,6 +2,8 @@
 name: explore-idea
 description: Run six forcing questions on a new idea before you build anything. Confronts demand reality, status quo cost, specificity, narrowest wedge, real observation, and future-fit. Writes friday/idea-exploration.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /explore-idea
 
 Most ideas sound good until someone asks who actually wants them. This command runs six forcing questions on your idea, one at a time, before you spend a day building anything. The goal is not encouragement. The goal is finding out now whether the idea holds up, while it still costs nothing to find out.

@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Why the Week Slips Away (and How a Weekly Review Stops It)
 
 The week ends and you cannot say with confidence what you shipped. You have a rough sense of what happened. You know you were busy. But the wins are blurry, the misses are soft-pedalled in your head, and whatever was supposed to carry forward is sitting in a mental pile somewhere.

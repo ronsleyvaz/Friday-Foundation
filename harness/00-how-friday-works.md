@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # 00 - How Friday Works
 
 Friday is not software you install and run. It is a configuration layer you build on top of Claude Code.

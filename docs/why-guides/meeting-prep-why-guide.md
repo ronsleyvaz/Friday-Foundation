@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # The Five Minutes That Decide Every Meeting
 
 The follow-up meeting exists because nobody named an outcome before the first one. The meeting ran long, the conversation drifted, and the result was another calendar invite. The problem is not the meeting. It is the five minutes before it.

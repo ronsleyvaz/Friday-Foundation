@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use.
+# Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0.
 # Friday SHORTCUTS usage reporter. Two jobs, nothing else:
 #  1. Hook mode (default, no arguments): read one Claude Code hook payload
 #     on stdin, decide whether it is a slash command or a known output

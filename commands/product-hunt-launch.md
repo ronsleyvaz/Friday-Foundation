@@ -2,6 +2,8 @@
 name: product-hunt-launch
 description: Build a Product Hunt specific launch runbook, pre-launch prep, launch-day hour-by-hour plan, and post-launch follow-up. Different from /go-to-market: this covers Product Hunt's specific mechanics, not a general launch. Writes friday/product-hunt-launch.md. Reads friday/voice.md if present and writes in your voice.
 ---
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # /product-hunt-launch
 
 Product Hunt has its own rules: reset time, hunter strategy, comment velocity, the first-hour crunch. A generic launch plan misses all of it. This command builds a runbook specific to Product Hunt's mechanics, honest about your actual chances given where you're starting from.

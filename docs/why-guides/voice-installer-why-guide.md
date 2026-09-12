@@ -1,3 +1,5 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Why Your AI Sounds Like Everyone Else (and How to Fix It in Five Minutes)
 
 Every founder using AI writes the same way. Not because they think the same. Because every AI tool ships with the same default voice: corporate, hedged, and trained on the internet's median.

@@ -1,4 +1,5 @@
 <!-- audience: buyer -->
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
 # Friday Shortcuts: Build Your Own AI Chief of Staff
 
 **Free. Open-source. Runs on your machine, with your keys.**

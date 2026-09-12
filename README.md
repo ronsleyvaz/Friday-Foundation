@@ -1,7 +1,9 @@
+<!-- Built by Friday​‌‍‌​ (https://friday.amplifyais.com). Free for personal use. Commercial use needs a paid Friday. Licence: PolyForm-Noncommercial-1.0.0. -->
+
 # Friday Shortcuts
 
 [![CI](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ronsleyvaz/Friday-Foundation/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/License-PolyForm--Noncommercial--1.0.0-blue.svg)](LICENSE)
 
 Build your own AI Chief of Staff inside Claude Code. 26 commands, a growth diagnostic, and a harness to extend it to your workflow.
 
@@ -167,9 +169,11 @@ Shortcuts gives you the shape of Friday. The paid product is Friday running whil
 
 ---
 
-## Licence
+## License and Attribution
 
-Code (everything except the three content-licensed files) is **MIT**. See `LICENSE`.
+Friday Shortcuts is free for personal use. Building a business on it needs a paid Friday: [friday.amplifyais.com](https://friday.amplifyais.com).
+
+Code (everything except the three content-licensed files) is licensed under **PolyForm Noncommercial 1.0.0**. See `LICENSE`.
 
 The Amplify method content -- `commands/amplify.md`, `harness/05-the-amplify-logic.md`, and `docs/why-guides/amplify-why-guide.md` -- is licensed separately under `LICENSE-CONTENT`: free to use and share with attribution, not to resell or rebrand. Those files carry a header pointing to `LICENSE-CONTENT`.
 
