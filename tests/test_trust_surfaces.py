@@ -53,12 +53,23 @@ def test_security_keeps_a_working_fallback():
 # --- AC2: unambiguous contribution licence ----------------------------------
 
 def test_contributing_licence_clause_is_unambiguous():
-    """The licence clause states MIT-by-default and names the three
-    maintainer-owned content-licensed files as a closed list."""
+    """The licence clause grandfathers contributions merged before the
+    PolyForm switch as MIT, states PolyForm applies to new pull requests,
+    and names the three maintainer-owned content-licensed files as a
+    closed list."""
     text = CONTRIBUTING.read_text(encoding="utf-8")
     lower = text.lower()
-    assert "all contributions are mit" in lower, (
-        "CONTRIBUTING must state all contributions are MIT licensed"
+    assert "stays mit licensed" in lower, (
+        "CONTRIBUTING must grandfather contributions merged before the "
+        "PolyForm switch as MIT licensed"
+    )
+    assert "#38" in text and "#40" in text, (
+        "CONTRIBUTING must name PRs #38 and #40 as examples covered by the "
+        "MIT grandfather clause"
+    )
+    assert "polyform noncommercial 1.0.0" in lower, (
+        "CONTRIBUTING must state new pull requests ship under PolyForm "
+        "Noncommercial 1.0.0"
     )
     assert "maintainer-owned" in lower, (
         "CONTRIBUTING must state the LICENSE-CONTENT files are maintainer-owned"

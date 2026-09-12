@@ -90,7 +90,9 @@ When your command is merged, add a line for yourself under Contributors in `CRED
 
 ## Licence
 
-All contributions are MIT licensed. By opening a pull request, you agree your contribution ships under the MIT `LICENSE`.
+Every contribution merged before 2026-09-12, including PRs #38 and #40 (credited in `CREDITS.md`), stays MIT licensed under the terms in place when it was merged. That covers every merged pull request to date, not only these two.
+
+From 2026-09-12, Friday Shortcuts ships under PolyForm Noncommercial 1.0.0. By opening a pull request now, you agree your contribution ships under the PolyForm Noncommercial 1.0.0 `LICENSE`.
 
 Three files carry the separate `LICENSE-CONTENT` licence instead: `commands/amplify.md`, `harness/05-the-amplify-logic.md`, and `docs/why-guides/amplify-why-guide.md`. These are maintainer-owned. A pull request must not add files to that list, remove the content-licence header from them, or change the terms in `LICENSE-CONTENT`.
 
