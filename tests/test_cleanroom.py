@@ -5,7 +5,7 @@ proprietary markers, or secrets.
 Scans: commands/, harness/, docs/, examples/, README.md, CONTRIBUTING.md,
        RELEASING.md, SECURITY.md, AGENTS.md, CLAUDE.md, CLAUDE.md.template,
        install.sh, LICENSE-CONTENT.
-Excludes: tests/ (contains pattern strings by necessity), LICENSE (MIT text).
+Excludes: tests/ (contains pattern strings by necessity), LICENSE (licence text).
 """
 import re
 from pathlib import Path
